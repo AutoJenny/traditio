@@ -63,7 +63,7 @@ export default function ProductImagesPage({ params }: { params: { slug: string }
         <Droppable droppableId="images-droppable" direction="horizontal">
           {(provided, snapshot) => (
             <div
-              className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+              className="mt-6 flex flex-wrap gap-8"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
@@ -78,6 +78,8 @@ export default function ProductImagesPage({ params }: { params: { slug: string }
                       style={{
                         ...provided.draggableProps.style,
                         boxShadow: snapshot.isDragging ? '0 4px 16px rgba(191,167,122,0.15)' : '0 2px 8px rgba(0,0,0,0.03)',
+                        minWidth: 220,
+                        maxWidth: 220,
                       }}
                     >
                       <div className="mb-2 w-full text-center">
