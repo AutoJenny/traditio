@@ -53,12 +53,13 @@ export default function Showroom() {
       <div className="flex items-center justify-between mb-10">
         <h1 className="font-heading text-4xl md:text-5xl font-bold uppercase text-espresso text-center">Showroom</h1>
         <div className="flex-1 flex justify-end">
-          <label className="sr-only" htmlFor="sort">Sort</label>
+          <label htmlFor="sort" className="mr-2 text-sand font-body text-sm hidden md:inline">Sort:</label>
           <select
             id="sort"
             value={sort}
             onChange={e => setSort(e.target.value)}
-            className="ml-4 px-3 py-2 rounded border border-sand bg-ivory text-espresso font-body text-sm focus:outline-none focus:ring-2 focus:ring-brass"
+            className="ml-2 px-3 py-2 rounded-lg border border-espresso bg-sand text-espresso font-body text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-brass focus:border-brass transition-colors duration-150 hover:bg-ivory/80 hover:border-brass"
+            style={{ minWidth: 170 }}
           >
             <option value="az">A-Z</option>
             <option value="price-asc">Price: Low to High</option>
