@@ -1,0 +1,11 @@
+[INIT] Created Traditio Site Build Checklist in /docs/plans/traditio_site_build_checklist.md to guide the staged implementation of the new site based on the style guide and reference design. 
+
+[STEP] Checked off Project Setup items: Tailwind CSS custom config, Google Fonts for Playfair Display and Inter, and base global styles in /docs/plans/traditio_site_build_checklist.md. 
+
+[STEP] Checked off 'Create main layout component (max-width, padding, grid, whitespace)' in /docs/plans/traditio_site_build_checklist.md. 
+
+[STEP] Checked off 'Implement sticky top navigation bar' and 'Place logo (images/site/traditio_logo.png) left' in /docs/plans/traditio_site_build_checklist.md. 
+
+[STEP] Checked off 'Add minimal navigation links right' in /docs/plans/traditio_site_build_checklist.md. 
+
+[STEP] Removed all Vite/React app code, configuration, and dependencies from the project root. The Next.js app in traditio-next-site is now the sole front-end codebase. Cleaned up src/, node_modules, lock files, and configs. Updated documentation as needed.
