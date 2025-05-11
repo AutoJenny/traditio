@@ -146,9 +146,23 @@ export default function AdminProductEdit() {
           <label className="block font-bold mb-1">Period</label>
           <input name="period" value={product.period || ""} onChange={handleChange} className="w-full border rounded p-2" />
         </div>
-        <div>
-          <label className="block font-bold mb-1">Images (comma-separated URLs)</label>
-          <input name="images" value={product.images?.map((img: any) => img.url).join(",") || ""} onChange={handleChange} className="w-full border rounded p-2" />
+        <div className="mb-4">
+          <label className="block font-semibold mb-1">Images</label>
+          <div className="flex flex-wrap gap-2 items-center">
+            {product.images && product.images.length > 0 ? (
+              product.images.map((img: any, idx: number) => (
+                <div key={img.url} className="relative">
+                  <img src={img.url} alt={img.alt || ''} className={`w-16 h-16 object-cover rounded border ${product.mainImageId === img.id ? 'ring-2 ring-sand-500' : ''}`} />
+                  {product.mainImageId === img.id && (
+                    <span className="absolute top-0 right-0 bg-sand-500 text-xs text-white px-1 rounded-bl">Main</span>
+                  )}
+                </div>
+              ))
+            ) : (
+              <span className="text-gray-400">No images</span>
+            )}
+            <a href={`/admin/products/${product.slug}/images`} className="ml-4 px-3 py-1 bg-sand-500 text-white rounded hover:bg-sand-600 transition">Edit Images</a>
+          </div>
         </div>
         <div className="flex gap-4 mt-6">
           <button type="submit" disabled={saving} className="bg-brass text-espresso font-bold rounded px-6 py-2 border-2 border-brass shadow hover:bg-espresso hover:text-ivory transition">{saving ? "Saving..." : "Save"}</button>
