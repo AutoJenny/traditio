@@ -31,6 +31,7 @@ export default function AdminProductList() {
               <th className="p-2 text-left">Image</th>
               <th className="p-2 text-left">Title</th>
               <th className="p-2 text-left">Category</th>
+              <th className="p-2 text-left">Featured</th>
               <th className="p-2 text-left">Price</th>
               <th className="p-2 text-left">Status</th>
               <th className="p-2 text-left">Actions</th>
@@ -55,6 +56,26 @@ export default function AdminProductList() {
                   {prod.categories && prod.categories.length > 0
                     ? prod.categories.map((cat: any) => cat.name).join(", ")
                     : "-"}
+                </td>
+                <td className="p-2">
+                  <select
+                    value={prod.featured ? 'y' : 'n'}
+                    onChange={async (e) => {
+                      const newVal = e.target.value === 'y';
+                      // Optimistically update UI
+                      setProducts((prev) => prev.map((p) => p.id === prod.id ? { ...p, featured: newVal } : p));
+                      // Update backend
+                      await fetch(`/api/products/${prod.slug}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ ...prod, featured: newVal }),
+                      });
+                    }}
+                    className="border rounded px-2 py-1"
+                  >
+                    <option value="y">y</option>
+                    <option value="n">n</option>
+                  </select>
                 </td>
                 <td className="p-2">£{prod.price}</td>
                 <td className="p-2">{prod.status}</td>
