@@ -23,3 +23,5 @@
 [2025-05-11] Updated traditio-next-site/README.md to clarify that all development commands must be run from the traditio-next-site directory, not the project root, to avoid 404 errors and misconfiguration.
 
 [2025-05-11] Removed root-level package.json, package-lock.json, tsconfig.json, next-env.d.ts, and tailwind.config.js to prevent confusion. All development must be done in traditio-next-site.
+
+[2025-05-11] Added docs/site_structure.md: in-depth technical documentation of the site structure, routes, API, backend, and conventions for new developers.
