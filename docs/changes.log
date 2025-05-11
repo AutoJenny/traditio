@@ -67,3 +67,5 @@
 [2024-05-12  showroom] Add: Right-aligned Sort dropdown to showroom header (A-Z, price L>H, price H>L).
 
 [2024-05-12  showroom] Update: Restyled Sort dropdown for subtle, elegant theme (sand bg, espresso border, rounded, soft hover/focus).
+
+[2024-05-12  showroom] Update: Sort dropdown now ultra-subtle (transparent, faint underline, no label, blends in); SHOWROOM heading perfectly centered.

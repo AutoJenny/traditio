@@ -50,6 +50,14 @@ export default function Showroom() {
 
   return (
     <main className="max-w-6xl mx-auto py-16 px-4">
+      <div className="relative mb-10 flex items-center justify-center">
+        <h1 className="font-heading text-4xl md:text-5xl font-bold uppercase text-espresso text-center w-full">Showroom</h1>
+        <select
+          id="sort"
+          value={sort}
+          onChange={e => setSort(e.target.value)}
+          className="absolute right-0 top-1/2 -translate-y-1/2 bg-transparent border-0 border-b border-sand text-sand font-body text-sm px-2 py-1 focus:outline-none focus:border-brass focus:text-brass transition-colors duration-150 appearance-none min-w-[120px] hover:text-brass"
+          aria-label="Sort products"
       <div className="flex items-center justify-between mb-10">
         <h1 className="font-heading text-4xl md:text-5xl font-bold uppercase text-espresso text-center">Showroom</h1>
         <div className="flex-1 flex justify-end">
