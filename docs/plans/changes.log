@@ -3,3 +3,4 @@
 [DATE] - Logo now confirmed to be displaying on homepage after cache clearing and dev server restart. 
 [DATE] - Analysis/documentation of reference site's top navigation and footer completed in style guide. Checklist updated. 
 [DATE] - Implemented top navigation and footer in global layout (layout.tsx) per style guide and checklist. Checklist updated. 
+[DATE] - Completed homepage (hero, featured grid, category nav, newsletter) analysis/documentation in style guide and checklist. 

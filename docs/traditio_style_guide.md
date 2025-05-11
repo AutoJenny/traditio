@@ -203,3 +203,35 @@
 - [ ] Blog List Item
 - [ ] Static Content Page
 // ... add more as discovered ...
+
+### Hero Section (Homepage)
+- **Layout:** Large, minimal, centered headline. Height: ~60vh. Max width: 800px. Centered both vertically and horizontally in container.
+- **Typography:** Headline: Playfair Display, 2.5–3rem, bold, uppercase. Subheadline: Inter, 1.2rem, muted sand color. CTA button: prominent, espresso on sand, bold, rounded, ~12px 24px padding.
+- **Background:** Ivory or subtle sand gradient. No image or a faint texture.
+- **CTA:** "Shop Collection" or similar, below headline, large and inviting.
+- **Spacing:** Generous vertical padding (~64px desktop, ~32px mobile).
+- **Transitions:** Button hover: invert colors, 200ms ease-in-out. Headline fade-in on load.
+- **Mobile:** Headline font ~2rem, padding reduced, CTA full width.
+- **Accessibility:** Headline is <h1>, button is <button> or <a> with role.
+
+### Featured Product Grid
+- **Layout:** 3–4 product cards per row (desktop), 2 (tablet), 1 (mobile). Max width: 1200px, centered. Gap: 32px desktop, 16px mobile.
+- **Card:** Sand background, rounded corners, subtle shadow, image top, title, price, SOLD badge if needed. Hover: image zoom/raise, shadow intensifies.
+- **Image:** Next.js <Image />, object-fit: cover, lazy loaded, alt text.
+- **Spacing:** 32px vertical between grid and other sections.
+- **Transitions:** Card/image hover: scale 1.03, shadow, 200ms.
+- **Accessibility:** Alt text, focus state on card.
+
+### Category Navigation
+- **Layout:** Horizontal bar above grid. All-caps, Inter, spaced links. Active category underlined or brass color. Gap: 24px desktop, 12px mobile.
+- **Categories:** All, Decorative, Garden, Lighting, Mirrors, Rugs, Seating, Storage, Tables.
+- **Transitions:** Link hover: underline or color change, 200ms.
+- **Mobile:** Scrollable horizontally, touch-friendly.
+- **Accessibility:** <nav> with aria-label, focus states.
+
+### Newsletter Signup (Homepage/Footer)
+- **Layout:** Input + button, inline on desktop, stacked on mobile. Max width: 400px. Centered or left-aligned.
+- **Input:** Rounded, border sand, padding 12px. Placeholder: "Your email".
+- **Button:** Espresso on sand, bold, rounded, hover invert, 200ms.
+- **Privacy Note:** Small, muted sand text below input.
+- **Accessibility:** Input has label, button is <button> with aria-label, form has role.

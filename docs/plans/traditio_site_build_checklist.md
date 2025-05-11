@@ -25,7 +25,7 @@
 ---
 
 ## 3. Homepage
-- [ ] **ANALYZE:** Examine and document the reference site's homepage (hero, featured grid, category nav, newsletter) in the style guide.
+- [x] **ANALYZE:** Examine and document the reference site's homepage (hero, featured grid, category nav, newsletter) in the style guide.
 - [ ] Implement hero section: large, minimal, headline ("FRENCH ANTIQUES & VINTAGE"), CTA
 - [ ] Implement Shop Collection CTA
 - [ ] Implement featured product grid (matches reference site layout and hover effects)
