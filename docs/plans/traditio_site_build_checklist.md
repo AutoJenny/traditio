@@ -95,6 +95,9 @@
 - [ ] Cross-browser testing
 - [ ] Content review for style/branding consistency
 - [ ] Start local dev server for review
+- [ ] Verify new ProductGrid component is used for all product grids (homepage, showroom, related products, admin list)
+- [ ] Verify SOLD badge appears on all sold products in all grids
+- [ ] Verify admin image management stub page is linked from admin product edit and displays summary (features coming soon)
 
 ---
 

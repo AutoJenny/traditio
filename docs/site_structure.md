@@ -31,9 +31,10 @@ traditio-next-site/
 │   │   ├── viewings/       # /viewings static route
 │   │   │   └── page.tsx
 │   │   ├── showroom/       # /showroom static route and dynamic product pages
-│   │   │   ├── page.tsx    # /showroom
+│   │   │   ├── page.tsx    # /showroom (uses ProductGrid, sort dropdown, category filter)
 │   │   │   └── [slug]/     # /showroom/[slug] dynamic route
-│   │   │       └── page.tsx  # Product detail page (now features interactive gallery, modal zoom, improved layout)
+│   │   │       └── page.tsx  # Product detail page (interactive gallery, modal zoom, related products via ProductGrid)
+│   │   ├── components/         # Shared React components (e.g., ProductGrid, Button, Badge)
 │   │   └── api/            # API routes (Next.js Route Handlers)
 │   │       ├── products/
 │   │       │   ├── route.ts      # /api/products (GET: list featured products)
@@ -74,17 +75,20 @@ traditio-next-site/
 - `/returns`    → `src/app/returns/page.tsx`
 - `/reviews`    → `src/app/reviews/page.tsx`
 - `/viewings`   → `src/app/viewings/page.tsx`
-- `/showroom`   → `src/app/showroom/page.tsx`
+- `/showroom`   → `src/app/showroom/page.tsx` (uses ProductGrid, sort dropdown, category filter)
 
 ### Dynamic Pages
 - `/showroom/[slug]` → `src/app/showroom/[slug]/page.tsx`
   - Displays product details for a given slug.
-  - Features interactive image gallery, modal zoom, and improved layout/UX (see latest update).
+  - Features interactive image gallery, modal zoom, improved layout/UX, and related products (ProductGrid)
 
 ### API Endpoints (Route Handlers)
 - `/api/products`         → `src/app/api/products/route.ts` (GET: list featured products)
 - `/api/products/[slug]`  → `src/app/api/products/[slug]/route.ts` (GET: product detail + related)
 - `/api/categories`       → `src/app/api/categories/route.ts` (GET: list categories)
+
+### Admin Pages
+- `/admin/products/[slug]/images` → Admin image management stub page (upload, reorder, set main, alt, delete coming soon)
 
 ---
 
@@ -115,6 +119,9 @@ traditio-next-site/
 - **Global styles**: `src/app/globals.css` (imported in `layout.tsx`)
 - **Component/page styles**: CSS modules (e.g., `page.module.css`)
 - **Tailwind CSS**: Used throughout for utility-first styling (see `tailwind.config.js`)
+- **ProductGrid component**: Used for all product grids (homepage, showroom, related products, admin list). Handles layout, hover effects, SOLD badge display, and links to product detail.
+- **SOLD badge**: Appears on product cards in all grids when product is sold (top right, all-caps, bold, muted or red, matches reference site).
+- **Sort dropdown**: Right-aligned in showroom header, subtle/transparent, faint underline, blends with theme, no label, SHOWROOM heading centered.
 
 ---
 

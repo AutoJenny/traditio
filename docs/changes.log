@@ -73,3 +73,5 @@
 [2024-05-12  about] Update: About page now features full brand story and philosophy, styled for elegance and clarity.
 
 [2024-05-12  legal] Update: Returns, Reviews, and Privacy pages now feature unique, original Traditio Interiors content, styled for clarity and trust.
+
+[2024-05-13] Documentation update: Updated /docs/site_structure.md, /docs/traditio_style_guide.md, and /docs/plans/traditio_site_build_checklist.md to reflect ProductGrid refactor, SOLD badge logic, sort dropdown in showroom, and admin image management stub. See /docs/plans/changes.log for summary entry.

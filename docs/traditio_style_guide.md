@@ -192,17 +192,18 @@
   - **Accessibility:** All links/buttons have visible focus states. Inputs have labels and aria attributes.
 
 - [ ] Hero Section
-- [ ] Product Card
-- [ ] Product Grid
-- [ ] Product Detail Gallery
+- [x] Product Card
+- [x] Product Grid (now unified via ProductGrid component)
+- [x] Product Detail Gallery
 - [ ] Add to Cart Button
-- [ ] SOLD Badge
+- [x] SOLD Badge (shown on all product cards when sold)
 - [ ] Category Navigation
 - [ ] Newsletter Signup
 - [ ] Contact Form
 - [ ] Blog List Item
 - [ ] Static Content Page
-// ... add more as discovered ...
+- [x] Sort Dropdown (showroom header, subtle theme)
+- [x] Admin Image Management Page (stub; upload/reorder/set main/alt/delete coming soon)
 
 ### Hero Section (Homepage)
 - **Layout:** Large, minimal, centered headline. Height: ~60vh. Max width: 800px. Centered both vertically and horizontally in container.
@@ -235,3 +236,22 @@
 - **Button:** Espresso on sand, bold, rounded, hover invert, 200ms.
 - **Privacy Note:** Small, muted sand text below input.
 - **Accessibility:** Input has label, button is <button> with aria-label, form has role.
+
+### ProductGrid Component
+- Used for all product grids (homepage, showroom, related products, admin list)
+- Handles layout, hover effects, SOLD badge display, and links to product detail
+
+### SOLD Badge
+- Appears on product cards in all grids when product is sold
+- Top right, all-caps, bold, muted or red, matches reference site
+- Hover/focus states consistent with card
+
+### Sort Dropdown (Showroom)
+- Right-aligned in showroom header
+- Options: A-Z, price L>H, price H>L
+- Subtle, transparent, faint underline, blends with theme
+- No label, SHOWROOM heading centered
+
+### Admin Image Management Page (Stub)
+- Linked from admin product edit page
+- Currently shows summary and link; features for upload, reorder, set main, alt text, delete coming soon
