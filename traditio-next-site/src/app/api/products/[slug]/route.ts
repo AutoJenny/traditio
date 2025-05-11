@@ -41,20 +41,24 @@ export async function GET(req, context) {
 export async function PUT(req, context) {
   const { slug } = context.params;
   const body = await req.json();
-  const { categoryIds, images, title, description, price, currency, status, mainImageId, dimensions, condition, origin, period, featured } = body;
-  console.log('PUT /api/products/[slug] received categoryIds:', categoryIds, 'types:', Array.isArray(categoryIds) ? categoryIds.map(x => typeof x) : typeof categoryIds);
+  const {
+    categoryIds,
+    title, description, price, currency, status, mainImageId,
+    dimensions, condition, origin, period, featured
+  } = body;
+
   // Find product by slug
   const product = await prisma.product.findUnique({ where: { slug } });
   if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 });
 
-  // Update product fields
+  // Update product fields (NO images)
   const updated = await prisma.product.update({
     where: { slug },
     data: {
       title,
       slug,
       description,
-      price: parseFloat(price),
+      price,
       currency,
       status,
       mainImageId,
@@ -63,28 +67,21 @@ export async function PUT(req, context) {
       origin,
       period,
       featured,
-      // Replace all categories
       categories: {
         deleteMany: {},
-        create: (categoryIds || []).map((categoryId: any) => ({ category: { connect: { id: parseInt(categoryId) } } })),
+        create: (categoryIds || []).map((id: number) => ({
+          category: { connect: { id } }
+        })),
       },
-      // Replace all images
-      images: {
-        deleteMany: {},
-        create: images || [],
-      },
+      // No images update here
     },
     include: {
       images: true,
-      categories: { include: { category: true } },
-    },
+      categories: { include: { category: true } }
+    }
   });
-  // Flatten categories
-  const flatProduct = {
-    ...updated,
-    categories: updated.categories.map((pc: any) => pc.category),
-  };
-  return NextResponse.json(flatProduct);
+
+  return NextResponse.json({ product: updated });
 }
 
 export async function DELETE(req, context) {
