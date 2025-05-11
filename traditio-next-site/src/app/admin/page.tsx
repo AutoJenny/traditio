@@ -41,15 +41,21 @@ export default function AdminProductList() {
               <tr key={prod.id} className="border-b border-sand hover:bg-ivory">
                 <td className="p-2">
                   {prod.images && prod.images[0] ? (
-                    <img src={prod.images[0].url} alt={prod.title} className="w-16 h-16 object-cover rounded" />
+                    <Link href={`/admin/products/${prod.slug}/images`}>
+                      <img src={prod.images[0].url} alt={prod.title} className="w-16 h-16 object-cover rounded hover:ring-2 hover:ring-sand-500 transition" />
+                    </Link>
                   ) : (
-                    <span className="text-2xl">🪑</span>
+                    <Link href={`/admin/products/${prod.slug}/images`} className="text-2xl">🪑</Link>
                   )}
                 </td>
                 <td className="p-2 font-bold">
                   <Link href={`/admin/products/${prod.slug}`} className="hover:underline text-brass">{prod.title}</Link>
                 </td>
-                <td className="p-2">{prod.category?.name || "-"}</td>
+                <td className="p-2">
+                  {prod.categories && prod.categories.length > 0
+                    ? prod.categories.map((cat: any) => cat.name).join(", ")
+                    : "-"}
+                </td>
                 <td className="p-2">£{prod.price}</td>
                 <td className="p-2">{prod.status}</td>
                 <td className="p-2">
