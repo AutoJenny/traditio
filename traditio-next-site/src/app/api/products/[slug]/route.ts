@@ -3,7 +3,8 @@ import { prisma } from '../../../../../lib/prisma';
 
 // @ts-ignore
 export async function GET(req, context) {
-  const { slug } = context.params;
+  const params = await context.params;
+  const { slug } = params;
   const product = await prisma.product.findUnique({
     where: { slug },
     include: {
@@ -39,7 +40,8 @@ export async function GET(req, context) {
 }
 
 export async function PUT(req, context) {
-  const { slug } = context.params;
+  const params = await context.params;
+  const { slug } = params;
   const body = await req.json();
   const {
     categoryIds,
@@ -85,7 +87,8 @@ export async function PUT(req, context) {
 }
 
 export async function DELETE(req, context) {
-  const { slug } = context.params;
+  const params = await context.params;
+  const { slug } = params;
   // Delete product by slug
   await prisma.product.delete({ where: { slug } });
   return NextResponse.json({ ok: true });

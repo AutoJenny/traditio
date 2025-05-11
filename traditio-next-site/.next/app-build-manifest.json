@@ -1,30 +1,10 @@
 {
   "pages": {
-    "/api/products/[slug]/images/upload/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/products/[slug]/images/upload/route.js"
-    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
-    ],
-    "/admin/products/[slug]/images/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/admin/products/[slug]/images/page.js"
-    ],
-    "/api/products/[slug]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/products/[slug]/route.js"
-    ],
-    "/api/products/[slug]/images/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/products/[slug]/images/route.js"
     ],
     "/admin/products/[slug]/page": [
       "static/chunks/webpack.js",
@@ -36,35 +16,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/categories/route.js"
     ],
-    "/admin/page": [
+    "/api/products/[slug]/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/admin/page.js"
-    ],
-    "/api/products/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/products/route.js"
-    ],
-    "/showroom/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/showroom/page.js"
-    ],
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
-    "/showroom/[slug]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/showroom/[slug]/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/api/products/[slug]/route.js"
     ]
   }
 }
