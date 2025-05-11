@@ -54,12 +54,19 @@ export async function PUT(req, context) {
     const product = await prisma.product.findUnique({ where: { slug } });
     if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 });
 
+    // If product has no title yet or is a draft, set title and generate slug as title_id
+    let newSlug = product.slug;
+    if ((!product.title || product.title === 'Draft') && title && title !== 'Draft') {
+      const baseSlug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      newSlug = `${baseSlug}-${product.id}`;
+    }
+
     // Update product fields (NO images)
     const updated = await prisma.product.update({
       where: { slug },
       data: {
         title,
-        slug,
+        slug: newSlug,
         description,
         price: parseFloat(price),
         currency,
