@@ -19,3 +19,7 @@
 [STEP] Implemented top navigation and footer in layout.tsx per the style guide and checklist. Checked off these items in the build checklist.
 
 [STEP] Committed all configuration and code changes. Verified via curl that the homepage is now styled and Tailwind CSS is working on port 3002. The site is no longer unstyled.
+
+[2025-05-11] Updated traditio-next-site/README.md to clarify that all development commands must be run from the traditio-next-site directory, not the project root, to avoid 404 errors and misconfiguration.
+
+[2025-05-11] Removed root-level package.json, package-lock.json, tsconfig.json, next-env.d.ts, and tailwind.config.js to prevent confusion. All development must be done in traditio-next-site.
