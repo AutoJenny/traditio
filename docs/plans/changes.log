@@ -4,3 +4,6 @@
 [DATE] - Analysis/documentation of reference site's top navigation and footer completed in style guide. Checklist updated. 
 [DATE] - Implemented top navigation and footer in global layout (layout.tsx) per style guide and checklist. Checklist updated. 
 [DATE] - Completed homepage (hero, featured grid, category nav, newsletter) analysis/documentation in style guide and checklist. 
+2025-05-11 Blitzed repo: removed all git metadata and submodule remnants, re-initialized git, and made a clean initial commit. Fixed showroom category filtering bug (products now appear under correct categories). All files now tracked as normal. See main docs/changes.log for summary. 
+2025-05-11 Fixed admin product edit: category checkboxes now pre-check and update correctly by normalizing category ID types (number vs string). See main docs/changes.log for summary. 
+2025-05-11 Refactored admin product edit: removed image editing, now shows summary and link to new image management page. Created stub image management page for product images (upload, reorder, set main, alt text, delete coming soon). See main docs/changes.log for summary. 

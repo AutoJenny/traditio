@@ -37,3 +37,9 @@
 2025-05-11: Refactored product detail page (/showroom/[slug]) to include interactive image gallery, modal zoom, and improved layout/UX to match modants.co.uk reference.
 
 [2025-05-11] Implemented zoom and pan functionality for product detail modal images using react-zoom-pan-pinch, allowing users to explore images in greater detail.
+
+2025-05-11 Blitzed repo: removed all git metadata and submodule remnants, re-initialized git, and made a clean initial commit. Fixed showroom category filtering bug (products now appear under correct categories). All files now tracked as normal. See docs/plans/changes.log for details.
+
+2025-05-11 Fixed admin product edit: category checkboxes now pre-check and update correctly by normalizing category ID types (number vs string).
+
+2025-05-11 Refactored admin product edit: removed image editing, now shows summary and link to new image management page. Created stub image management page for product images (upload, reorder, set main, alt text, delete coming soon).
