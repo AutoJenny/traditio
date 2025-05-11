@@ -45,6 +45,7 @@ export default function RootLayout({
             <li><a href="/contact" className="hover:text-brass transition-colors duration-200">Contact</a></li>
           </ul>
           <div className="flex items-center gap-6">
+            <a href="/admin" className="bg-brass text-espresso font-bold rounded px-4 py-2 border-2 border-brass uppercase shadow hover:bg-espresso hover:text-ivory transition">Edit</a>
             <a href="/account" className="hover:text-brass transition-colors duration-200">Sign In</a>
             <a href="/cart" className="relative hover:text-brass transition-colors duration-200">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 inline">
