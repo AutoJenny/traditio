@@ -23,7 +23,7 @@ export default function AdminProductEdit() {
       // Flatten categories to array of IDs for form
       setProduct({
         ...prodData.product,
-        categoryIds: prodData.product?.categories?.map((cat: any) => cat.id) || [],
+        categoryIds: prodData.product?.categories?.map((cat: any) => Number(cat.id)) || [],
         images: prodData.product?.images || [],
       });
       setLoading(false);
@@ -34,11 +34,12 @@ export default function AdminProductEdit() {
   function handleChange(e: any) {
     const { name, value, type, checked } = e.target;
     if (name === "categoryIds") {
+      const id = Number(value);
       setProduct((prev: any) => ({
         ...prev,
         categoryIds: checked
-          ? [...prev.categoryIds, value]
-          : prev.categoryIds.filter((id: string) => id !== value),
+          ? [...prev.categoryIds, id]
+          : prev.categoryIds.filter((cid: number) => cid !== id),
       }));
     } else if (name === "images") {
       setProduct((prev: any) => ({ ...prev, images: value.split(",").map((url: string) => ({ url })) }));
@@ -117,7 +118,7 @@ export default function AdminProductEdit() {
                   type="checkbox"
                   name="categoryIds"
                   value={cat.id}
-                  checked={product.categoryIds.includes(cat.id)}
+                  checked={product.categoryIds.includes(Number(cat.id))}
                   onChange={handleChange}
                 />
                 {cat.name}
