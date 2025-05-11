@@ -7,6 +7,8 @@ export default function AdminProductList() {
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
   const [showDeleted, setShowDeleted] = useState(false);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [categoryFilter, setCategoryFilter] = useState('ALL');
 
   useEffect(() => {
     async function fetchProducts() {
@@ -15,14 +17,19 @@ export default function AdminProductList() {
       setProducts(data.sort((a: any, b: any) => a.title.localeCompare(b.title)));
       setLoading(false);
     }
+    async function fetchCategories() {
+      const res = await fetch("/api/categories");
+      setCategories(await res.json());
+    }
     fetchProducts();
+    fetchCategories();
   }, []);
 
   return (
     <main className="max-w-4xl mx-auto py-12 px-4">
       <h1 className="font-heading text-3xl md:text-4xl font-bold uppercase text-espresso mb-8">Admin: Products</h1>
       <div className="mb-6 flex items-center justify-between">
-        <div>
+        <div className="flex items-center gap-6">
           <label className="inline-flex items-center gap-2 font-semibold text-sand-700">
             <input
               type="checkbox"
@@ -31,6 +38,19 @@ export default function AdminProductList() {
               className="accent-brass"
             />
             Show Deleted
+          </label>
+          <label className="inline-flex items-center gap-2 font-semibold text-sand-700">
+            Category:
+            <select
+              value={categoryFilter}
+              onChange={e => setCategoryFilter(e.target.value)}
+              className="border rounded px-2 py-1"
+            >
+              <option value="ALL">ALL</option>
+              {categories.map((cat: any) => (
+                <option key={cat.id} value={cat.id}>{cat.name}</option>
+              ))}
+            </select>
           </label>
         </div>
         <button
@@ -77,6 +97,10 @@ export default function AdminProductList() {
           <tbody>
             {products
               .filter((prod: any) => showDeleted || prod.status !== 'deleted')
+              .filter((prod: any) =>
+                categoryFilter === 'ALL' ||
+                (prod.categories && prod.categories.some((cat: any) => String(cat.id) === String(categoryFilter)))
+              )
               .map((prod: any) => (
                 <tr key={prod.id} className="border-b border-sand hover:bg-ivory group">
                   <td className="p-2 relative">
