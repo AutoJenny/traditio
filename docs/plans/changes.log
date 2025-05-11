@@ -10,3 +10,4 @@
 [2024-05-12  admin] Fix: Await context.params in /api/products/[slug] API route (Next.js 15+), resolving product details not saving in admin edit page. 
 [2024-05-12  admin] Update: Admin product price input now robust—shows raw value while editing, formats with commas on blur, always sends raw value to backend, and removes pattern attribute for best UX. 
 [2024-05-12  nav] Add: EDIT button to header, linking to /admin, styled for admin visibility. 
+[2024-05-12  admin] Add: SOLD icon to admin product list view panel (top right on hover, matches product details page). 

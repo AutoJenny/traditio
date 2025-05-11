@@ -39,14 +39,21 @@ export default function AdminProductList() {
           </thead>
           <tbody>
             {products.map((prod: any) => (
-              <tr key={prod.id} className="border-b border-sand hover:bg-ivory">
-                <td className="p-2">
+              <tr key={prod.id} className="border-b border-sand hover:bg-ivory group">
+                <td className="p-2 relative">
                   {prod.images && prod.images[0] ? (
                     <Link href={`/admin/products/${prod.slug}/images`}>
                       <img src={prod.images[0].url} alt={prod.title} className="w-16 h-16 object-cover rounded hover:ring-2 hover:ring-sand-500 transition" />
+                      {prod.status === 'sold' && (
+                        <span className="absolute top-1 right-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity inline-block bg-red-400 text-white text-xs rounded px-2 py-0.5 uppercase font-bold">SOLD</span>
+                      )}
                     </Link>
                   ) : (
-                    <Link href={`/admin/products/${prod.slug}/images`} className="text-2xl">🪑</Link>
+                    <Link href={`/admin/products/${prod.slug}/images`} className="text-2xl">🪑
+                      {prod.status === 'sold' && (
+                        <span className="absolute top-1 right-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity inline-block bg-red-400 text-white text-xs rounded px-2 py-0.5 uppercase font-bold">SOLD</span>
+                      )}
+                    </Link>
                   )}
                 </td>
                 <td className="p-2 font-bold">
