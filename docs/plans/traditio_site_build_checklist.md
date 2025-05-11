@@ -10,10 +10,10 @@
 ---
 
 ## 1. Project Setup (do these first)
-- [ ] Closely examine the reference site's global layout, breakpoints, and overall structure. Document in style guide.
-- [ ] Set up Next.js project with custom styles (Traditio palette, fonts, etc.)
-- [ ] Install and configure Tailwind CSS
-- [ ] Set up image optimization and lazy loading
+- [x] Closely examine the reference site's global layout, breakpoints, and overall structure. Document in style guide.
+- [x] Set up Next.js project with custom styles (Traditio palette, fonts, etc.)
+- [x] Install and configure Tailwind CSS
+- [x] Set up image optimization and lazy loading (logo confirmed working)
 
 ---
 
@@ -99,4 +99,10 @@
 
 # Component-by-Component Breakdown (see separate document for details)
 - [ ] For each component, ensure the analysis/documentation step is complete in the style guide before implementation.
-- [ ] Document every component (nav, card, button, badge, form, etc.) with screenshots, CSS/JS notes, and exact dimensions/animations as implemented on the reference site. 
+- [ ] Document every component (nav, card, button, badge, form, etc.) with screenshots, CSS/JS notes, and exact dimensions/animations as implemented on the reference site.
+
+---
+
+**Update [DATE]:**
+- Logo image (traditio_logo.png) is now present in public directory and referenced on homepage.
+- Image optimization setup in progress. 

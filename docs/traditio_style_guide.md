@@ -20,10 +20,20 @@
 
 ## 🧱 Layout & Structure
 
-- Container Width: Max `1200px`, padded `24px` each side  
-- Grid: 12-column responsive grid system  
-- Whitespace: Generous `32px–64px` spacing  
-- Navigation: Sticky top bar with logo left, minimal links right  
+- **Container Width:** Max `1200px`, padded `24px` each side (desktop), ~16px (mobile)
+- **Grid:** 12-column responsive grid system, 3–4 columns desktop, 2 tablet, 1 mobile
+- **Breakpoints:**
+  - Desktop: ≥1200px
+  - Tablet: ~768–1199px
+  - Mobile: <768px
+- **Whitespace:** Generous `32px–64px` vertical spacing between sections, `24px` horizontal padding
+- **Navigation:** Sticky top bar, logo left, minimal links right, height ~64px
+- **Footer:** Full width, max content width matches container, top: newsletter/contact, bottom: legal links
+- **Section Spacing:** ~64px desktop, ~32px mobile
+- **Card min-width:** ~280-320px
+- **Hero height:** ~60vh
+- **Button padding:** ~12px 24px
+- **Font sizes:** Headings ~2-3rem, body ~1-1.2rem
 
 ## 🖼 Imagery Style
 
@@ -57,8 +67,38 @@
 
 ## Reference Site Layout & Component Mapping (modants.co.uk)
 
-**General Principle:**
-- All layouts, spacings, and interactions (including hover, transitions, and JS behaviors) should match https://www.modants.co.uk/ exactly, except for Traditio's own palette and fonts.
+**Global Layout & Structure Analysis:**
+- **Container & Grid:**
+  - Max width: ~1200px (centered, auto margins)
+  - Side padding: ~24px desktop, ~16px mobile
+  - Grid: 3–4 columns desktop, 2 tablet, 1 mobile
+  - Gutter: ~32px desktop, ~16px mobile
+- **Breakpoints:**
+  - Desktop: ≥1200px
+  - Tablet: ~768–1199px
+  - Mobile: <768px
+- **Header/Nav:**
+  - Height: ~64px
+  - Sticky on scroll
+  - Logo left, nav links center/right, account/cart right
+  - Mobile: Hamburger menu, slide-down nav
+- **Footer:**
+  - Full width, max content width matches container
+  - Top: newsletter signup, contact info
+  - Bottom: legal links, copyright
+- **Spacing:**
+  - Section vertical spacing: ~64px desktop, ~32px mobile
+  - Card vertical margin: ~32px
+  - Button padding: 12px 24px
+- **Typography:**
+  - Headings: 2.5–3rem (hero), 1.5–2rem (section)
+  - Body: 1–1.2rem
+- **Transitions:**
+  - All interactive elements (nav links, buttons, cards) use 200–300ms ease-in-out transitions
+- **Other:**
+  - Images: Responsive, object-fit: cover, lazy loaded
+  - Accessibility: Alt text on all images, focus states on links/buttons
+  - All images must use Next.js <Image /> for optimization and lazy loading. Do not use <img> tags.
 
 ### Layout
 - **Container max-width:** ~1200px
@@ -133,38 +173,6 @@
 ## Component-by-Component Reference
 
 ### Global Layout & Structure Analysis (modants.co.uk)
-
-- **Container & Grid:**
-  - Max width: ~1200px (centered, auto margins)
-  - Side padding: ~24px desktop, ~16px mobile
-  - Grid: 3–4 columns desktop, 2 tablet, 1 mobile
-  - Gutter: ~32px desktop, ~16px mobile
-- **Breakpoints:**
-  - Desktop: ≥1200px
-  - Tablet: ~768–1199px
-  - Mobile: <768px
-- **Header/Nav:**
-  - Height: ~64px
-  - Sticky on scroll
-  - Logo left, nav links center/right, account/cart right
-  - Mobile: Hamburger menu, slide-down nav
-- **Footer:**
-  - Full width, max content width matches container
-  - Top: newsletter signup, contact info
-  - Bottom: legal links, copyright
-- **Spacing:**
-  - Section vertical spacing: ~64px desktop, ~32px mobile
-  - Card vertical margin: ~32px
-  - Button padding: 12px 24px
-- **Typography:**
-  - Headings: 2.5–3rem (hero), 1.5–2rem (section)
-  - Body: 1–1.2rem
-- **Transitions:**
-  - All interactive elements (nav links, buttons, cards) use 200–300ms ease-in-out transitions
-- **Other:**
-  - Images: Responsive, object-fit: cover, lazy loaded
-  - Accessibility: Alt text on all images, focus states on links/buttons
-  - **All images must use Next.js <Image /> for optimization and lazy loading. Do not use <img> tags.**
 
 - [x] Navigation Bar
   - **Layout:** Full-width, max content width ~1200px, centered. Height: ~64px desktop, ~56px mobile. Logo left (links to home). Navigation links (Home, About, Showroom, Blog, Viewings, Delivery, Contact) center/right. Spacing between links: ~32px desktop, ~20px mobile. Sticky on scroll.
