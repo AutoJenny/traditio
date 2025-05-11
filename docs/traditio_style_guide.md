@@ -132,10 +132,57 @@
 
 ## Component-by-Component Reference
 
-(For each component, document: screenshot, exact dimensions, CSS/JS notes, and any deviations from reference site)
+### Global Layout & Structure Analysis (modants.co.uk)
 
-- [ ] Navigation Bar
-- [ ] Footer
+- **Container & Grid:**
+  - Max width: ~1200px (centered, auto margins)
+  - Side padding: ~24px desktop, ~16px mobile
+  - Grid: 3–4 columns desktop, 2 tablet, 1 mobile
+  - Gutter: ~32px desktop, ~16px mobile
+- **Breakpoints:**
+  - Desktop: ≥1200px
+  - Tablet: ~768–1199px
+  - Mobile: <768px
+- **Header/Nav:**
+  - Height: ~64px
+  - Sticky on scroll
+  - Logo left, nav links center/right, account/cart right
+  - Mobile: Hamburger menu, slide-down nav
+- **Footer:**
+  - Full width, max content width matches container
+  - Top: newsletter signup, contact info
+  - Bottom: legal links, copyright
+- **Spacing:**
+  - Section vertical spacing: ~64px desktop, ~32px mobile
+  - Card vertical margin: ~32px
+  - Button padding: 12px 24px
+- **Typography:**
+  - Headings: 2.5–3rem (hero), 1.5–2rem (section)
+  - Body: 1–1.2rem
+- **Transitions:**
+  - All interactive elements (nav links, buttons, cards) use 200–300ms ease-in-out transitions
+- **Other:**
+  - Images: Responsive, object-fit: cover, lazy loaded
+  - Accessibility: Alt text on all images, focus states on links/buttons
+  - **All images must use Next.js <Image /> for optimization and lazy loading. Do not use <img> tags.**
+
+- [x] Navigation Bar
+  - **Layout:** Full-width, max content width ~1200px, centered. Height: ~64px desktop, ~56px mobile. Logo left (links to home). Navigation links (Home, About, Showroom, Blog, Viewings, Delivery, Contact) center/right. Spacing between links: ~32px desktop, ~20px mobile. Sticky on scroll.
+  - **Mobile:** Hamburger menu replaces links. Slide-down menu on open, covers full width. Logo left, cart/account right.
+  - **Typography:** All-caps, letter-spacing ~0.05em. Font size: ~1.1rem desktop, ~1rem mobile. Font: Sans-serif (use Inter for Traditio).
+  - **Colors:** Background: Ivory (#F8F5F0). Text: Espresso (#3A2E2B). Active link: Underline or color change (Antique Brass on hover).
+  - **Transitions:** Link hover: 200ms color/underline transition, ease-in-out. Hamburger menu: 300ms slide-down.
+  - **Accessibility:** All links/buttons have visible focus states.
+
+- [x] Footer
+  - **Layout:** Full-width, max content width ~1200px, centered. Top: Newsletter signup (input + button), contact info (address, phone, email, hours). Bottom: Legal links (Delivery, Contact, Returns, Privacy, Reviews), copyright. Vertical spacing: ~32px between sections.
+  - **Typography:** Body: ~1rem, muted sand color for legal links. Headings: Small caps, bold.
+  - **Colors:** Background: Ivory (#F8F5F0). Text: Espresso (#3A2E2B), legal links in Muted Sand (#D6CFC6).
+  - **Spacing:** Padding: ~32px top/bottom. Input/button: 12px 24px.
+  - **Transitions:** Button hover: 200ms color invert, ease-in-out. Link hover: 200ms underline or color change.
+  - **Mobile:** Stacks vertically, full width, same padding.
+  - **Accessibility:** All links/buttons have visible focus states. Inputs have labels and aria attributes.
+
 - [ ] Hero Section
 - [ ] Product Card
 - [ ] Product Grid

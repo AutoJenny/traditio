@@ -9,3 +9,13 @@
 [STEP] Checked off 'Add minimal navigation links right' in /docs/plans/traditio_site_build_checklist.md. 
 
 [STEP] Removed all Vite/React app code, configuration, and dependencies from the project root. The Next.js app in traditio-next-site is now the sole front-end codebase. Cleaned up src/, node_modules, lock files, and configs. Updated documentation as needed.
+
+[STEP] Refactored build checklist: now enforces analysis/documentation before implementation for every section, in optimal order. Updated style guide for pixel-perfect modants.co.uk clone. All instructions are now explicit for new coders.
+
+[STEP] Completed and documented global layout & structure analysis of modants.co.uk in the style guide as required by the new checklist process.
+
+[STEP] Replaced <img> with Next.js <Image> for the logo in layout.tsx and page.tsx to enable image optimization and lazy loading, as required by the build checklist and style guide.
+
+[STEP] Implemented top navigation and footer in layout.tsx per the style guide and checklist. Checked off these items in the build checklist.
+
+[STEP] Committed all configuration and code changes. Verified via curl that the homepage is now styled and Tailwind CSS is working on port 3002. The site is no longer unstyled.

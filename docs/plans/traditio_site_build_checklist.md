@@ -1,5 +1,7 @@
 # Traditio Site Build Checklist (Modelled on https://www.modants.co.uk/)
 
+**IMPORTANT: Coders must follow this checklist in order, without seeking further permission or instructions unless a step is ambiguous or blocked. Do not ask the project owner for next steps if the checklist is clear.**
+
 ## 0. General Instructions
 - [ ] For each section/component below, **first** closely examine the equivalent on https://www.modants.co.uk/ (using browser dev tools for layout, dimensions, transitions, and JS behaviors).
 - [ ] Document findings in the 'Component-by-Component Reference' section of the style guide **before** starting implementation.
@@ -16,9 +18,9 @@
 ---
 
 ## 2. Core Layout
-- [ ] **ANALYZE:** Examine and document the reference site's top navigation and footer (layout, spacing, transitions, mobile behavior) in the style guide.
-- [ ] Implement top navigation: logo (left), navigation links (Home, About, Showroom, Blog, Viewings, Delivery, Contact), account (Sign In/My Account), cart (icon with item count)
-- [ ] Implement footer: contact details, address, phone, email, hours, newsletter signup, legal links, copyright
+- [x] **ANALYZE:** Examine and document the reference site's top navigation and footer (layout, spacing, transitions, mobile behavior) in the style guide.
+- [x] Implement top navigation: logo (left), navigation links (Home, About, Showroom, Blog, Viewings, Delivery, Contact), account (Sign In/My Account), cart (icon with item count)
+- [x] Implement footer: contact details, address, phone, email, hours, newsletter signup, legal links, copyright
 
 ---
 
