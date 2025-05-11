@@ -72,6 +72,10 @@ export default function Home() {
               href={`/showroom/${prod.slug}`}
               className="relative group bg-sand rounded-card shadow-card flex flex-col items-center transition-transform duration-200 hover:scale-105 hover:shadow-lg aspect-square overflow-hidden"
             >
+              {/* SOLD icon, top right, only on hover */}
+              {prod.status === 'sold' && (
+                <span className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity inline-block bg-red-400 text-white text-xs rounded px-2 py-0.5 uppercase font-bold">SOLD</span>
+              )}
               <div className="absolute inset-0 w-full h-full">
                 {prod.images && prod.images[0] ? (
                   <img

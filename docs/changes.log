@@ -55,3 +55,7 @@
 [2024-05-12  showroom] Add: SOLD icon to showroom grid panels (top right on hover, matches details/admin views).
 
 [2024-05-12  admin] Update: 'Images' label in admin product edit is now a link to the images editing page for the current product.
+
+[2024-05-12  git] Update: .gitignore now ignores all .next build artifacts in all subdirs; removed .next from git tracking.
+
+[2024-05-12  home] Add: SOLD icon to homepage product grid panels (top right on hover, matches showroom/admin grids).
