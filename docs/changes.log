@@ -51,3 +51,5 @@
 [2024-05-12  nav] Add: EDIT button to header, linking to /admin, styled for admin visibility.
 
 [2024-05-12  admin] Add: SOLD icon to admin product list view panel (top right on hover, matches product details page).
+
+[2024-05-12  showroom] Add: SOLD icon to showroom grid panels (top right on hover, matches details/admin views).
