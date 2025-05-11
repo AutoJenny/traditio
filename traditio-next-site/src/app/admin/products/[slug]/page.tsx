@@ -151,12 +151,12 @@ export default function AdminProductEdit() {
           <div className="flex flex-wrap gap-2 items-center">
             {product.images && product.images.length > 0 ? (
               product.images.map((img: any, idx: number) => (
-                <div key={img.url} className="relative">
-                  <img src={img.url} alt={img.alt || ''} className={`w-16 h-16 object-cover rounded border ${product.mainImageId === img.id ? 'ring-2 ring-sand-500' : ''}`} />
+                <a key={img.url} href={`/admin/products/${product.slug}/images`} className="relative group">
+                  <img src={img.url} alt={img.alt || ''} className={`w-16 h-16 object-cover rounded border ${product.mainImageId === img.id ? 'ring-2 ring-sand-500' : ''} group-hover:opacity-80 transition`} />
                   {product.mainImageId === img.id && (
                     <span className="absolute top-0 right-0 bg-sand-500 text-xs text-white px-1 rounded-bl">Main</span>
                   )}
-                </div>
+                </a>
               ))
             ) : (
               <span className="text-gray-400">No images</span>
