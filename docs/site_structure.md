@@ -33,7 +33,7 @@ traditio-next-site/
 │   │   ├── showroom/       # /showroom static route and dynamic product pages
 │   │   │   ├── page.tsx    # /showroom
 │   │   │   └── [slug]/     # /showroom/[slug] dynamic route
-│   │   │       └── page.tsx
+│   │   │       └── page.tsx  # Product detail page (now features interactive gallery, modal zoom, improved layout)
 │   │   └── api/            # API routes (Next.js Route Handlers)
 │   │       ├── products/
 │   │       │   ├── route.ts      # /api/products (GET: list featured products)
@@ -79,6 +79,7 @@ traditio-next-site/
 ### Dynamic Pages
 - `/showroom/[slug]` → `src/app/showroom/[slug]/page.tsx`
   - Displays product details for a given slug.
+  - Features interactive image gallery, modal zoom, and improved layout/UX (see latest update).
 
 ### API Endpoints (Route Handlers)
 - `/api/products`         → `src/app/api/products/route.ts` (GET: list featured products)

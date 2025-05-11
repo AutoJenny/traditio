@@ -25,3 +25,15 @@
 [2025-05-11] Removed root-level package.json, package-lock.json, tsconfig.json, next-env.d.ts, and tailwind.config.js to prevent confusion. All development must be done in traditio-next-site.
 
 [2025-05-11] Added docs/site_structure.md: in-depth technical documentation of the site structure, routes, API, backend, and conventions for new developers.
+
+[2025-05-11] Added 'Rare Buddha' as a featured product in the Decorative category with test images to the seed script for testing purposes.
+
+[2025-05-11] Homepage category links now navigate to showroom with the correct category selected; showroom reads the query param to set the initial filter.
+
+[2025-05-11] Updated product panels on homepage and showroom: now square, show only main image (cropped), and on hover darken with name/price in sand color centered.
+
+[2025-05-11] Updated homepage and showroom product panels to link to the product detail page (/showroom/[slug]) using Next.js Link and the product slug.
+
+2025-05-11: Refactored product detail page (/showroom/[slug]) to include interactive image gallery, modal zoom, and improved layout/UX to match modants.co.uk reference.
+
+[2025-05-11] Implemented zoom and pan functionality for product detail modal images using react-zoom-pan-pinch, allowing users to explore images in greater detail.
