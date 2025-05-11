@@ -46,6 +46,21 @@
       "static/chunks/main-app.js",
       "static/chunks/app/showroom/[slug]/page.js"
     ],
+    "/admin/products/[slug]/images/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/admin/products/[slug]/images/page.js"
+    ],
+    "/api/products/[slug]/images/upload/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/products/[slug]/images/upload/route.js"
+    ],
+    "/api/products/[slug]/images/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/products/[slug]/images/route.js"
+    ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",

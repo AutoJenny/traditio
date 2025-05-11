@@ -181,7 +181,7 @@ export default function AdminProductEdit() {
           <input name="period" value={product.period || ""} onChange={handleChange} className="w-full border rounded p-2" />
         </div>
         <div className="mb-4">
-          <label className="block font-semibold mb-1">Images</label>
+          <a href={`/admin/products/${product.slug}/images`} className="block font-semibold mb-1 text-brass hover:underline transition">Images</a>
           <div className="flex flex-wrap gap-2 items-center">
             {product.images && product.images.length > 0 ? (
               product.images.map((img: any, idx: number) => (
