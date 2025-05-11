@@ -17,3 +17,4 @@
 [2024-05-12  home] Add: SOLD icon to homepage product grid panels (top right on hover, matches showroom/admin grids). 
 [2024-05-12  refactor] Create reusable ProductGrid component; homepage and showroom now use it for product grids (SOLD icon, hover, layout unified). 
 [2024-05-12  refactor] Related Products on product details page now uses ProductGrid for consistent layout/behavior. 
+[2024-05-12  showroom] Add: Right-aligned Sort dropdown to showroom header (A-Z, price L>H, price H>L). 
