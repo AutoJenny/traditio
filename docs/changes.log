@@ -59,3 +59,5 @@
 [2024-05-12  git] Update: .gitignore now ignores all .next build artifacts in all subdirs; removed .next from git tracking.
 
 [2024-05-12  home] Add: SOLD icon to homepage product grid panels (top right on hover, matches showroom/admin grids).
+
+[2024-05-12  refactor] Create reusable ProductGrid component; homepage and showroom now use it for product grids (SOLD icon, hover, layout unified).
