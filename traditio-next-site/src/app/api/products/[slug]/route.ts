@@ -41,7 +41,8 @@ export async function GET(req, context) {
 export async function PUT(req, context) {
   const { slug } = context.params;
   const body = await req.json();
-  const { categoryIds, images, ...data } = body;
+  const { categoryIds, images, title, description, price, currency, status, mainImageId, dimensions, condition, origin, period, featured } = body;
+  console.log('PUT /api/products/[slug] received categoryIds:', categoryIds, 'types:', Array.isArray(categoryIds) ? categoryIds.map(x => typeof x) : typeof categoryIds);
   // Find product by slug
   const product = await prisma.product.findUnique({ where: { slug } });
   if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 });
@@ -50,8 +51,18 @@ export async function PUT(req, context) {
   const updated = await prisma.product.update({
     where: { slug },
     data: {
-      ...data,
-      price: parseFloat(data.price),
+      title,
+      slug,
+      description,
+      price: parseFloat(price),
+      currency,
+      status,
+      mainImageId,
+      dimensions,
+      condition,
+      origin,
+      period,
+      featured,
       // Replace all categories
       categories: {
         deleteMany: {},
