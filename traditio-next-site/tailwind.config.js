@@ -11,7 +11,7 @@ module.exports = {
       colors: {
         ivory: '#F8F5F0',
         espresso: '#3A2E2B',
-        sand: '#D6CFC6',
+        sand: '#B3A995',
         brass: '#BFA07A',
         clay: '#A28E7D',
       },
