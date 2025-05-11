@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  name        String
+  description String?
+  parent      Category? @relation("CategoryToCategory", fields: [parentId], references: [id])
+  parentId    Int?
+  children    Category[] @relation("CategoryToCategory")
+  order       Int?
+  products    Product[]
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  description String
+  price       Float
+  currency    String    @default("GBP")
+  status      String    @default("available")
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  mainImage   Image?    @relation("MainImage", fields: [mainImageId], references: [id])
+  mainImageId Int?
+  images      Image[]
+  dimensions  String?
+  condition   String?
+  origin      String?
+  period      String?
+  featured    Boolean   @default(false)
+  badges      Badge[]
+  tags        ProductTag[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  url       String
+  alt       String?
+  product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+  order     Int?
+  mainFor   Product? @relation("MainImage")
+}
+
+model Badge {
+  id        Int      @id @default(autoincrement())
+  label     String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  products ProductTag[]
+}
+
+model ProductTag {
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  tag       Tag     @relation(fields: [tagId], references: [id])
+  tagId     Int
+
+  @@id([productId, tagId])
+} 
