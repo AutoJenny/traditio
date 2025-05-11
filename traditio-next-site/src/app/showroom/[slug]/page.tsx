@@ -22,6 +22,13 @@ export default function ProductDetail() {
     fetchProduct();
   }, [slug]);
 
+  function formatPrice(value: string | number) {
+    if (value === null || value === undefined) return '';
+    const num = typeof value === 'number' ? value : parseFloat(value.toString().replace(/,/g, ''));
+    if (isNaN(num)) return '';
+    return num.toLocaleString('en-GB');
+  }
+
   if (loading) return <div className="text-center py-16">Loading...</div>;
   if (!product) return <div className="text-center py-16">Product not found.</div>;
 
@@ -53,7 +60,7 @@ export default function ProductDetail() {
             {product.featured && <span className="inline-block bg-brass text-espresso text-xs rounded px-2 py-0.5 uppercase font-bold">Featured</span>}
             {product.status === 'sold' && <span className="inline-block bg-red-400 text-white text-xs rounded px-2 py-0.5 uppercase font-bold">SOLD</span>}
           </div>
-          <p className="font-body text-2xl text-brass font-bold mb-4">£{product.price}</p>
+          <p className="font-body text-2xl text-brass font-bold mb-4">£{formatPrice(product.price)}</p>
           <div className="mb-6">
             <p className="font-body text-base text-sand mb-2 whitespace-pre-line">{product.description}</p>
             <ul className="text-sm text-sand space-y-1">
@@ -118,7 +125,7 @@ export default function ProductDetail() {
                 )}
               </div>
               <h3 className="font-heading text-lg text-espresso mb-1 text-center">{prod.title}</h3>
-              <p className="font-body text-brass font-bold mb-2">£{prod.price}</p>
+              <p className="font-body text-brass font-bold mb-2">£{formatPrice(prod.price)}</p>
             </div>
           ))}
         </div>

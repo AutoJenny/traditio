@@ -31,6 +31,19 @@ export default function AdminProductEdit() {
     fetchData();
   }, [slug]);
 
+  function formatPrice(value: string | number) {
+    if (value === null || value === undefined) return '';
+    const num = typeof value === 'number' ? value : parseFloat(value.toString().replace(/,/g, ''));
+    if (isNaN(num)) return '';
+    return num.toLocaleString('en-GB');
+  }
+
+  function handlePriceChange(e: any) {
+    const raw = e.target.value.replace(/,/g, '');
+    if (!/^\d*(\.\d{0,2})?$/.test(raw)) return; // Only allow numbers and up to 2 decimals
+    setProduct((prev: any) => ({ ...prev, price: raw }));
+  }
+
   function handleChange(e: any) {
     const { name, value, type, checked } = e.target;
     if (name === "categoryIds") {
@@ -100,7 +113,15 @@ export default function AdminProductEdit() {
         </div>
         <div>
           <label className="block font-bold mb-1">Price</label>
-          <input name="price" type="number" value={product.price || ""} onChange={handleChange} className="w-full border rounded p-2" />
+          <input
+            name="price"
+            type="text"
+            value={formatPrice(product.price) || ''}
+            onChange={handlePriceChange}
+            className="w-full border rounded p-2"
+            inputMode="decimal"
+            pattern="^\\d*(\\.\\d{0,2})?$"
+          />
         </div>
         <div>
           <label className="block font-bold mb-1">Status</label>

@@ -95,6 +95,8 @@ export default function ProductImagesPage({ params }: { params: { slug: string }
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveMsg, setSaveMsg] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchImages() {
@@ -150,6 +152,44 @@ export default function ProductImagesPage({ params }: { params: { slug: string }
     }
   }
 
+  async function handleUpload(e: React.FormEvent) {
+    e.preventDefault();
+    setUploading(true);
+    setUploadError(null);
+    const form = e.target as HTMLFormElement;
+    const input = form.elements.namedItem('images') as HTMLInputElement;
+    if (!input.files || input.files.length === 0) {
+      setUploadError('No files selected');
+      setUploading(false);
+      return;
+    }
+    const formData = new FormData();
+    Array.from(input.files).forEach(file => formData.append('images', file));
+    try {
+      const res = await fetch(`/api/products/${slug}/images/upload`, {
+        method: 'POST',
+        body: formData,
+      });
+      if (!res.ok) throw new Error('Upload failed');
+      // Refresh images
+      const data = await res.json();
+      setImages(
+        (data.images || []).sort((a: any, b: any) => {
+          if (a.order != null && b.order != null) return a.order - b.order;
+          if (a.order != null) return -1;
+          if (b.order != null) return 1;
+          return a.id - b.id;
+        })
+      );
+      setMainImageId(data.mainImageId || null);
+    } catch (err: any) {
+      setUploadError(err.message);
+    } finally {
+      setUploading(false);
+      form.reset();
+    }
+  }
+
   if (loading) return <div className="text-center py-16">Loading...</div>;
 
   return (
@@ -165,6 +205,24 @@ export default function ProductImagesPage({ params }: { params: { slug: string }
           items={images.map((img) => img.id || img.url)}
           strategy={rectSortingStrategy}
         >
+          <form onSubmit={handleUpload} className="mb-8 flex flex-col sm:flex-row items-center gap-4">
+            <input
+              type="file"
+              name="images"
+              accept="image/*"
+              multiple
+              className="border rounded px-2 py-1"
+              disabled={uploading}
+            />
+            <button
+              type="submit"
+              disabled={uploading}
+              className="bg-brass text-espresso font-bold rounded px-6 py-2 border-2 border-brass shadow hover:bg-espresso hover:text-ivory transition"
+            >
+              {uploading ? 'Uploading...' : 'Upload Images'}
+            </button>
+            {uploadError && <span className="text-red-600 text-sm">{uploadError}</span>}
+          </form>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {images.map((img, idx) => (
               <DraggableImage

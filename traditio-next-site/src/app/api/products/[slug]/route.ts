@@ -58,7 +58,7 @@ export async function PUT(req, context) {
       title,
       slug,
       description,
-      price,
+      price: parseFloat(price),
       currency,
       status,
       mainImageId,
