@@ -28,9 +28,12 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const { categoryIds, ...data } = body;
+    // Step 1: Create with temporary slug
+    const tempSlug = data.title ? data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'product';
     const product = await prisma.product.create({
       data: {
         ...data,
+        slug: tempSlug,
         price: parseFloat(data.price),
         images: { create: data.images || [] },
         categories: {
@@ -42,7 +45,17 @@ export async function POST(req) {
         categories: { include: { category: true } },
       },
     });
-    return NextResponse.json(product);
+    // Step 2: Update slug to include ID
+    const newSlug = `${tempSlug}_${product.id}`;
+    const updated = await prisma.product.update({
+      where: { id: product.id },
+      data: { slug: newSlug },
+      include: {
+        images: true,
+        categories: { include: { category: true } },
+      },
+    });
+    return NextResponse.json(updated);
   } catch (error) {
     console.error('API /api/products POST error:', error);
     return NextResponse.json({ error: typeof error === 'object' && error && 'message' in error ? (error as any).message : String(error) }, { status: 500 });
