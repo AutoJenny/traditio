@@ -26,6 +26,13 @@ export default function Home() {
     fetchProducts();
   }, []);
 
+  function formatPrice(value: string | number) {
+    if (value === null || value === undefined) return '';
+    const num = typeof value === 'number' ? value : parseFloat(value.toString().replace(/,/g, ''));
+    if (isNaN(num)) return '';
+    return num.toLocaleString('en-GB');
+  }
+
   return (
     <main className="flex flex-col items-center justify-center min-h-[60vh] py-16 px-4 bg-ivory">
       <section className="w-full max-w-2xl mx-auto text-center">
@@ -78,7 +85,7 @@ export default function Home() {
                 {/* Overlay for hover */}
                 <div className="absolute inset-0 bg-espresso bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
                   <h2 className="font-heading text-xl text-sand mb-2 text-center">{prod.title}</h2>
-                  <p className="font-body text-sand font-bold mb-2 text-center">£{prod.price}</p>
+                  <p className="font-body text-sand font-bold mb-2 text-center">£{formatPrice(prod.price)}</p>
                 </div>
               </div>
             </Link>

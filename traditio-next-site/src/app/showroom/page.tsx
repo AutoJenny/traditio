@@ -22,6 +22,13 @@ export default function Showroom() {
     fetchData();
   }, []);
 
+  function formatPrice(value: string | number) {
+    if (value === null || value === undefined) return '';
+    const num = typeof value === 'number' ? value : parseFloat(value.toString().replace(/,/g, ''));
+    if (isNaN(num)) return '';
+    return num.toLocaleString('en-GB');
+  }
+
   if (loading) return <div className="text-center py-16">Loading...</div>;
 
   // Filter products by selected category
@@ -78,7 +85,7 @@ export default function Showroom() {
               {/* Overlay for hover */}
               <div className="absolute inset-0 bg-espresso bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
                 <h2 className="font-heading text-xl text-sand mb-2 text-center">{prod.title}</h2>
-                <p className="font-body text-sand font-bold mb-2 text-center">£{prod.price}</p>
+                <p className="font-body text-sand font-bold mb-2 text-center">£{formatPrice(prod.price)}</p>
               </div>
             </div>
           </Link>
