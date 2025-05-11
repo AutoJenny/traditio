@@ -1,0 +1,144 @@
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(() => {
+var exports = {};
+exports.id = "app/api/products/[slug]/route";
+exports.ids = ["app/api/products/[slug]/route"];
+exports.modules = {
+
+/***/ "(rsc)/./lib/prisma.ts":
+/*!***********************!*\
+  !*** ./lib/prisma.ts ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   prisma: () => (/* binding */ prisma)\n/* harmony export */ });\n/* harmony import */ var _prisma_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @prisma/client */ \"@prisma/client\");\n/* harmony import */ var _prisma_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_prisma_client__WEBPACK_IMPORTED_MODULE_0__);\n\nconst globalForPrisma = global;\nconst prisma = globalForPrisma.prisma || new _prisma_client__WEBPACK_IMPORTED_MODULE_0__.PrismaClient({\n    log: [\n        'query',\n        'info',\n        'warn',\n        'error'\n    ]\n});\nif (true) globalForPrisma.prisma = prisma;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9saWIvcHJpc21hLnRzIiwibWFwcGluZ3MiOiI7Ozs7OztBQUE4QztBQUU5QyxNQUFNQyxrQkFBa0JDO0FBRWpCLE1BQU1DLFNBQ1hGLGdCQUFnQkUsTUFBTSxJQUN0QixJQUFJSCx3REFBWUEsQ0FBQztJQUNmSSxLQUFLO1FBQUM7UUFBUztRQUFRO1FBQVE7S0FBUTtBQUN6QyxHQUFHO0FBRUwsSUFBSUMsSUFBcUMsRUFBRUosZ0JBQWdCRSxNQUFNLEdBQUdBIiwic291cmNlcyI6WyIvVXNlcnMvbmlja2ZpZGRlcy9Db2RlL3Byb2plY3RzL3RyYWRpdGlvL3RyYWRpdGlvLW5leHQtc2l0ZS9saWIvcHJpc21hLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFByaXNtYUNsaWVudCB9IGZyb20gJ0BwcmlzbWEvY2xpZW50JztcblxuY29uc3QgZ2xvYmFsRm9yUHJpc21hID0gZ2xvYmFsIGFzIHVua25vd24gYXMgeyBwcmlzbWE6IFByaXNtYUNsaWVudCB9O1xuXG5leHBvcnQgY29uc3QgcHJpc21hID1cbiAgZ2xvYmFsRm9yUHJpc21hLnByaXNtYSB8fFxuICBuZXcgUHJpc21hQ2xpZW50KHtcbiAgICBsb2c6IFsncXVlcnknLCAnaW5mbycsICd3YXJuJywgJ2Vycm9yJ10sXG4gIH0pO1xuXG5pZiAocHJvY2Vzcy5lbnYuTk9ERV9FTlYgIT09ICdwcm9kdWN0aW9uJykgZ2xvYmFsRm9yUHJpc21hLnByaXNtYSA9IHByaXNtYTsgIl0sIm5hbWVzIjpbIlByaXNtYUNsaWVudCIsImdsb2JhbEZvclByaXNtYSIsImdsb2JhbCIsInByaXNtYSIsImxvZyIsInByb2Nlc3MiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./lib/prisma.ts\n");
+
+/***/ }),
+
+/***/ "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute&page=%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute.ts&appDir=%2FUsers%2Fnickfiddes%2FCode%2Fprojects%2Ftraditio%2Ftraditio-next-site%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fnickfiddes%2FCode%2Fprojects%2Ftraditio%2Ftraditio-next-site&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute&page=%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute.ts&appDir=%2FUsers%2Fnickfiddes%2FCode%2Fprojects%2Ftraditio%2Ftraditio-next-site%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fnickfiddes%2FCode%2Fprojects%2Ftraditio%2Ftraditio-next-site&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D! ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   patchFetch: () => (/* binding */ patchFetch),\n/* harmony export */   routeModule: () => (/* binding */ routeModule),\n/* harmony export */   serverHooks: () => (/* binding */ serverHooks),\n/* harmony export */   workAsyncStorage: () => (/* binding */ workAsyncStorage),\n/* harmony export */   workUnitAsyncStorage: () => (/* binding */ workUnitAsyncStorage)\n/* harmony export */ });\n/* harmony import */ var next_dist_server_route_modules_app_route_module_compiled__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/server/route-modules/app-route/module.compiled */ \"(rsc)/./node_modules/next/dist/server/route-modules/app-route/module.compiled.js\");\n/* harmony import */ var next_dist_server_route_modules_app_route_module_compiled__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_route_modules_app_route_module_compiled__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_dist_server_route_kind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/dist/server/route-kind */ \"(rsc)/./node_modules/next/dist/server/route-kind.js\");\n/* harmony import */ var next_dist_server_lib_patch_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/dist/server/lib/patch-fetch */ \"(rsc)/./node_modules/next/dist/server/lib/patch-fetch.js\");\n/* harmony import */ var next_dist_server_lib_patch_fetch__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_lib_patch_fetch__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _Users_nickfiddes_Code_projects_traditio_traditio_next_site_src_app_api_products_slug_route_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/app/api/products/[slug]/route.ts */ \"(rsc)/./src/app/api/products/[slug]/route.ts\");\n\n\n\n\n// We inject the nextConfigOutput here so that we can use them in the route\n// module.\nconst nextConfigOutput = \"\"\nconst routeModule = new next_dist_server_route_modules_app_route_module_compiled__WEBPACK_IMPORTED_MODULE_0__.AppRouteRouteModule({\n    definition: {\n        kind: next_dist_server_route_kind__WEBPACK_IMPORTED_MODULE_1__.RouteKind.APP_ROUTE,\n        page: \"/api/products/[slug]/route\",\n        pathname: \"/api/products/[slug]\",\n        filename: \"route\",\n        bundlePath: \"app/api/products/[slug]/route\"\n    },\n    resolvedPagePath: \"/Users/nickfiddes/Code/projects/traditio/traditio-next-site/src/app/api/products/[slug]/route.ts\",\n    nextConfigOutput,\n    userland: _Users_nickfiddes_Code_projects_traditio_traditio_next_site_src_app_api_products_slug_route_ts__WEBPACK_IMPORTED_MODULE_3__\n});\n// Pull out the exports that we need to expose from the module. This should\n// be eliminated when we've moved the other routes to the new format. These\n// are used to hook into the route.\nconst { workAsyncStorage, workUnitAsyncStorage, serverHooks } = routeModule;\nfunction patchFetch() {\n    return (0,next_dist_server_lib_patch_fetch__WEBPACK_IMPORTED_MODULE_2__.patchFetch)({\n        workAsyncStorage,\n        workUnitAsyncStorage\n    });\n}\n\n\n//# sourceMappingURL=app-route.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2J1aWxkL3dlYnBhY2svbG9hZGVycy9uZXh0LWFwcC1sb2FkZXIvaW5kZXguanM/bmFtZT1hcHAlMkZhcGklMkZwcm9kdWN0cyUyRiU1QnNsdWclNUQlMkZyb3V0ZSZwYWdlPSUyRmFwaSUyRnByb2R1Y3RzJTJGJTVCc2x1ZyU1RCUyRnJvdXRlJmFwcFBhdGhzPSZwYWdlUGF0aD1wcml2YXRlLW5leHQtYXBwLWRpciUyRmFwaSUyRnByb2R1Y3RzJTJGJTVCc2x1ZyU1RCUyRnJvdXRlLnRzJmFwcERpcj0lMkZVc2VycyUyRm5pY2tmaWRkZXMlMkZDb2RlJTJGcHJvamVjdHMlMkZ0cmFkaXRpbyUyRnRyYWRpdGlvLW5leHQtc2l0ZSUyRnNyYyUyRmFwcCZwYWdlRXh0ZW5zaW9ucz10c3gmcGFnZUV4dGVuc2lvbnM9dHMmcGFnZUV4dGVuc2lvbnM9anN4JnBhZ2VFeHRlbnNpb25zPWpzJnJvb3REaXI9JTJGVXNlcnMlMkZuaWNrZmlkZGVzJTJGQ29kZSUyRnByb2plY3RzJTJGdHJhZGl0aW8lMkZ0cmFkaXRpby1uZXh0LXNpdGUmaXNEZXY9dHJ1ZSZ0c2NvbmZpZ1BhdGg9dHNjb25maWcuanNvbiZiYXNlUGF0aD0mYXNzZXRQcmVmaXg9Jm5leHRDb25maWdPdXRwdXQ9JnByZWZlcnJlZFJlZ2lvbj0mbWlkZGxld2FyZUNvbmZpZz1lMzAlM0QhIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQStGO0FBQ3ZDO0FBQ3FCO0FBQ2dEO0FBQzdIO0FBQ0E7QUFDQTtBQUNBLHdCQUF3Qix5R0FBbUI7QUFDM0M7QUFDQSxjQUFjLGtFQUFTO0FBQ3ZCO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsS0FBSztBQUNMO0FBQ0E7QUFDQSxZQUFZO0FBQ1osQ0FBQztBQUNEO0FBQ0E7QUFDQTtBQUNBLFFBQVEsc0RBQXNEO0FBQzlEO0FBQ0EsV0FBVyw0RUFBVztBQUN0QjtBQUNBO0FBQ0EsS0FBSztBQUNMO0FBQzBGOztBQUUxRiIsInNvdXJjZXMiOlsiIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEFwcFJvdXRlUm91dGVNb2R1bGUgfSBmcm9tIFwibmV4dC9kaXN0L3NlcnZlci9yb3V0ZS1tb2R1bGVzL2FwcC1yb3V0ZS9tb2R1bGUuY29tcGlsZWRcIjtcbmltcG9ydCB7IFJvdXRlS2luZCB9IGZyb20gXCJuZXh0L2Rpc3Qvc2VydmVyL3JvdXRlLWtpbmRcIjtcbmltcG9ydCB7IHBhdGNoRmV0Y2ggYXMgX3BhdGNoRmV0Y2ggfSBmcm9tIFwibmV4dC9kaXN0L3NlcnZlci9saWIvcGF0Y2gtZmV0Y2hcIjtcbmltcG9ydCAqIGFzIHVzZXJsYW5kIGZyb20gXCIvVXNlcnMvbmlja2ZpZGRlcy9Db2RlL3Byb2plY3RzL3RyYWRpdGlvL3RyYWRpdGlvLW5leHQtc2l0ZS9zcmMvYXBwL2FwaS9wcm9kdWN0cy9bc2x1Z10vcm91dGUudHNcIjtcbi8vIFdlIGluamVjdCB0aGUgbmV4dENvbmZpZ091dHB1dCBoZXJlIHNvIHRoYXQgd2UgY2FuIHVzZSB0aGVtIGluIHRoZSByb3V0ZVxuLy8gbW9kdWxlLlxuY29uc3QgbmV4dENvbmZpZ091dHB1dCA9IFwiXCJcbmNvbnN0IHJvdXRlTW9kdWxlID0gbmV3IEFwcFJvdXRlUm91dGVNb2R1bGUoe1xuICAgIGRlZmluaXRpb246IHtcbiAgICAgICAga2luZDogUm91dGVLaW5kLkFQUF9ST1VURSxcbiAgICAgICAgcGFnZTogXCIvYXBpL3Byb2R1Y3RzL1tzbHVnXS9yb3V0ZVwiLFxuICAgICAgICBwYXRobmFtZTogXCIvYXBpL3Byb2R1Y3RzL1tzbHVnXVwiLFxuICAgICAgICBmaWxlbmFtZTogXCJyb3V0ZVwiLFxuICAgICAgICBidW5kbGVQYXRoOiBcImFwcC9hcGkvcHJvZHVjdHMvW3NsdWddL3JvdXRlXCJcbiAgICB9LFxuICAgIHJlc29sdmVkUGFnZVBhdGg6IFwiL1VzZXJzL25pY2tmaWRkZXMvQ29kZS9wcm9qZWN0cy90cmFkaXRpby90cmFkaXRpby1uZXh0LXNpdGUvc3JjL2FwcC9hcGkvcHJvZHVjdHMvW3NsdWddL3JvdXRlLnRzXCIsXG4gICAgbmV4dENvbmZpZ091dHB1dCxcbiAgICB1c2VybGFuZFxufSk7XG4vLyBQdWxsIG91dCB0aGUgZXhwb3J0cyB0aGF0IHdlIG5lZWQgdG8gZXhwb3NlIGZyb20gdGhlIG1vZHVsZS4gVGhpcyBzaG91bGRcbi8vIGJlIGVsaW1pbmF0ZWQgd2hlbiB3ZSd2ZSBtb3ZlZCB0aGUgb3RoZXIgcm91dGVzIHRvIHRoZSBuZXcgZm9ybWF0LiBUaGVzZVxuLy8gYXJlIHVzZWQgdG8gaG9vayBpbnRvIHRoZSByb3V0ZS5cbmNvbnN0IHsgd29ya0FzeW5jU3RvcmFnZSwgd29ya1VuaXRBc3luY1N0b3JhZ2UsIHNlcnZlckhvb2tzIH0gPSByb3V0ZU1vZHVsZTtcbmZ1bmN0aW9uIHBhdGNoRmV0Y2goKSB7XG4gICAgcmV0dXJuIF9wYXRjaEZldGNoKHtcbiAgICAgICAgd29ya0FzeW5jU3RvcmFnZSxcbiAgICAgICAgd29ya1VuaXRBc3luY1N0b3JhZ2VcbiAgICB9KTtcbn1cbmV4cG9ydCB7IHJvdXRlTW9kdWxlLCB3b3JrQXN5bmNTdG9yYWdlLCB3b3JrVW5pdEFzeW5jU3RvcmFnZSwgc2VydmVySG9va3MsIHBhdGNoRmV0Y2gsICB9O1xuXG4vLyMgc291cmNlTWFwcGluZ1VSTD1hcHAtcm91dGUuanMubWFwIl0sIm5hbWVzIjpbXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute&page=%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute.ts&appDir=%2FUsers%2Fnickfiddes%2FCode%2Fprojects%2Ftraditio%2Ftraditio-next-site%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fnickfiddes%2FCode%2Fprojects%2Ftraditio%2Ftraditio-next-site&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!\n");
+
+/***/ }),
+
+/***/ "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?server=true!":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?server=true! ***!
+  \******************************************************************************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "(rsc)/./src/app/api/products/[slug]/route.ts":
+/*!**********************************************!*\
+  !*** ./src/app/api/products/[slug]/route.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   DELETE: () => (/* binding */ DELETE),\n/* harmony export */   GET: () => (/* binding */ GET),\n/* harmony export */   PUT: () => (/* binding */ PUT)\n/* harmony export */ });\n/* harmony import */ var next_server__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/server */ \"(rsc)/./node_modules/next/dist/api/server.js\");\n/* harmony import */ var _lib_prisma__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../lib/prisma */ \"(rsc)/./lib/prisma.ts\");\n\n\n// @ts-ignore\nasync function GET(req, context) {\n    const { slug } = context.params;\n    const product = await _lib_prisma__WEBPACK_IMPORTED_MODULE_1__.prisma.product.findUnique({\n        where: {\n            slug\n        },\n        include: {\n            images: true,\n            categories: {\n                include: {\n                    category: true\n                }\n            }\n        }\n    });\n    if (!product) return next_server__WEBPACK_IMPORTED_MODULE_0__.NextResponse.json({\n        product: null,\n        related: []\n    }, {\n        status: 404\n    });\n    // Use the first category for related products (for now)\n    const firstCat = product.categories[0]?.category;\n    let related = [];\n    if (firstCat) {\n        related = await _lib_prisma__WEBPACK_IMPORTED_MODULE_1__.prisma.product.findMany({\n            where: {\n                categories: {\n                    some: {\n                        categoryId: firstCat.id\n                    }\n                },\n                id: {\n                    not: product.id\n                }\n            },\n            include: {\n                images: true\n            },\n            take: 3\n        });\n    }\n    // Flatten categories for easier frontend use\n    const flatProduct = {\n        ...product,\n        categories: product.categories.map((pc)=>pc.category)\n    };\n    return next_server__WEBPACK_IMPORTED_MODULE_0__.NextResponse.json({\n        product: flatProduct,\n        related\n    });\n}\nasync function PUT(req, context) {\n    const { slug } = context.params;\n    const body = await req.json();\n    const { categoryIds, title, description, price, currency, status, mainImageId, dimensions, condition, origin, period, featured } = body;\n    // Find product by slug\n    const product = await _lib_prisma__WEBPACK_IMPORTED_MODULE_1__.prisma.product.findUnique({\n        where: {\n            slug\n        }\n    });\n    if (!product) return next_server__WEBPACK_IMPORTED_MODULE_0__.NextResponse.json({\n        error: 'Product not found'\n    }, {\n        status: 404\n    });\n    // Update product fields (NO images)\n    const updated = await _lib_prisma__WEBPACK_IMPORTED_MODULE_1__.prisma.product.update({\n        where: {\n            slug\n        },\n        data: {\n            title,\n            slug,\n            description,\n            price,\n            currency,\n            status,\n            mainImageId,\n            dimensions,\n            condition,\n            origin,\n            period,\n            featured,\n            categories: {\n                deleteMany: {},\n                create: (categoryIds || []).map((id)=>({\n                        category: {\n                            connect: {\n                                id\n                            }\n                        }\n                    }))\n            }\n        },\n        include: {\n            images: true,\n            categories: {\n                include: {\n                    category: true\n                }\n            }\n        }\n    });\n    return next_server__WEBPACK_IMPORTED_MODULE_0__.NextResponse.json({\n        product: updated\n    });\n}\nasync function DELETE(req, context) {\n    const { slug } = context.params;\n    // Delete product by slug\n    await _lib_prisma__WEBPACK_IMPORTED_MODULE_1__.prisma.product.delete({\n        where: {\n            slug\n        }\n    });\n    return next_server__WEBPACK_IMPORTED_MODULE_0__.NextResponse.json({\n        ok: true\n    });\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9zcmMvYXBwL2FwaS9wcm9kdWN0cy9bc2x1Z10vcm91dGUudHMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7QUFBd0Q7QUFDTDtBQUVuRCxhQUFhO0FBQ04sZUFBZUUsSUFBSUMsR0FBRyxFQUFFQyxPQUFPO0lBQ3BDLE1BQU0sRUFBRUMsSUFBSSxFQUFFLEdBQUdELFFBQVFFLE1BQU07SUFDL0IsTUFBTUMsVUFBVSxNQUFNTiwrQ0FBTUEsQ0FBQ00sT0FBTyxDQUFDQyxVQUFVLENBQUM7UUFDOUNDLE9BQU87WUFBRUo7UUFBSztRQUNkSyxTQUFTO1lBQ1BDLFFBQVE7WUFDUkMsWUFBWTtnQkFBRUYsU0FBUztvQkFBRUcsVUFBVTtnQkFBSztZQUFFO1FBQzVDO0lBQ0Y7SUFDQSxJQUFJLENBQUNOLFNBQVMsT0FBT1AscURBQVlBLENBQUNjLElBQUksQ0FBQztRQUFFUCxTQUFTO1FBQU1RLFNBQVMsRUFBRTtJQUFDLEdBQUc7UUFBRUMsUUFBUTtJQUFJO0lBRXJGLHdEQUF3RDtJQUN4RCxNQUFNQyxXQUFXVixRQUFRSyxVQUFVLENBQUMsRUFBRSxFQUFFQztJQUN4QyxJQUFJRSxVQUFVLEVBQUU7SUFDaEIsSUFBSUUsVUFBVTtRQUNaRixVQUFVLE1BQU1kLCtDQUFNQSxDQUFDTSxPQUFPLENBQUNXLFFBQVEsQ0FBQztZQUN0Q1QsT0FBTztnQkFDTEcsWUFBWTtvQkFDVk8sTUFBTTt3QkFBRUMsWUFBWUgsU0FBU0ksRUFBRTtvQkFBQztnQkFDbEM7Z0JBQ0FBLElBQUk7b0JBQUVDLEtBQUtmLFFBQVFjLEVBQUU7Z0JBQUM7WUFDeEI7WUFDQVgsU0FBUztnQkFBRUMsUUFBUTtZQUFLO1lBQ3hCWSxNQUFNO1FBQ1I7SUFDRjtJQUVBLDZDQUE2QztJQUM3QyxNQUFNQyxjQUFjO1FBQ2xCLEdBQUdqQixPQUFPO1FBQ1ZLLFlBQVlMLFFBQVFLLFVBQVUsQ0FBQ2EsR0FBRyxDQUFDLENBQUNDLEtBQVlBLEdBQUdiLFFBQVE7SUFDN0Q7SUFFQSxPQUFPYixxREFBWUEsQ0FBQ2MsSUFBSSxDQUFDO1FBQUVQLFNBQVNpQjtRQUFhVDtJQUFRO0FBQzNEO0FBRU8sZUFBZVksSUFBSXhCLEdBQUcsRUFBRUMsT0FBTztJQUNwQyxNQUFNLEVBQUVDLElBQUksRUFBRSxHQUFHRCxRQUFRRSxNQUFNO0lBQy9CLE1BQU1zQixPQUFPLE1BQU16QixJQUFJVyxJQUFJO0lBQzNCLE1BQU0sRUFDSmUsV0FBVyxFQUNYQyxLQUFLLEVBQUVDLFdBQVcsRUFBRUMsS0FBSyxFQUFFQyxRQUFRLEVBQUVqQixNQUFNLEVBQUVrQixXQUFXLEVBQ3hEQyxVQUFVLEVBQUVDLFNBQVMsRUFBRUMsTUFBTSxFQUFFQyxNQUFNLEVBQUVDLFFBQVEsRUFDaEQsR0FBR1g7SUFFSix1QkFBdUI7SUFDdkIsTUFBTXJCLFVBQVUsTUFBTU4sK0NBQU1BLENBQUNNLE9BQU8sQ0FBQ0MsVUFBVSxDQUFDO1FBQUVDLE9BQU87WUFBRUo7UUFBSztJQUFFO0lBQ2xFLElBQUksQ0FBQ0UsU0FBUyxPQUFPUCxxREFBWUEsQ0FBQ2MsSUFBSSxDQUFDO1FBQUUwQixPQUFPO0lBQW9CLEdBQUc7UUFBRXhCLFFBQVE7SUFBSTtJQUVyRixvQ0FBb0M7SUFDcEMsTUFBTXlCLFVBQVUsTUFBTXhDLCtDQUFNQSxDQUFDTSxPQUFPLENBQUNtQyxNQUFNLENBQUM7UUFDMUNqQyxPQUFPO1lBQUVKO1FBQUs7UUFDZHNDLE1BQU07WUFDSmI7WUFDQXpCO1lBQ0EwQjtZQUNBQztZQUNBQztZQUNBakI7WUFDQWtCO1lBQ0FDO1lBQ0FDO1lBQ0FDO1lBQ0FDO1lBQ0FDO1lBQ0EzQixZQUFZO2dCQUNWZ0MsWUFBWSxDQUFDO2dCQUNiQyxRQUFRLENBQUNoQixlQUFlLEVBQUUsRUFBRUosR0FBRyxDQUFDLENBQUNKLEtBQWdCO3dCQUMvQ1IsVUFBVTs0QkFBRWlDLFNBQVM7Z0NBQUV6Qjs0QkFBRzt3QkFBRTtvQkFDOUI7WUFDRjtRQUVGO1FBQ0FYLFNBQVM7WUFDUEMsUUFBUTtZQUNSQyxZQUFZO2dCQUFFRixTQUFTO29CQUFFRyxVQUFVO2dCQUFLO1lBQUU7UUFDNUM7SUFDRjtJQUVBLE9BQU9iLHFEQUFZQSxDQUFDYyxJQUFJLENBQUM7UUFBRVAsU0FBU2tDO0lBQVE7QUFDOUM7QUFFTyxlQUFlTSxPQUFPNUMsR0FBRyxFQUFFQyxPQUFPO0lBQ3ZDLE1BQU0sRUFBRUMsSUFBSSxFQUFFLEdBQUdELFFBQVFFLE1BQU07SUFDL0IseUJBQXlCO0lBQ3pCLE1BQU1MLCtDQUFNQSxDQUFDTSxPQUFPLENBQUN5QyxNQUFNLENBQUM7UUFBRXZDLE9BQU87WUFBRUo7UUFBSztJQUFFO0lBQzlDLE9BQU9MLHFEQUFZQSxDQUFDYyxJQUFJLENBQUM7UUFBRW1DLElBQUk7SUFBSztBQUN0QyIsInNvdXJjZXMiOlsiL1VzZXJzL25pY2tmaWRkZXMvQ29kZS9wcm9qZWN0cy90cmFkaXRpby90cmFkaXRpby1uZXh0LXNpdGUvc3JjL2FwcC9hcGkvcHJvZHVjdHMvW3NsdWddL3JvdXRlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5leHRSZXF1ZXN0LCBOZXh0UmVzcG9uc2UgfSBmcm9tICduZXh0L3NlcnZlcic7XG5pbXBvcnQgeyBwcmlzbWEgfSBmcm9tICcuLi8uLi8uLi8uLi8uLi9saWIvcHJpc21hJztcblxuLy8gQHRzLWlnbm9yZVxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIEdFVChyZXEsIGNvbnRleHQpIHtcbiAgY29uc3QgeyBzbHVnIH0gPSBjb250ZXh0LnBhcmFtcztcbiAgY29uc3QgcHJvZHVjdCA9IGF3YWl0IHByaXNtYS5wcm9kdWN0LmZpbmRVbmlxdWUoe1xuICAgIHdoZXJlOiB7IHNsdWcgfSxcbiAgICBpbmNsdWRlOiB7XG4gICAgICBpbWFnZXM6IHRydWUsXG4gICAgICBjYXRlZ29yaWVzOiB7IGluY2x1ZGU6IHsgY2F0ZWdvcnk6IHRydWUgfSB9LFxuICAgIH0sXG4gIH0pO1xuICBpZiAoIXByb2R1Y3QpIHJldHVybiBOZXh0UmVzcG9uc2UuanNvbih7IHByb2R1Y3Q6IG51bGwsIHJlbGF0ZWQ6IFtdIH0sIHsgc3RhdHVzOiA0MDQgfSk7XG5cbiAgLy8gVXNlIHRoZSBmaXJzdCBjYXRlZ29yeSBmb3IgcmVsYXRlZCBwcm9kdWN0cyAoZm9yIG5vdylcbiAgY29uc3QgZmlyc3RDYXQgPSBwcm9kdWN0LmNhdGVnb3JpZXNbMF0/LmNhdGVnb3J5O1xuICBsZXQgcmVsYXRlZCA9IFtdO1xuICBpZiAoZmlyc3RDYXQpIHtcbiAgICByZWxhdGVkID0gYXdhaXQgcHJpc21hLnByb2R1Y3QuZmluZE1hbnkoe1xuICAgICAgd2hlcmU6IHtcbiAgICAgICAgY2F0ZWdvcmllczoge1xuICAgICAgICAgIHNvbWU6IHsgY2F0ZWdvcnlJZDogZmlyc3RDYXQuaWQgfSxcbiAgICAgICAgfSxcbiAgICAgICAgaWQ6IHsgbm90OiBwcm9kdWN0LmlkIH0sXG4gICAgICB9LFxuICAgICAgaW5jbHVkZTogeyBpbWFnZXM6IHRydWUgfSxcbiAgICAgIHRha2U6IDMsXG4gICAgfSk7XG4gIH1cblxuICAvLyBGbGF0dGVuIGNhdGVnb3JpZXMgZm9yIGVhc2llciBmcm9udGVuZCB1c2VcbiAgY29uc3QgZmxhdFByb2R1Y3QgPSB7XG4gICAgLi4ucHJvZHVjdCxcbiAgICBjYXRlZ29yaWVzOiBwcm9kdWN0LmNhdGVnb3JpZXMubWFwKChwYzogYW55KSA9PiBwYy5jYXRlZ29yeSksXG4gIH07XG5cbiAgcmV0dXJuIE5leHRSZXNwb25zZS5qc29uKHsgcHJvZHVjdDogZmxhdFByb2R1Y3QsIHJlbGF0ZWQgfSk7XG59XG5cbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBQVVQocmVxLCBjb250ZXh0KSB7XG4gIGNvbnN0IHsgc2x1ZyB9ID0gY29udGV4dC5wYXJhbXM7XG4gIGNvbnN0IGJvZHkgPSBhd2FpdCByZXEuanNvbigpO1xuICBjb25zdCB7XG4gICAgY2F0ZWdvcnlJZHMsXG4gICAgdGl0bGUsIGRlc2NyaXB0aW9uLCBwcmljZSwgY3VycmVuY3ksIHN0YXR1cywgbWFpbkltYWdlSWQsXG4gICAgZGltZW5zaW9ucywgY29uZGl0aW9uLCBvcmlnaW4sIHBlcmlvZCwgZmVhdHVyZWRcbiAgfSA9IGJvZHk7XG5cbiAgLy8gRmluZCBwcm9kdWN0IGJ5IHNsdWdcbiAgY29uc3QgcHJvZHVjdCA9IGF3YWl0IHByaXNtYS5wcm9kdWN0LmZpbmRVbmlxdWUoeyB3aGVyZTogeyBzbHVnIH0gfSk7XG4gIGlmICghcHJvZHVjdCkgcmV0dXJuIE5leHRSZXNwb25zZS5qc29uKHsgZXJyb3I6ICdQcm9kdWN0IG5vdCBmb3VuZCcgfSwgeyBzdGF0dXM6IDQwNCB9KTtcblxuICAvLyBVcGRhdGUgcHJvZHVjdCBmaWVsZHMgKE5PIGltYWdlcylcbiAgY29uc3QgdXBkYXRlZCA9IGF3YWl0IHByaXNtYS5wcm9kdWN0LnVwZGF0ZSh7XG4gICAgd2hlcmU6IHsgc2x1ZyB9LFxuICAgIGRhdGE6IHtcbiAgICAgIHRpdGxlLFxuICAgICAgc2x1ZyxcbiAgICAgIGRlc2NyaXB0aW9uLFxuICAgICAgcHJpY2UsXG4gICAgICBjdXJyZW5jeSxcbiAgICAgIHN0YXR1cyxcbiAgICAgIG1haW5JbWFnZUlkLFxuICAgICAgZGltZW5zaW9ucyxcbiAgICAgIGNvbmRpdGlvbixcbiAgICAgIG9yaWdpbixcbiAgICAgIHBlcmlvZCxcbiAgICAgIGZlYXR1cmVkLFxuICAgICAgY2F0ZWdvcmllczoge1xuICAgICAgICBkZWxldGVNYW55OiB7fSxcbiAgICAgICAgY3JlYXRlOiAoY2F0ZWdvcnlJZHMgfHwgW10pLm1hcCgoaWQ6IG51bWJlcikgPT4gKHtcbiAgICAgICAgICBjYXRlZ29yeTogeyBjb25uZWN0OiB7IGlkIH0gfVxuICAgICAgICB9KSksXG4gICAgICB9LFxuICAgICAgLy8gTm8gaW1hZ2VzIHVwZGF0ZSBoZXJlXG4gICAgfSxcbiAgICBpbmNsdWRlOiB7XG4gICAgICBpbWFnZXM6IHRydWUsXG4gICAgICBjYXRlZ29yaWVzOiB7IGluY2x1ZGU6IHsgY2F0ZWdvcnk6IHRydWUgfSB9XG4gICAgfVxuICB9KTtcblxuICByZXR1cm4gTmV4dFJlc3BvbnNlLmpzb24oeyBwcm9kdWN0OiB1cGRhdGVkIH0pO1xufVxuXG5leHBvcnQgYXN5bmMgZnVuY3Rpb24gREVMRVRFKHJlcSwgY29udGV4dCkge1xuICBjb25zdCB7IHNsdWcgfSA9IGNvbnRleHQucGFyYW1zO1xuICAvLyBEZWxldGUgcHJvZHVjdCBieSBzbHVnXG4gIGF3YWl0IHByaXNtYS5wcm9kdWN0LmRlbGV0ZSh7IHdoZXJlOiB7IHNsdWcgfSB9KTtcbiAgcmV0dXJuIE5leHRSZXNwb25zZS5qc29uKHsgb2s6IHRydWUgfSk7XG59ICJdLCJuYW1lcyI6WyJOZXh0UmVzcG9uc2UiLCJwcmlzbWEiLCJHRVQiLCJyZXEiLCJjb250ZXh0Iiwic2x1ZyIsInBhcmFtcyIsInByb2R1Y3QiLCJmaW5kVW5pcXVlIiwid2hlcmUiLCJpbmNsdWRlIiwiaW1hZ2VzIiwiY2F0ZWdvcmllcyIsImNhdGVnb3J5IiwianNvbiIsInJlbGF0ZWQiLCJzdGF0dXMiLCJmaXJzdENhdCIsImZpbmRNYW55Iiwic29tZSIsImNhdGVnb3J5SWQiLCJpZCIsIm5vdCIsInRha2UiLCJmbGF0UHJvZHVjdCIsIm1hcCIsInBjIiwiUFVUIiwiYm9keSIsImNhdGVnb3J5SWRzIiwidGl0bGUiLCJkZXNjcmlwdGlvbiIsInByaWNlIiwiY3VycmVuY3kiLCJtYWluSW1hZ2VJZCIsImRpbWVuc2lvbnMiLCJjb25kaXRpb24iLCJvcmlnaW4iLCJwZXJpb2QiLCJmZWF0dXJlZCIsImVycm9yIiwidXBkYXRlZCIsInVwZGF0ZSIsImRhdGEiLCJkZWxldGVNYW55IiwiY3JlYXRlIiwiY29ubmVjdCIsIkRFTEVURSIsImRlbGV0ZSIsIm9rIl0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(rsc)/./src/app/api/products/[slug]/route.ts\n");
+
+/***/ }),
+
+/***/ "(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?server=true!":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?server=true! ***!
+  \******************************************************************************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "../app-render/after-task-async-storage.external":
+/*!***********************************************************************************!*\
+  !*** external "next/dist/server/app-render/after-task-async-storage.external.js" ***!
+  \***********************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/server/app-render/after-task-async-storage.external.js");
+
+/***/ }),
+
+/***/ "../app-render/work-async-storage.external":
+/*!*****************************************************************************!*\
+  !*** external "next/dist/server/app-render/work-async-storage.external.js" ***!
+  \*****************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/server/app-render/work-async-storage.external.js");
+
+/***/ }),
+
+/***/ "./work-unit-async-storage.external":
+/*!**********************************************************************************!*\
+  !*** external "next/dist/server/app-render/work-unit-async-storage.external.js" ***!
+  \**********************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/server/app-render/work-unit-async-storage.external.js");
+
+/***/ }),
+
+/***/ "@prisma/client":
+/*!*********************************!*\
+  !*** external "@prisma/client" ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@prisma/client");
+
+/***/ }),
+
+/***/ "next/dist/compiled/next-server/app-page.runtime.dev.js":
+/*!*************************************************************************!*\
+  !*** external "next/dist/compiled/next-server/app-page.runtime.dev.js" ***!
+  \*************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/compiled/next-server/app-page.runtime.dev.js");
+
+/***/ }),
+
+/***/ "next/dist/compiled/next-server/app-route.runtime.dev.js":
+/*!**************************************************************************!*\
+  !*** external "next/dist/compiled/next-server/app-route.runtime.dev.js" ***!
+  \**************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/compiled/next-server/app-route.runtime.dev.js");
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../../../webpack-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader/index.js?name=app%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute&page=%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fproducts%2F%5Bslug%5D%2Froute.ts&appDir=%2FUsers%2Fnickfiddes%2FCode%2Fprojects%2Ftraditio%2Ftraditio-next-site%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fnickfiddes%2FCode%2Fprojects%2Ftraditio%2Ftraditio-next-site&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
+module.exports = __webpack_exports__;
+
+})();

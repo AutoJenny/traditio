@@ -93,6 +93,8 @@ export default function ProductImagesPage({ params }: { params: { slug: string }
   const [images, setImages] = useState<any[]>([]);
   const [mainImageId, setMainImageId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [saveMsg, setSaveMsg] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchImages() {
@@ -130,6 +132,24 @@ export default function ProductImagesPage({ params }: { params: { slug: string }
     }
   }
 
+  async function handleSave() {
+    setSaving(true);
+    setSaveMsg(null);
+    try {
+      const res = await fetch(`/api/products/${slug}/images`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ images }),
+      });
+      if (!res.ok) throw new Error('Failed to save');
+      setSaveMsg('Saved!');
+    } catch (err: any) {
+      setSaveMsg('Error saving');
+    } finally {
+      setSaving(false);
+    }
+  }
+
   if (loading) return <div className="text-center py-16">Loading...</div>;
 
   return (
@@ -158,6 +178,16 @@ export default function ProductImagesPage({ params }: { params: { slug: string }
           </div>
         </SortableContext>
       </DndContext>
+      <div className="mt-8 flex flex-col items-center">
+        <button
+          onClick={handleSave}
+          disabled={saving}
+          className="bg-brass text-espresso font-bold rounded px-6 py-2 border-2 border-brass shadow hover:bg-espresso hover:text-ivory transition"
+        >
+          {saving ? 'Saving...' : 'Save Changes'}
+        </button>
+        {saveMsg && <div className={`mt-2 text-sm ${saveMsg === 'Saved!' ? 'text-green-600' : 'text-red-600'}`}>{saveMsg}</div>}
+      </div>
     </div>
   );
 } 
