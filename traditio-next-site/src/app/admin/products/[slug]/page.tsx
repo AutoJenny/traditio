@@ -10,6 +10,8 @@ export default function AdminProductEdit() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  // Track if price input is focused
+  const [priceFocused, setPriceFocused] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -39,9 +41,19 @@ export default function AdminProductEdit() {
   }
 
   function handlePriceChange(e: any) {
+    // Always store raw value (no commas)
     const raw = e.target.value.replace(/,/g, '');
     if (!/^\d*(\.\d{0,2})?$/.test(raw)) return; // Only allow numbers and up to 2 decimals
     setProduct((prev: any) => ({ ...prev, price: raw }));
+  }
+
+  function handlePriceFocus() {
+    setPriceFocused(true);
+  }
+
+  function handlePriceBlur() {
+    setPriceFocused(false);
+    // Optionally, format price on blur (already handled by value logic)
   }
 
   function handleChange(e: any) {
@@ -116,11 +128,12 @@ export default function AdminProductEdit() {
           <input
             name="price"
             type="text"
-            value={formatPrice(product.price) || ''}
+            value={priceFocused ? (product.price || '') : formatPrice(product.price) || ''}
             onChange={handlePriceChange}
+            onFocus={handlePriceFocus}
+            onBlur={handlePriceBlur}
             className="w-full border rounded p-2"
             inputMode="decimal"
-            pattern="^\\d*(\\.\\d{0,2})?$"
           />
         </div>
         <div>

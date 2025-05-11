@@ -40,50 +40,55 @@ export async function GET(req, context) {
 }
 
 export async function PUT(req, context) {
-  const params = await context.params;
-  const { slug } = params;
-  const body = await req.json();
-  const {
-    categoryIds,
-    title, description, price, currency, status, mainImageId,
-    dimensions, condition, origin, period, featured
-  } = body;
+  try {
+    const params = await context.params;
+    const { slug } = params;
+    const body = await req.json();
+    const {
+      categoryIds,
+      title, description, price, currency, status, mainImageId,
+      dimensions, condition, origin, period, featured
+    } = body;
 
-  // Find product by slug
-  const product = await prisma.product.findUnique({ where: { slug } });
-  if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 });
+    // Find product by slug
+    const product = await prisma.product.findUnique({ where: { slug } });
+    if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 });
 
-  // Update product fields (NO images)
-  const updated = await prisma.product.update({
-    where: { slug },
-    data: {
-      title,
-      slug,
-      description,
-      price: parseFloat(price),
-      currency,
-      status,
-      mainImageId,
-      dimensions,
-      condition,
-      origin,
-      period,
-      featured,
-      categories: {
-        deleteMany: {},
-        create: (categoryIds || []).map((id: number) => ({
-          category: { connect: { id } }
-        })),
+    // Update product fields (NO images)
+    const updated = await prisma.product.update({
+      where: { slug },
+      data: {
+        title,
+        slug,
+        description,
+        price: parseFloat(price),
+        currency,
+        status,
+        mainImageId,
+        dimensions,
+        condition,
+        origin,
+        period,
+        featured,
+        categories: {
+          deleteMany: {},
+          create: (categoryIds || []).map((id: number) => ({
+            category: { connect: { id } }
+          })),
+        },
+        // No images update here
       },
-      // No images update here
-    },
-    include: {
-      images: true,
-      categories: { include: { category: true } }
-    }
-  });
+      include: {
+        images: true,
+        categories: { include: { category: true } }
+      }
+    });
 
-  return NextResponse.json({ product: updated });
+    return NextResponse.json({ product: updated });
+  } catch (err) {
+    console.error('PUT /api/products/[slug] error:', err);
+    return NextResponse.json({ error: err?.message || 'Unknown error' }, { status: 500 });
+  }
 }
 
 export async function DELETE(req, context) {

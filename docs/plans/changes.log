@@ -8,3 +8,4 @@
 2025-05-11 Fixed admin product edit: category checkboxes now pre-check and update correctly by normalizing category ID types (number vs string). See main docs/changes.log for summary. 
 2025-05-11 Refactored admin product edit: removed image editing, now shows summary and link to new image management page. Created stub image management page for product images (upload, reorder, set main, alt text, delete coming soon). See main docs/changes.log for summary. 
 [2024-05-12  admin] Fix: Await context.params in /api/products/[slug] API route (Next.js 15+), resolving product details not saving in admin edit page. 
+[2024-05-12  admin] Update: Admin product price input now robust—shows raw value while editing, formats with commas on blur, always sends raw value to backend, and removes pattern attribute for best UX. 
