@@ -58,22 +58,11 @@ export default function Showroom() {
           onChange={e => setSort(e.target.value)}
           className="absolute right-0 top-1/2 -translate-y-1/2 bg-transparent border-0 border-b border-sand text-sand font-body text-sm px-2 py-1 focus:outline-none focus:border-brass focus:text-brass transition-colors duration-150 appearance-none min-w-[120px] hover:text-brass"
           aria-label="Sort products"
-      <div className="flex items-center justify-between mb-10">
-        <h1 className="font-heading text-4xl md:text-5xl font-bold uppercase text-espresso text-center">Showroom</h1>
-        <div className="flex-1 flex justify-end">
-          <label htmlFor="sort" className="mr-2 text-sand font-body text-sm hidden md:inline">Sort:</label>
-          <select
-            id="sort"
-            value={sort}
-            onChange={e => setSort(e.target.value)}
-            className="ml-2 px-3 py-2 rounded-lg border border-espresso bg-sand text-espresso font-body text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-brass focus:border-brass transition-colors duration-150 hover:bg-ivory/80 hover:border-brass"
-            style={{ minWidth: 170 }}
-          >
-            <option value="az">A-Z</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-          </select>
-        </div>
+        >
+          <option value="az">A-Z</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+        </select>
       </div>
       {/* Category Filter */}
       <nav className="w-full mb-8 overflow-x-auto" aria-label="Product Categories">
