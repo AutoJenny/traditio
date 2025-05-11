@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { TransformWrapper, TransformComponent, useControls } from 'react-zoom-pan-pinch';
+import ProductGrid from "../../../components/ProductGrid";
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -114,21 +115,7 @@ export default function ProductDetail() {
       {/* Related Products */}
       <section className="mt-16">
         <h2 className="font-heading text-2xl mb-6 text-espresso">Related Products</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {related.map((prod: any) => (
-            <div key={prod.id} className="bg-sand rounded-card shadow-card p-4 flex flex-col items-center transition-transform duration-200 hover:scale-105 hover:shadow-lg">
-              <div className="w-full h-32 bg-ivory rounded mb-4 flex items-center justify-center overflow-hidden">
-                {prod.images && prod.images[0] ? (
-                  <img src={prod.images[0].url} alt={prod.images[0].alt || prod.title} className="object-cover h-full w-full" />
-                ) : (
-                  <span className="text-2xl text-sand">🪑</span>
-                )}
-              </div>
-              <h3 className="font-heading text-lg text-espresso mb-1 text-center">{prod.title}</h3>
-              <p className="font-body text-brass font-bold mb-2">£{formatPrice(prod.price)}</p>
-            </div>
-          ))}
-        </div>
+        <ProductGrid products={related} gridClassName="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" />
       </section>
     </main>
   );
