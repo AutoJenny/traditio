@@ -63,10 +63,8 @@ export default function RootLayout({
           <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             <div>
               <h3 className="font-heading text-lg mb-2 uppercase tracking-wider">Contact</h3>
-              <p>Traditio Interiors<br/>123 High Street<br/>Edinburgh, Scotland EH1 1AA</p>
-              <p className="mt-2">Phone: <a href="tel:+441312345678" className="hover:underline">+44 131 234 5678</a></p>
-              <p>Email: <a href="mailto:info@traditio.com" className="hover:underline">info@traditio.com</a></p>
-              <p className="mt-2">Hours: Mon–Sat 10am–6pm</p>
+              <p>Traditio Interiors<br/>Edinburgh, Scotland</p>
+              <p className="mt-2">Email: <a href="mailto:info@traditio.com" className="hover:underline">info@traditio.com</a></p>
             </div>
             <div>
               <h3 className="font-heading text-lg mb-2 uppercase tracking-wider">Newsletter</h3>
