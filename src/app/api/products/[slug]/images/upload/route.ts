@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '../../../../../../../lib/prisma';
+import pool from '../../../../../../../lib/db';
 import fs from 'fs';
 import path from 'path';
 
@@ -8,8 +8,9 @@ const PUBLIC_DIR = path.join(process.cwd(), 'public/images/products');
 export async function POST(req, context) {
   const { slug } = await context.params;
   // Find product
-  const product = await prisma.product.findUnique({ where: { slug } });
-  if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 });
+  const productRes = await pool.query('SELECT * FROM "Product" WHERE slug = $1', [slug]);
+  if (productRes.rows.length === 0) return NextResponse.json({ error: 'Product not found' }, { status: 404 });
+  const product = productRes.rows[0];
 
   // Parse form data using Web API
   const formData = await req.formData();
@@ -18,8 +19,8 @@ export async function POST(req, context) {
   if (!fs.existsSync(productDir)) fs.mkdirSync(productDir, { recursive: true });
 
   // Find next available N for <slug>_N.jpg
-  const existing = await prisma.image.findMany({ where: { productId: product.id }, orderBy: { order: 'asc' } });
-  let nextN = existing.length + 1;
+  const existingRes = await pool.query('SELECT * FROM "Image" WHERE "productId" = $1 ORDER BY "order" ASC', [product.id]);
+  let nextN = existingRes.rows.length + 1;
   const newImages = [];
 
   for (const file of files) {
@@ -33,18 +34,15 @@ export async function POST(req, context) {
     const buffer = Buffer.from(arrayBuffer);
     fs.writeFileSync(destPath, buffer);
     const url = `/images/products/${slug}/${filename}`;
-    const image = await prisma.image.create({
-      data: {
-        url,
-        productId: product.id,
-        order: nextN - 1,
-      },
-    });
-    newImages.push(image);
+    const insertRes = await pool.query(
+      'INSERT INTO "Image" (url, "productId", "order") VALUES ($1, $2, $3) RETURNING *',
+      [url, product.id, nextN - 1]
+    );
+    newImages.push(insertRes.rows[0]);
     nextN++;
   }
 
   // Return updated images
-  const images = await prisma.image.findMany({ where: { productId: product.id }, orderBy: { order: 'asc' } });
-  return NextResponse.json({ images, mainImageId: product.mainImageId });
+  const imagesRes = await pool.query('SELECT * FROM "Image" WHERE "productId" = $1 ORDER BY "order" ASC', [product.id]);
+  return NextResponse.json({ images: imagesRes.rows, mainImageId: product.mainImageId });
 } 
