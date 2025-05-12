@@ -19,7 +19,7 @@ export default function Viewings() {
       <section>
         <h2 className="font-heading text-2xl md:text-3xl font-semibold text-espresso mb-4">Remote</h2>
         <p className="font-body text-lg text-sand mb-6">
-          Can't visit us in person? No problem. We offer personalized remote viewings via video call.
+          Can't visit us in person? No problem. We offer personalised remote viewings via video call.
         </p>
         <p className="font-body text-base text-sand mb-4">
           Using FaceTime, WhatsApp, or Zoom, we can walk you through any items in our collection, providing detailed close-ups and answering your questions in real-time. Our remote viewings are by appointment only and tailored to your specific interests.
