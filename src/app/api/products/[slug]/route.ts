@@ -73,7 +73,8 @@ export async function PUT(req, context) {
   }
 }
 
-export async function GET(req, { params }) {
+export async function GET(req, context) {
+  const { params } = await context;
   const slug = params.slug;
   try {
     const productRes = await pool.query('SELECT * FROM "Product" WHERE slug = $1', [slug]);
