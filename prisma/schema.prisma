@@ -30,7 +30,7 @@ model Product {
   category    Category  @relation(fields: [categoryId], references: [id])
   categoryId  Int
   mainImage   Image?    @relation("MainImage", fields: [mainImageId], references: [id])
-  mainImageId Int?
+  mainImageId Int?      @unique
   images      Image[]
   dimensions  String?
   condition   String?
