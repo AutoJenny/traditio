@@ -87,3 +87,5 @@
 [2024-05-14 showroom] Fixed issue with deleted products appearing in showroom and product detail pages by updating API endpoints to filter out products with status "deleted".
 
 [2024-05-14 viewings] Updated viewings page to feature two distinct sections: "In-Person" for physical visits to our Edinburgh location, and "Remote" for FaceTime, WhatsApp, or Zoom viewings by appointment.
+
+[2024-05-14 delivery] Created comprehensive delivery information page explaining bespoke delivery options, insurance, free collection, timeframes, and international shipping policy.
