@@ -1,3 +1,10 @@
+# Traditio Project
+
+**NOTE (2025-05-12): Prisma is no longer used.**
+- All database access, migrations, and seeding are now handled via raw SQL and the `pg` package.
+- The Prisma schema, client, and migration tools have been fully removed from the project.
+- All future DB changes should be made by editing migration SQL files directly and updating scripts as needed.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Important: Use the Correct Directory

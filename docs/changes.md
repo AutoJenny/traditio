@@ -7,10 +7,12 @@
 - Created a full SQL backup of the database before making any changes, stored in `prisma/exports/`.
 - The project is now ready for safe, reliable future migrations.
 - Manually created Customer and Message tables in the database to support the contact form, due to Prisma migration drift. This is a temporary workaround until migration history is rebuilt.
+- Migrated Product-Category relationship to pure many-to-many: dropped categoryId from Product, all relationships now via ProductCategory join table, and updated seed script accordingly. See changes.log for details.
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 
 - Fixed showroom category filtering: updated frontend logic to use cat.category.slug, matching the API response structure so category filtering now works as expected.
+- Restored DnD image management UI to admin product images page: drag-and-drop reordering, alt text editing, image upload, and save functionality are now available again. See changes.log for details.
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 

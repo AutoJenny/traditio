@@ -22,3 +22,7 @@ DROP TABLE "Customer";
 
 -- DropTable
 DROP TABLE "Message";
+
+-- Remove categoryId from Product for many-to-many relationship
+ALTER TABLE "Product" DROP CONSTRAINT IF EXISTS "Product_categoryId_fkey";
+ALTER TABLE "Product" DROP COLUMN IF EXISTS "categoryId";

@@ -101,14 +101,10 @@ traditio/
 
 ## 3. Backend Integration
 
-- **Prisma ORM** is used for database access.
-  - Prisma client is instantiated in `lib/prisma.ts` (singleton pattern for hot-reloading).
-  - Database schema is defined in `prisma/schema.prisma`.
-  - Migrations are tracked in `prisma/migrations/`.
-  - Seed data can be added via `prisma/seed.ts`.
-  - The generated Prisma client is in `src/generated/prisma/`.
-
-- **API Route Handlers** (in `src/app/api/`) use Prisma to fetch and return data as JSON.
+- **Raw SQL & pg package** are now used for all database access, migrations, and seeding.
+  - The Prisma ORM, schema, and migration tools have been fully removed from the project as of 2025-05-12.
+  - All migrations are now managed by editing SQL files in `prisma/migrations/` and running them directly against the database.
+  - Seeding is handled by `scripts/seed_db.ts` using the `pg` package and raw SQL.
 
 ---
 
