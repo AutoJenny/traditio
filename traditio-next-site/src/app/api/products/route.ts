@@ -4,6 +4,11 @@ import { prisma } from '../../../../lib/prisma';
 export async function GET() {
   try {
     const products = await prisma.product.findMany({
+      where: {
+        status: {
+          not: 'deleted'  // Filter out deleted products
+        }
+      },
       include: {
         images: true,
         categories: {

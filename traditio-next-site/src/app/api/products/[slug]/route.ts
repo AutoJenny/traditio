@@ -12,7 +12,9 @@ export async function GET(req, context) {
       categories: { include: { category: true } },
     },
   });
-  if (!product) return NextResponse.json({ product: null, related: [] }, { status: 404 });
+  
+  // Return 404 if product doesn't exist or is deleted
+  if (!product || product.status === 'deleted') return NextResponse.json({ product: null, related: [] }, { status: 404 });
 
   // Use the first category for related products (for now)
   const firstCat = product.categories[0]?.category;
@@ -24,6 +26,7 @@ export async function GET(req, context) {
           some: { categoryId: firstCat.id },
         },
         id: { not: product.id },
+        status: { not: 'deleted' }  // Exclude deleted products from related items
       },
       include: { images: true },
       take: 3,
