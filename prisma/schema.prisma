@@ -8,39 +8,38 @@ datasource db {
 }
 
 model Category {
-  id          Int       @id @default(autoincrement())
-  slug        String    @unique
+  id          Int               @id @default(autoincrement())
+  slug        String            @unique
   name        String
   description String?
-  parent      Category? @relation("CategoryToCategory", fields: [parentId], references: [id])
+  parent      Category?         @relation("CategoryToCategory", fields: [parentId], references: [id])
   parentId    Int?
-  children    Category[] @relation("CategoryToCategory")
+  children    Category[]        @relation("CategoryToCategory")
   order       Int?
-  products    Product[]
+  products    ProductCategory[]
 }
 
 model Product {
-  id          Int       @id @default(autoincrement())
-  slug        String    @unique
+  id          Int               @id @default(autoincrement())
+  slug        String            @unique
   title       String
   description String
   price       Float
-  currency    String    @default("GBP")
-  status      String    @default("available")
-  category    Category  @relation(fields: [categoryId], references: [id])
-  categoryId  Int
-  mainImage   Image?    @relation("MainImage", fields: [mainImageId], references: [id])
-  mainImageId Int?      @unique
+  currency    String            @default("GBP")
+  status      String            @default("available")
+  mainImage   Image?            @relation("MainImage", fields: [mainImageId], references: [id])
+  mainImageId Int?              @unique
   images      Image[]
   dimensions  String?
   condition   String?
   origin      String?
   period      String?
-  featured    Boolean   @default(false)
+  featured    Boolean           @default(false)
   badges      Badge[]
   tags        ProductTag[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  categories  ProductCategory[]
 }
 
 model Image {
@@ -73,4 +72,13 @@ model ProductTag {
   tagId     Int
 
   @@id([productId, tagId])
+}
+
+model ProductCategory {
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  @@id([productId, categoryId])
 } 

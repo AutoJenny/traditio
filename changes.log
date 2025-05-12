@@ -1,0 +1,19 @@
+2025-05-12: Added product document upload and management to admin product Source tab. Implemented API endpoints for upload, listing, and deletion of ProductDocuments. Updated UI to support document upload, display, and removal. 
+
+[2024-05-13] Added GET handler to src/app/api/products/[slug]/route.ts to resolve 405 error and allow fetching product details by slug. 
+
+[2024-05-13] Fixed admin product edit page: updated GET handler in src/app/api/products/[slug]/route.ts to wrap product in a 'product' property in the response. 
+
+[2024-05-13] Improved PUT handler in src/app/api/products/[slug]/route.ts: added error handling/logging and optimized update logic to only update categories/images if provided, avoiding unnecessary deleteMany/create operations. 
+
+[2024-05-13] Fixed bug in PUT handler for products: sanitized categoryIds to filter out null/invalid values before updating categories, preventing Prisma errors and failed updates. 
+
+[2024-05-13] Fixed Next.js dynamic API route param usage and optimized PUT handler to only update categories/images if changed, improving admin save performance. 
+
+[2024-05-13] Added CORS headers and OPTIONS handler to categories and product API routes for cross-origin compatibility. 
+
+[2024-05-13] Fixed dynamic API route handler signatures in products/[slug] to use correct Next.js convention, removing unnecessary await/context destructuring. 
+
+[2024-05-13] Fixed admin product edit: sanitize payload before PUT, only sending valid fields (categoryIds, images, etc.) to backend for updates. 
+
+[2024-05-13] Fixed category update in product PUT handler: now uses explicit deleteMany/createMany for ProductCategory join table, ensuring updates persist for many-to-many relations. 

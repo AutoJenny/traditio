@@ -1,0 +1,15 @@
+# NOTE: As of 2025-05-14, all exports and paths referencing 'traditio-next-site' now refer to the project root. Adjust restore/import commands accordingly.
+Export timestamp: Starting data export...
+Exported 39 products
+Exported 8 categories
+Exported 0 product-category relationships
+Exported 13 images
+Exported 0 tags
+Exported 0 product-tag relationships
+Exported 0 sources
+Exported 0 badges
+Exported 0 product documents
+
+Data export completed! All files saved to /Users/nickfiddes/Code/projects/traditio/traditio-next-site/prisma/exports
+Timestamp: 2025-05-12T07-45-34-368Z
+2025-05-12T07-45-34-368Z

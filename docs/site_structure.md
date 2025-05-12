@@ -7,7 +7,7 @@ This document provides a technical overview of the Traditio Next.js site to help
 ## 1. Directory Structure
 
 ```
-traditio-next-site/
+traditio/
 ├── src/
 │   ├── app/                # Main Next.js app directory (App Router)
 │   │   ├── page.tsx        # Homepage route (/)
@@ -145,12 +145,11 @@ traditio-next-site/
 
 ## 7. Getting Started for New Developers
 
-1. `cd traditio-next-site`
-2. `npm install`
-3. `npm run dev` (starts on http://localhost:3000)
-4. Edit files in `src/app/` to add or change routes/pages.
-5. For backend/API changes, edit files in `src/app/api/` and/or `prisma/`.
-6. For DB changes, update `prisma/schema.prisma`, run `npx prisma migrate dev`, and update seed data as needed.
+1. `npm install` (from the project root)
+2. `npm run dev` (starts on http://localhost:3000)
+3. Edit files in `src/app/` to add or change routes/pages.
+4. For backend/API changes, edit files in `src/app/api/` and/or `prisma/`.
+5. For DB changes, update `prisma/schema.prisma`, run `npx prisma migrate dev`, and update seed data as needed.
 
 ---
 

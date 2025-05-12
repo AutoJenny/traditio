@@ -28,7 +28,7 @@ export default function AdminProductEdit() {
       // Flatten categories to array of IDs for form
       setProduct({
         ...prodData.product,
-        categoryIds: prodData.product?.categories?.map((cat: any) => Number(cat.id)) || [],
+        categoryIds: prodData.product?.categories?.map((cat: any) => Number(cat.categoryId)) || [],
         images: prodData.product?.images || [],
       });
       setLoading(false);
@@ -81,10 +81,23 @@ export default function AdminProductEdit() {
     setSaving(true);
     setError("");
     try {
+      // Sanitize payload
+      const cleanProduct = {
+        ...product,
+        categoryIds: (product.categoryIds || []).filter((id: any) => typeof id === 'number' && id > 0),
+        images: (product.images || []).map((img: any) => ({
+          url: img.url,
+          ...(img.alt !== undefined ? { alt: img.alt } : {}),
+          ...(typeof img.order === 'number' ? { order: img.order } : {}),
+        })),
+      };
+      delete cleanProduct.categories;
+      delete cleanProduct.createdAt;
+      delete cleanProduct.updatedAt;
       const res = await fetch(`/api/products/${slug}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(product),
+        body: JSON.stringify(cleanProduct),
       });
       if (!res.ok) throw new Error("Failed to save");
       const data = await res.json();

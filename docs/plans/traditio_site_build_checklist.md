@@ -14,6 +14,7 @@
 - [x] Set up Next.js project with custom styles (Traditio palette, fonts, etc.)
 - [x] Install and configure Tailwind CSS
 - [x] Set up image optimization and lazy loading (logo confirmed working)
+- [x] All commands and development are now run from the project root. Do not cd into a subdirectory.
 
 ---
 

@@ -91,3 +91,5 @@
 [2024-05-14 delivery] Created comprehensive delivery information page explaining bespoke delivery options, insurance, free collection, timeframes, and international shipping policy.
 
 [2024-05-14 footer] Updated site footer to remove specific street address, postcode, phone number, and business hours while retaining city/country location and email contact information for improved privacy while maintaining geographic context.
+
+[2025-05-14 structure] Updated all references to 'traditio-next-site' in README.md, docs/site_structure.md, and onboarding instructions. All commands, development, and scripts must now be run from the project root. Documentation and onboarding steps have been updated to reflect this new structure and prevent confusion.
