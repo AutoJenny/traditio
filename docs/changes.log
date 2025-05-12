@@ -85,3 +85,5 @@
 [2024-05-14 restore] Successfully restored database and image files after schema change using the backup system. Process validated the effectiveness of the backup and restore procedures.
 
 [2024-05-14 showroom] Fixed issue with deleted products appearing in showroom and product detail pages by updating API endpoints to filter out products with status "deleted".
+
+[2024-05-14 viewings] Updated viewings page to feature two distinct sections: "In-Person" for physical visits to our Edinburgh location, and "Remote" for FaceTime, WhatsApp, or Zoom viewings by appointment.
