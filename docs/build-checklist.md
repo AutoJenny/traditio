@@ -1,0 +1,2 @@
+- [ ] Before making any migration changes, create a full SQL backup with `pg_dump $DATABASE_URL > backup.sql`.
+- [ ] Ensure the `prisma/migrations/` directory contains only the current baseline migration unless intentionally adding a new migration. 
