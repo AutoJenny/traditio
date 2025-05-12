@@ -28,7 +28,7 @@ export default function AdminProductEdit() {
       // Flatten categories to array of IDs for form
       setProduct({
         ...prodData.product,
-        categoryIds: prodData.product?.categories?.map((cat: any) => Number(cat.categoryId)) || [],
+        categoryIds: prodData.product?.categories?.map((cat: any) => Number(cat.id)) || [],
         images: prodData.product?.images || [],
       });
       setLoading(false);
@@ -107,7 +107,7 @@ export default function AdminProductEdit() {
       } else if (data.product) {
         setProduct({
           ...data.product,
-          categoryIds: data.product.categories?.map((cat: any) => Number(cat.categoryId)) || [],
+          categoryIds: data.product.categories?.map((cat: any) => Number(cat.id)) || [],
           images: data.product.images || [],
         });
         // Optionally, show a success message here
