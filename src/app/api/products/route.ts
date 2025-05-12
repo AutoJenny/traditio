@@ -11,6 +11,7 @@ export async function GET() {
       },
       include: {
         images: true,
+        categories: { include: { category: true } },
       },
       orderBy: { createdAt: 'desc' },
     });
