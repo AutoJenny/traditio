@@ -1,0 +1,10 @@
+COPY public."Category" (id, slug, name, description, "parentId", "order") FROM stdin;
+25	decorative	Decorative	\N	\N	\N
+26	garden	Garden	\N	\N	\N
+27	lighting	Lighting	\N	\N	\N
+28	mirrors	Mirrors	\N	\N	\N
+29	rugs	Rugs	\N	\N	\N
+30	seating	Seating	\N	\N	\N
+31	storage	Storage	\N	\N	\N
+32	tables	Tables	\N	\N	\N
+\.

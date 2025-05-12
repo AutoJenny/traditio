@@ -89,6 +89,13 @@ traditio-next-site/
 
 ### Admin Pages
 - `/admin/products/[slug]/images` → Admin image management stub page (upload, reorder, set main, alt, delete coming soon)
+- `/admin/products/[slug]` → **Tabbed admin product edit page** (file: `src/app/admin/products/[slug]/page.tsx`)
+  - Features a tabbed interface with the following tabs:
+    - **Source**: (Planned) Acquisition source, date, price, provenance, and document upload
+    - **Description**: Title, price, status, categories, description, dimensions, condition, origin, period
+    - **Images**: Image summary and link to image management
+    - **Sale**: (Planned) Sale details and workflow
+  - Tab switching is handled in React state; each tab displays its relevant form or summary.
 
 ---
 

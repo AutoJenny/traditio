@@ -1,0 +1,106 @@
+[
+  {
+    "id": 20,
+    "url": "/images/products/butler-s-tray-table-133/butler-s-tray-table-133_1.jpeg",
+    "alt": null,
+    "order": 0,
+    "productId": 133,
+    "productSlug": "butler-s-tray-table-133"
+  },
+  {
+    "id": 21,
+    "url": "/images/products/draft-1747000717807-3966/draft-1747000717807-3966_1.jpeg",
+    "alt": null,
+    "order": 0,
+    "productId": 131,
+    "productSlug": "draft-1747000717807-3966"
+  },
+  {
+    "id": 22,
+    "url": "/images/products/large-terracotta-pot_104/large-terracotta-pot_104_1.jpeg",
+    "alt": null,
+    "order": 0,
+    "productId": 104,
+    "productSlug": "large-terracotta-pot_104"
+  },
+  {
+    "id": 23,
+    "url": "/images/products/louis-xvi-chair_114/louis-xvi-chair_114_1.jpeg",
+    "alt": null,
+    "order": 0,
+    "productId": 114,
+    "productSlug": "louis-xvi-chair_114"
+  },
+  {
+    "id": 24,
+    "url": "/images/products/louis-xvi-chair_114/louis-xvi-chair_114_2.jpeg",
+    "alt": null,
+    "order": 1,
+    "productId": 114,
+    "productSlug": "louis-xvi-chair_114"
+  },
+  {
+    "id": 25,
+    "url": "/images/products/marble-console-table_120/marble-console-table_120_1.jpeg",
+    "alt": null,
+    "order": 0,
+    "productId": 120,
+    "productSlug": "marble-console-table_120"
+  },
+  {
+    "id": 26,
+    "url": "/images/products/marble-console-table_120/marble-console-table_120_2.jpeg",
+    "alt": null,
+    "order": 1,
+    "productId": 120,
+    "productSlug": "marble-console-table_120"
+  },
+  {
+    "id": 27,
+    "url": "/images/products/rare-buddha_101/rare-buddha_101_1.jpeg",
+    "alt": null,
+    "order": 0,
+    "productId": 101,
+    "productSlug": "rare-buddha_101"
+  },
+  {
+    "id": 28,
+    "url": "/images/products/rare-buddha_101/rare-buddha_101_2.jpeg",
+    "alt": null,
+    "order": 1,
+    "productId": 101,
+    "productSlug": "rare-buddha_101"
+  },
+  {
+    "id": 29,
+    "url": "/images/products/rare-buddha_101/rare-buddha_101_3.jpeg",
+    "alt": null,
+    "order": 2,
+    "productId": 101,
+    "productSlug": "rare-buddha_101"
+  },
+  {
+    "id": 30,
+    "url": "/images/products/rare-buddha_101/rare-buddha_101_4.jpeg",
+    "alt": null,
+    "order": 3,
+    "productId": 101,
+    "productSlug": "rare-buddha_101"
+  },
+  {
+    "id": 19,
+    "url": "/images/products/art-nouveau-mirror_109/art-nouveau-mirror_109_2.jpeg",
+    "alt": null,
+    "order": 0,
+    "productId": 109,
+    "productSlug": "art-nouveau-mirror_109"
+  },
+  {
+    "id": 18,
+    "url": "/images/products/art-nouveau-mirror_109/art-nouveau-mirror_109_1.jpeg",
+    "alt": null,
+    "order": 1,
+    "productId": 109,
+    "productSlug": "art-nouveau-mirror_109"
+  }
+]

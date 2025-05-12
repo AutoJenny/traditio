@@ -1,0 +1,39 @@
+COPY public."Product" (id, slug, title, description, price, currency, status, "mainImageId", dimensions, condition, origin, period, featured, "createdAt", "updatedAt") FROM stdin;
+115	paris-bistro-stool_115	Paris Bistro Stool	Classic French bistro stool.	130	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.024
+116	velvet-sofa_116	Velvet Sofa	Plush velvet 3-seater.	1500	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.025
+118	vintage-steamer-trunk_118	Vintage Steamer Trunk	Leather and brass trunk.	390	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.025
+119	carved-bookcase_119	Carved Bookcase	Tall carved bookcase.	800	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.026
+110	trumeau-mirror_110	Trumeau Mirror	Antique French trumeau.	480	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.016
+111	persian-rug_111	Persian Rug	Hand-knotted wool rug.	900	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.017
+112	kilim-runner_112	Kilim Runner	Colorful kilim runner.	320	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.018
+113	aubusson-tapestry_113	Aubusson Tapestry	French tapestry panel.	1100	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.019
+99	bronze-art-deco-statue_99	Bronze Art Deco Statue	Elegant 1920s bronze statue.	340	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.019
+100	gilded-frame_100	Gilded Frame	Ornate 19th-century frame.	95	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.02
+102	stone-birdbath_102	Stone Birdbath	Classic garden birdbath.	210	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.021
+103	iron-garden-bench_103	Iron Garden Bench	Victorian-style bench.	450	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.022
+106	brass-table-lamp_106	Brass Table Lamp	Classic brass lamp.	180	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.023
+107	industrial-wall-sconce_107	Industrial Wall Sconce	Vintage industrial sconce.	75	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.023
+122	round-side-table_122	Round Side Table	Small round side table.	220	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.027
+124	cast-iron-garden-urn_124	Cast Iron Garden Urn	Heavy cast iron urn.	320	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.029
+125	opaline-glass-lamp_125	Opaline Glass Lamp	French opaline lamp.	260	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.029
+126	triptych-mirror_126	Triptych Mirror	Three-panel mirror.	410	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.03
+127	moroccan-rug_127	Moroccan Rug	Handwoven Moroccan rug.	780	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.03
+128	leather-club-chair_128	Leather Club Chair	Classic leather club chair.	950	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.031
+129	wine-cabinet_129	Wine Cabinet	French wine storage.	1200	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.032
+130	nesting-tables_130	Nesting Tables	Set of three tables.	330	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.032
+108	ornate-gold-mirror_108	Ornate Gold Mirror	Large gilded mirror.	350	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 20:13:25.375
+98	vintage-french-vase_98	Vintage French Vase	A beautiful hand-painted vase.	120	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 20:13:32.828
+105	crystal-chandelier_105	Crystal Chandelier	Sparkling French chandelier.	1200	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:38:56.372
+109	art-nouveau-mirror_109	Art Nouveau Mirror	Curved wood frame.	202000	GBP	sold	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 20:14:27.529
+104	large-terracotta-pot_104	Large Terracotta Pot	Handmade terracotta.	60	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 20:22:00.613
+101	rare-buddha_101	Rare Buddha	A unique and rare Buddha statue for testing porpoises.	15500	GBP	sold	\N	6" high	As new	Tibet	c. 11th century	t	2025-05-11 17:54:04.39	2025-05-11 20:09:29.287
+131	draft-1747000717807-3966	Butler's Tray Table 1	Draft	250	GBP	deleted	\N					f	2025-05-11 21:58:37.809	2025-05-11 22:14:08.31
+133	butler-s-tray-table-133	Butler's Tray Table	Draft	250	GBP	draft	\N					t	2025-05-11 22:07:06.142	2025-05-11 22:14:31.064
+114	louis-xvi-chair_114	Louis XVI Chair	Carved wood, upholstered.	600	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 20:23:30.257
+123	bamboo-plant-stand_123	Bamboo Plant Stand	Art Deco plant stand.	140	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 21:08:14.856
+121	farmhouse-dining-table_121	Farmhouse Dining Table	Rustic oak table.	1800	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 21:08:19.378
+117	french-armoire_117	French Armoire	19th-century oak armoire.	2100	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 21:08:27.041
+120	marble-console-table_120	Marble Console Table	Louis XV style console.	950	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 21:14:56.955
+132	draft-1747001086450-4247	Draft	Draft	0	GBP	draft	\N					f	2025-05-11 22:04:46.451	2025-05-11 22:04:46.451
+134	draft-1747002719068-5025	Draft	Draft	0	GBP	draft	\N					f	2025-05-11 22:31:59.07	2025-05-11 22:31:59.07
+\.

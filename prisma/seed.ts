@@ -1,120 +1,110 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
+import fs from 'fs';
 
-async function main() {
-  // Categories
-  const categories = [
-    { slug: 'all', name: 'All' },
-    { slug: 'decorative', name: 'Decorative' },
-    { slug: 'garden', name: 'Garden' },
-    { slug: 'lighting', name: 'Lighting' },
-    { slug: 'mirrors', name: 'Mirrors' },
-    { slug: 'rugs', name: 'Rugs' },
-    { slug: 'seating', name: 'Seating' },
-    { slug: 'storage', name: 'Storage' },
-    { slug: 'tables', name: 'Tables' },
-  ];
-  for (const cat of categories) {
-    await prisma.category.upsert({
-      where: { slug: cat.slug },
-      update: {},
-      create: cat,
-    });
-  }
-
-  // Products
-  const products = [
-    {
-      slug: 'antique-oak-table',
-      title: 'Antique Oak Table',
-      description: 'A beautiful antique oak table, perfect for any dining room.',
-      price: 1200,
-      status: 'available',
-      category: { connect: { slug: 'tables' } },
-      featured: true,
-      images: {
-        create: [
-          { url: '/images/products/oak-table-1.jpg', alt: 'Antique Oak Table' },
-          { url: '/images/products/oak-table-2.jpg', alt: 'Antique Oak Table - Detail' },
-        ],
-      },
-      dimensions: '180cm x 90cm x 75cm',
-      condition: 'Excellent',
-      origin: 'Scotland',
-      period: '19th Century',
-    },
-    {
-      slug: 'vintage-armchair',
-      title: 'Vintage Armchair',
-      description: 'A comfortable vintage armchair with original upholstery.',
-      price: 650,
-      status: 'sold',
-      category: { connect: { slug: 'seating' } },
-      featured: false,
-      images: {
-        create: [
-          { url: '/images/products/armchair-1.jpg', alt: 'Vintage Armchair' },
-        ],
-      },
-      dimensions: '80cm x 75cm x 100cm',
-      condition: 'Good',
-      origin: 'England',
-      period: 'Early 20th Century',
-    },
-    {
-      slug: 'gilded-mirror',
-      title: 'Gilded Mirror',
-      description: 'A large gilded mirror with ornate frame.',
-      price: 950,
-      status: 'available',
-      category: { connect: { slug: 'mirrors' } },
-      featured: true,
-      images: {
-        create: [
-          { url: '/images/products/gilded-mirror-1.jpg', alt: 'Gilded Mirror' },
-        ],
-      },
-      dimensions: '120cm x 180cm',
-      condition: 'Restored',
-      origin: 'France',
-      period: 'Late 19th Century',
-    },
-    {
-      slug: 'rare-buddha',
-      title: 'Rare Buddha',
-      description: 'A rare Buddha statue, perfect for collectors and interior design.',
-      price: 2200,
-      status: 'available',
-      category: { connect: { slug: 'decorative' } },
-      featured: true,
-      images: {
-        create: [
-          { url: '/images/products/test/IMG_1603.jpeg', alt: 'Rare Buddha - Angle 1' },
-          { url: '/images/products/test/IMG_1604.jpeg', alt: 'Rare Buddha - Angle 2' },
-          { url: '/images/products/test/IMG_1606.jpeg', alt: 'Rare Buddha - Angle 3' },
-          { url: '/images/products/test/IMG_1607.jpeg', alt: 'Rare Buddha - Angle 4' },
-        ],
-      },
-      dimensions: '30cm x 20cm x 15cm',
-      condition: 'Excellent',
-      origin: 'Asia',
-      period: 'Unknown',
-    },
-  ];
-  for (const prod of products) {
-    await prisma.product.upsert({
-      where: { slug: prod.slug },
-      update: {},
-      create: prod,
-    });
+function loadJson(filename: string) {
+  try {
+    return fs.readFileSync(filename, 'utf8').split('\n').filter(Boolean).map(line => JSON.parse(line));
+  } catch (e) {
+    return [];
   }
 }
 
+async function main() {
+  // Clear all tables
+  await prisma.productCategory.deleteMany({});
+  await prisma.product.deleteMany({});
+  await prisma.category.deleteMany({});
+  await prisma.source.deleteMany({});
+  await prisma.image.deleteMany({});
+  await prisma.badge.deleteMany({});
+  await prisma.tag.deleteMany({});
+  await prisma.productTag.deleteMany({});
+  await prisma.productDocument.deleteMany({});
+
+  // Load data from JSON
+  const products = loadJson('products.json');
+  const categories = loadJson('categories.json');
+  const productCategories = loadJson('product_categories.json');
+  const images = loadJson('images.jsonl');
+
+  // Insert categories and build slug->id map
+  const categorySlugToId: Record<string, number> = {};
+  for (const cat of categories) {
+    const created = await prisma.category.create({ data: { ...cat, id: undefined } });
+    categorySlugToId[created.slug] = created.id;
+  }
+
+  // Insert products and build slug->id map
+  const productSlugToId: Record<string, number> = {};
+  for (const prod of products) {
+    const created = await prisma.product.create({ data: { ...prod, id: undefined } });
+    productSlugToId[created.slug] = created.id;
+  }
+
+  // Insert images (map productId by slug if possible)
+  for (const img of images) {
+    if (img.productId) {
+      // Try to find the product by slug (if available in your data), else use the mapped ID
+      await prisma.image.create({ data: { ...img, id: undefined, productId: img.productId } });
+    }
+  }
+
+  // Insert product-category relationships using mapped IDs
+  for (const pc of productCategories) {
+    // Try to map by productId and categoryId, or by slug if available
+    let productId = pc.productId;
+    let categoryId = pc.categoryId;
+    // If your product_categories.json has slugs, use them here
+    // Otherwise, use the mapped IDs
+    if (!productId && pc.productSlug) productId = productSlugToId[pc.productSlug];
+    if (!categoryId && pc.categorySlug) categoryId = categorySlugToId[pc.categorySlug];
+    if (productId && categoryId) {
+      await prisma.productCategory.create({ data: { productId, categoryId } });
+    } else {
+      console.warn(`Skipping ProductCategory: productId ${productId} or categoryId ${categoryId} does not exist`);
+    }
+  }
+
+  // Sample data for empty tables
+  // Tags
+  const tag1 = await prisma.tag.create({ data: { name: 'antique' } });
+  const tag2 = await prisma.tag.create({ data: { name: 'vintage' } });
+  // ProductTag
+  const sampleProduct = await prisma.product.findFirst();
+  if (sampleProduct) {
+    await prisma.productTag.create({ data: { productId: sampleProduct.id, tagId: tag1.id } });
+    await prisma.productTag.create({ data: { productId: sampleProduct.id, tagId: tag2.id } });
+  }
+  // Sources
+  const source1 = await prisma.source.create({ data: { name: 'Sample Auction House', address: '123 Main St', postcode: 'AB12 3CD', notes: 'Sample source' } });
+  // Badges
+  if (sampleProduct) {
+    await prisma.badge.create({ data: { label: 'Featured', productId: sampleProduct.id } });
+  }
+  // ProductDocument
+  if (sampleProduct) {
+    await prisma.productDocument.create({ data: { productId: sampleProduct.id, url: '/docs/sample.pdf', type: 'receipt', notes: 'Sample document' } });
+  }
+
+  // Reset sequences for all tables with IDs
+  const maxProduct = await prisma.product.findFirst({ orderBy: { id: 'desc' } });
+  const maxCategory = await prisma.category.findFirst({ orderBy: { id: 'desc' } });
+  const maxImage = await prisma.image.findFirst({ orderBy: { id: 'desc' } });
+  const maxTag = await prisma.tag.findFirst({ orderBy: { id: 'desc' } });
+  const maxBadge = await prisma.badge.findFirst({ orderBy: { id: 'desc' } });
+  const maxSource = await prisma.source.findFirst({ orderBy: { id: 'desc' } });
+  const maxProductDocument = await prisma.productDocument.findFirst({ orderBy: { id: 'desc' } });
+
+  await prisma.$executeRawUnsafe(`SELECT setval('"Product_id_seq"', ${maxProduct ? maxProduct.id + 1 : 1}, false)`);
+  await prisma.$executeRawUnsafe(`SELECT setval('"Category_id_seq"', ${maxCategory ? maxCategory.id + 1 : 1}, false)`);
+  await prisma.$executeRawUnsafe(`SELECT setval('"Image_id_seq"', ${maxImage ? maxImage.id + 1 : 1}, false)`);
+  await prisma.$executeRawUnsafe(`SELECT setval('"Tag_id_seq"', ${maxTag ? maxTag.id + 1 : 1}, false)`);
+  await prisma.$executeRawUnsafe(`SELECT setval('"Badge_id_seq"', ${maxBadge ? maxBadge.id + 1 : 1}, false)`);
+  await prisma.$executeRawUnsafe(`SELECT setval('"Source_id_seq"', ${maxSource ? maxSource.id + 1 : 1}, false)`);
+  await prisma.$executeRawUnsafe(`SELECT setval('"ProductDocument_id_seq"', ${maxProductDocument ? maxProductDocument.id + 1 : 1}, false)`);
+}
+
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  }); 
+  .catch(e => { console.error(e); process.exit(1); })
+  .finally(() => prisma.$disconnect()); 

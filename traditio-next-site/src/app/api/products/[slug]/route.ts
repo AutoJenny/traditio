@@ -47,7 +47,8 @@ export async function PUT(req, context) {
     const {
       categoryIds,
       title, description, price, currency, status, mainImageId,
-      dimensions, condition, origin, period, featured
+      dimensions, condition, origin, period, featured,
+      sourceId, acquisitionDate, acquisitionPrice, acquisitionCurrency, acquisitionNotes, provenance
     } = body;
 
     // Find product by slug
@@ -77,6 +78,12 @@ export async function PUT(req, context) {
         origin,
         period,
         featured,
+        sourceId: sourceId || null,
+        acquisitionDate: acquisitionDate ? new Date(acquisitionDate) : null,
+        acquisitionPrice: acquisitionPrice !== undefined ? parseFloat(acquisitionPrice) : null,
+        acquisitionCurrency: acquisitionCurrency || undefined,
+        acquisitionNotes: acquisitionNotes || undefined,
+        provenance: provenance || undefined,
         categories: {
           deleteMany: {},
           create: (categoryIds || []).map((id: number) => ({

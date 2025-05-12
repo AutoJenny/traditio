@@ -2,6 +2,12 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
+const QUICK_SOURCES = [
+  { label: "Inherited", name: "Inherited" },
+  { label: "Found/Gift", name: "Found/Gift" },
+  { label: "Anonymous Purchase", name: "Anonymous Purchase" },
+];
+
 export default function AdminProductEdit() {
   const { slug } = useParams();
   const router = useRouter();
@@ -15,6 +21,12 @@ export default function AdminProductEdit() {
   const [activeTab, setActiveTab] = useState('Description');
   // Accept both id and slug for routing
   const productIdOrSlug = slug;
+  // Source tab state
+  const [sourceQuery, setSourceQuery] = useState("");
+  const [sourceOptions, setSourceOptions] = useState<any[]>([]);
+  const [sourceLoading, setSourceLoading] = useState(false);
+  const [showNewSource, setShowNewSource] = useState(false);
+  const [newSource, setNewSource] = useState({ name: "", address: "", postcode: "", notes: "" });
 
   useEffect(() => {
     async function fetchData() {
@@ -35,6 +47,16 @@ export default function AdminProductEdit() {
     }
     fetchData();
   }, [slug]);
+
+  // Fetch sources for autocomplete
+  useEffect(() => {
+    if (!sourceQuery) return setSourceOptions([]);
+    setSourceLoading(true);
+    fetch(`/api/sources?query=${encodeURIComponent(sourceQuery)}`)
+      .then(res => res.json())
+      .then(setSourceOptions)
+      .finally(() => setSourceLoading(false));
+  }, [sourceQuery]);
 
   function formatPrice(value: string | number) {
     if (value === null || value === undefined) return '';
@@ -73,6 +95,36 @@ export default function AdminProductEdit() {
       setProduct((prev: any) => ({ ...prev, images: value.split(",").map((url: string) => ({ url })) }));
     } else {
       setProduct((prev: any) => ({ ...prev, [name]: value }));
+    }
+  }
+
+  // Handle quick source selection
+  function handleQuickSource(name: string) {
+    setProduct((prev: any) => ({ ...prev, sourceName: name, sourceId: undefined }));
+    setSourceQuery(name);
+    setShowNewSource(false);
+  }
+
+  // Handle source select
+  function handleSourceSelect(option: any) {
+    setProduct((prev: any) => ({ ...prev, sourceId: option.id, sourceName: option.name }));
+    setShowNewSource(false);
+  }
+
+  // Handle new source creation
+  async function handleCreateSource(e: any) {
+    e.preventDefault();
+    const res = await fetch('/api/sources', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newSource),
+    });
+    if (res.ok) {
+      const created = await res.json();
+      setProduct((prev: any) => ({ ...prev, sourceId: created.id, sourceName: created.name }));
+      setShowNewSource(false);
+      setSourceQuery("");
+      setNewSource({ name: "", address: "", postcode: "", notes: "" });
     }
   }
 
@@ -143,8 +195,73 @@ export default function AdminProductEdit() {
         ))}
       </div>
       {activeTab === 'Source' && (
-        <div className="py-8 text-sand-700 text-lg italic text-center">
-          <p>Source details for this product will go here.</p>
+        <div className="space-y-6">
+          <div>
+            <label className="block font-bold mb-1">Source</label>
+            <div className="flex gap-2 mb-2">
+              {QUICK_SOURCES.map(q => (
+                <button key={q.name} type="button" className="px-3 py-1 rounded bg-sand-200 hover:bg-sand-300 text-espresso font-semibold" onClick={() => handleQuickSource(q.name)}>{q.label}</button>
+              ))}
+            </div>
+            <input
+              type="text"
+              className="w-full border rounded p-2 mb-1"
+              placeholder="Type to search or add source..."
+              value={product.sourceName || sourceQuery}
+              onChange={e => {
+                setSourceQuery(e.target.value);
+                setProduct((prev: any) => ({ ...prev, sourceName: e.target.value, sourceId: undefined }));
+                setShowNewSource(false);
+              }}
+              onFocus={() => setShowNewSource(false)}
+            />
+            {sourceLoading && <div className="text-sm text-gray-400">Searching...</div>}
+            {sourceOptions.length > 0 && (
+              <div className="border rounded bg-white shadow p-2 mt-1">
+                {sourceOptions.map(opt => (
+                  <div key={opt.id} className="cursor-pointer hover:bg-sand-100 p-1 rounded" onClick={() => handleSourceSelect(opt)}>{opt.name}</div>
+                ))}
+                <div className="mt-2 text-xs text-gray-500">Can't find it? <button type="button" className="underline" onClick={() => setShowNewSource(true)}>Add new source</button></div>
+              </div>
+            )}
+            {showNewSource && (
+              <form onSubmit={handleCreateSource} className="mt-2 space-y-2 border rounded p-3 bg-sand-50">
+                <input required className="w-full border rounded p-2" placeholder="Name" value={newSource.name} onChange={e => setNewSource(s => ({ ...s, name: e.target.value }))} />
+                <input className="w-full border rounded p-2" placeholder="Address" value={newSource.address} onChange={e => setNewSource(s => ({ ...s, address: e.target.value }))} />
+                <input className="w-full border rounded p-2" placeholder="Postcode" value={newSource.postcode} onChange={e => setNewSource(s => ({ ...s, postcode: e.target.value }))} />
+                <textarea className="w-full border rounded p-2" placeholder="Notes" value={newSource.notes} onChange={e => setNewSource(s => ({ ...s, notes: e.target.value }))} />
+                <button type="submit" className="bg-brass text-espresso font-bold rounded px-4 py-2 border-2 border-brass shadow hover:bg-espresso hover:text-ivory transition">Create Source</button>
+              </form>
+            )}
+          </div>
+          <div>
+            <label className="block font-bold mb-1">Acquisition Date</label>
+            <input type="date" className="w-full border rounded p-2" value={product.acquisitionDate ? product.acquisitionDate.slice(0,10) : ''} onChange={e => setProduct((prev: any) => ({ ...prev, acquisitionDate: e.target.value }))} />
+          </div>
+          <div>
+            <label className="block font-bold mb-1">Acquisition Price</label>
+            <div className="flex gap-2">
+              <input type="number" step="0.01" className="w-full border rounded p-2" value={product.acquisitionPrice || ''} onChange={e => setProduct((prev: any) => ({ ...prev, acquisitionPrice: e.target.value }))} />
+              <select className="border rounded p-2" value={product.acquisitionCurrency || 'GBP'} onChange={e => setProduct((prev: any) => ({ ...prev, acquisitionCurrency: e.target.value }))}>
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label className="block font-bold mb-1">Acquisition Notes</label>
+            <textarea className="w-full border rounded p-2" value={product.acquisitionNotes || ''} onChange={e => setProduct((prev: any) => ({ ...prev, acquisitionNotes: e.target.value }))} />
+          </div>
+          <div>
+            <label className="block font-bold mb-1">Provenance</label>
+            <textarea className="w-full border rounded p-2" value={product.provenance || ''} onChange={e => setProduct((prev: any) => ({ ...prev, provenance: e.target.value }))} />
+          </div>
+          <div>
+            <label className="block font-bold mb-1">Receipts / Documents</label>
+            <input type="file" className="w-full border rounded p-2" multiple disabled />
+            <div className="text-xs text-gray-400 mt-1">(Document upload coming soon)</div>
+          </div>
         </div>
       )}
       {activeTab === 'Description' && (
