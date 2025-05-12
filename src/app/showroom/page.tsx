@@ -37,7 +37,7 @@ export default function Showroom() {
   const filteredProducts = selectedCategory === 'all'
     ? products
     : products.filter((prod: any) =>
-        prod.categories && prod.categories.some((cat: any) => cat.slug === selectedCategory)
+        prod.categories && prod.categories.some((cat: any) => cat.category?.slug === selectedCategory)
       );
 
   // Sort filtered products

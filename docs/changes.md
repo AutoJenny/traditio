@@ -10,3 +10,7 @@
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 
+- Fixed showroom category filtering: updated frontend logic to use cat.category.slug, matching the API response structure so category filtering now works as expected.
+
+## 2024-05-13
+- Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 

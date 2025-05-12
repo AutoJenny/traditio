@@ -17,3 +17,5 @@
 [2024-05-13] Fixed admin product edit: sanitize payload before PUT, only sending valid fields (categoryIds, images, etc.) to backend for updates. 
 
 [2024-05-13] Fixed category update in product PUT handler: now uses explicit deleteMany/createMany for ProductCategory join table, ensuring updates persist for many-to-many relations. 
+
+[2024-05-13] Fixed showroom category filtering: updated filter logic in src/app/showroom/page.tsx to use cat.category.slug instead of cat.slug, matching the API response structure. 
