@@ -104,6 +104,13 @@ export default function AdminProductEdit() {
       // If the slug has changed, redirect to the new canonical URL
       if (data.product && data.product.slug && data.product.slug !== slug) {
         router.push(`/admin/products/${data.product.slug}`);
+      } else if (data.product) {
+        setProduct({
+          ...data.product,
+          categoryIds: data.product.categories?.map((cat: any) => Number(cat.categoryId)) || [],
+          images: data.product.images || [],
+        });
+        // Optionally, show a success message here
       } else {
         router.refresh();
       }
