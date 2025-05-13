@@ -10,6 +10,7 @@
 - Migrated Product-Category relationship to pure many-to-many: dropped categoryId from Product, all relationships now via ProductCategory join table, and updated seed script accordingly. See changes.log for details.
 - Added DELETE handler to /api/products/[slug] for soft-deleting products (sets status='deleted').
 - Admin product list: Edit button is now a small blue circle with a pen icon instead of text.
+- Show Deleted checkbox now works: API supports ?showDeleted=1 to include deleted products; frontend refetches accordingly.
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 

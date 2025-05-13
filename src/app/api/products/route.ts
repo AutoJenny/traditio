@@ -1,11 +1,13 @@
 import { NextResponse } from 'next/server';
 import pool from '../../../../lib/db';
 
-export async function GET() {
+export async function GET(req) {
   try {
-    // Fetch products (excluding deleted)
+    const url = req?.url ? new URL(req.url, 'http://localhost') : null;
+    const showDeleted = url && url.searchParams.get('showDeleted');
+    // Fetch products (optionally including deleted)
     const { rows: products } = await pool.query(`
-      SELECT * FROM "Product" WHERE status != 'deleted' ORDER BY "createdAt" DESC
+      SELECT * FROM "Product"${showDeleted ? '' : ' WHERE status != \'deleted\''} ORDER BY "createdAt" DESC
     `);
 
     // Fetch all images for these products

@@ -12,7 +12,7 @@ export default function AdminProductList() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const res = await fetch("/api/products");
+      const res = await fetch(`/api/products${showDeleted ? '?showDeleted=1' : ''}`);
       const data = await res.json();
       setProducts(data.sort((a: any, b: any) => a.title.localeCompare(b.title)));
       setLoading(false);
@@ -23,7 +23,7 @@ export default function AdminProductList() {
     }
     fetchProducts();
     fetchCategories();
-  }, []);
+  }, [showDeleted]);
 
   return (
     <main className="max-w-4xl mx-auto py-12 px-4">

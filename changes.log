@@ -33,3 +33,7 @@
 [YYYY-MM-DD] Admin UI: Edit button is now a blue button, Delete is a trash icon button that sends a DELETE request to the API (not a PUT). Ensured delete is distinct and works as expected. UI and API behavior now match requirements. 
 
 [YYYY-MM-DD] Admin product list: Edit button is now a small blue circle with a pen icon instead of text. 
+
+[YYYY-MM-DD] Show Deleted checkbox now works: API supports ?showDeleted=1 to include deleted products; frontend refetches accordingly. 
+
+[YYYY-MM-DD] Commented out Sign In and basket icon links in the header (layout.tsx), not deleted. 

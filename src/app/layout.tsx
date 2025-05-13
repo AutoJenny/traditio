@@ -47,13 +47,13 @@ export default function RootLayout({
           </ul>
           <div className="flex items-center gap-6">
             <Link href="/admin" className="bg-brass text-espresso font-bold rounded px-4 py-2 border-2 border-brass uppercase shadow hover:bg-espresso hover:text-ivory transition">Edit</Link>
-            <Link href="/account" className="hover:text-brass transition-colors duration-200">Sign In</Link>
-            <Link href="/cart" className="relative hover:text-brass transition-colors duration-200">
+            {/* <Link href="/account" className="hover:text-brass transition-colors duration-200">Sign In</Link> */}
+            {/* <Link href="/cart" className="relative hover:text-brass transition-colors duration-200">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 inline">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.836l.383 1.437m0 0l1.35 5.062c.13.487.576.83 1.087.83h8.27c.51 0 .957-.343 1.087-.83l1.35-5.062m-12.144 0h12.144m-12.144 0l-.383-1.437A1.125 1.125 0 0 1 5.636 3h12.728c.51 0 .955.343 1.087.836l.383 1.437m-2.25 13.5a1.125 1.125 0 1 1-2.25 0 1.125 1.125 0 0 1 2.25 0zm-9 0a1.125 1.125 0 1 1-2.25 0 1.125 1.125 0 0 1 2.25 0z" />
               </svg>
               <span className="absolute -top-2 -right-2 bg-brass text-white text-xs rounded-full px-1.5 py-0.5">0</span>
-            </Link>
+            </Link> */}
           </div>
         </nav>
         {/* Main Content */}
