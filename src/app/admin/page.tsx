@@ -102,7 +102,13 @@ export default function AdminProductList() {
                 (prod.categories && prod.categories.some((cat: any) => String(cat.id) === String(categoryFilter)))
               )
               .map((prod: any) => (
-                <tr key={prod.id} className="border-b border-sand hover:bg-ivory group">
+                <tr
+                  key={prod.id}
+                  className={`border-b border-sand hover:bg-ivory group transition-colors duration-150
+                    ${prod.status === 'sold' ? 'bg-sand-200 opacity-60' : ''}
+                    ${prod.status === 'draft' ? 'bg-white' : ''}
+                  `}
+                >
                   <td className="p-2 relative">
                     {prod.images && prod.images[0] ? (
                       <Link href={`/admin/products/${prod.slug}/images`}>
