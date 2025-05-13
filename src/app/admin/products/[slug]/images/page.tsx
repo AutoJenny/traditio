@@ -193,6 +193,8 @@ export default function ProductImagesPage() {
         })
       );
       setMainImageId(data.mainImageId || null);
+      // Auto-save after upload to persist new image order/state
+      await handleSave();
     } catch (err: any) {
       setUploadError(err.message);
     } finally {

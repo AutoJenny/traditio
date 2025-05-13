@@ -95,6 +95,7 @@ traditio/
 ### Admin Pages
 - `/admin/products/[slug]/images` → Admin image management page (upload, reorder, set main, alt, delete supported)
   - Backend now rejects updates that would remove all images, and frontend warns/prevents saving if no images are present. This prevents accidental image loss.
+  - After uploading an image, the page now auto-saves the image order/state to the backend, making the flow foolproof and preventing accidental image loss or state mismatch.
 - `/admin/products/[slug]` → **Tabbed admin product edit page** (file: `src/app/admin/products/[slug]/page.tsx`). In the product list, Edit is a blue button and Delete is a trash icon button that sends a DELETE request.
   - Backend now rejects updates that would remove all images, and frontend warns/prevents saving if no images are present. This prevents accidental image loss.
   - Features a tabbed interface with the following tabs:
