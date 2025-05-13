@@ -55,6 +55,11 @@ export default function AdminMessageDetail() {
   const [saving, setSaving] = useState(false);
   const [productImage, setProductImage] = useState<string | null>(null);
   const [product, setProduct] = useState<any | null>(null);
+  const [replySubject, setReplySubject] = useState('Re: Your enquiry');
+  const [replyBody, setReplyBody] = useState('');
+  const [replySending, setReplySending] = useState(false);
+  const [replySent, setReplySent] = useState(false);
+  const [replyError, setReplyError] = useState('');
 
   useEffect(() => {
     async function fetchMessage() {
@@ -130,6 +135,55 @@ export default function AdminMessageDetail() {
             <div className="bg-white rounded p-6 text-lg text-espresso shadow mb-8">
               {message.content}
             </div>
+            {/* Reply by email form */}
+            <form
+              className="bg-sand-50 rounded p-6 shadow mb-8"
+              onSubmit={async e => {
+                e.preventDefault();
+                setReplySending(true);
+                setReplyError('');
+                setReplySent(false);
+                try {
+                  const res = await fetch('/api/reply', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      to: message.customer_email,
+                      subject: replySubject,
+                      text: replyBody,
+                    }),
+                  });
+                  if (!res.ok) {
+                    const data = await res.json();
+                    throw new Error(data.error || 'Failed to send email');
+                  }
+                  setReplySent(true);
+                  setReplyBody('');
+                } catch (err: any) {
+                  setReplyError(err.message);
+                } finally {
+                  setReplySending(false);
+                }
+              }}
+            >
+              <div className="mb-4">
+                <label className="block font-semibold mb-1">To</label>
+                <input type="email" value={message.customer_email} disabled className="w-full border rounded p-2 bg-sand-100" />
+              </div>
+              <div className="mb-4">
+                <label className="block font-semibold mb-1">Subject</label>
+                <input type="text" value={replySubject} onChange={e => setReplySubject(e.target.value)} className="w-full border rounded p-2" required />
+              </div>
+              <div className="mb-4">
+                <label className="block font-semibold mb-1">Message</label>
+                <textarea value={replyBody} onChange={e => setReplyBody(e.target.value)} className="w-full border rounded p-2" rows={5} required />
+              </div>
+              <button type="submit" disabled={replySending} className="bg-brass text-espresso font-bold rounded px-6 py-2 border-2 border-brass shadow hover:bg-espresso hover:text-ivory transition">
+                {replySending ? 'Sending…' : 'Send Reply'}
+              </button>
+              {replySent && <span className="ml-4 text-green-700 font-semibold">Reply sent!</span>}
+              {replyError && <span className="ml-4 text-red-600 font-semibold">{replyError}</span>}
+            </form>
           </div>
           {/* Product panel if available */}
           {product && product.images && product.images.length > 0 && (

@@ -1,4 +1,6 @@
 {
+  "/api/messages/[id]/route": "app/api/messages/[id]/route.js",
+  "/api/products/[slug]/route": "app/api/products/[slug]/route.js",
   "/admin/messages/page": "app/admin/messages/page.js",
   "/admin/messages/[id]/page": "app/admin/messages/[id]/page.js"
 }
