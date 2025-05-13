@@ -99,3 +99,5 @@
 - All product-category relationships now managed via ProductCategory join table only.
 - Updated seed script to remove categoryId from Product inserts and rely solely on join table.
 - Updated documentation and migration logs accordingly.
+
+[2025-05-13  admin] Update: All three main links on the admin landing page now have visually appealing icons for products, messages, and customers.
