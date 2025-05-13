@@ -107,3 +107,5 @@
 [2025-05-14  admin] Global cleanup: Searched and destroyed all instances of 'createdAt'/'updatedAt' in code, data, and docs. Only 'created'/'updated' remain everywhere for consistency.
 
 [2025-05-14  showroom] Update: Showroom page now excludes products with status 'draft', 'sold', or 'deleted' from the product grid and category views.
+
+[2025-05-14  showroom] Add: 'Newest' sort option to showroom page, sorting products by most recently created first.

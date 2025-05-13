@@ -45,6 +45,11 @@ export default function Showroom() {
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sort === 'price-asc') return (a.price || 0) - (b.price || 0);
     if (sort === 'price-desc') return (b.price || 0) - (a.price || 0);
+    if (sort === 'newest') {
+      const aDate = a.created ? new Date(a.created).getTime() : 0;
+      const bDate = b.created ? new Date(b.created).getTime() : 0;
+      return bDate - aDate;
+    }
     // Default: A-Z
     return (a.title || '').localeCompare(b.title || '');
   });
@@ -63,6 +68,7 @@ export default function Showroom() {
           <option value="az">A-Z</option>
           <option value="price-asc">Price: Low to High</option>
           <option value="price-desc">Price: High to Low</option>
+          <option value="newest">Newest</option>
         </select>
       </div>
       {/* Category Filter */}
