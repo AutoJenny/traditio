@@ -105,7 +105,7 @@ export default function AdminProductList() {
                 <tr
                   key={prod.id}
                   className={`border-b border-sand hover:bg-ivory group transition-colors duration-150
-                    ${prod.status === 'sold' ? 'bg-gray-700 text-white' : ''}
+                    ${prod.status === 'sold' ? 'bg-gray-300 opacity-60' : ''}
                     ${prod.status === 'draft' ? 'bg-white' : ''}
                   `}
                 >
