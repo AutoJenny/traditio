@@ -68,10 +68,18 @@ export default function ProductDetail() {
           <div className="mb-6">
             <p className="font-body text-base text-sand mb-2 whitespace-pre-line">{product.description}</p>
             <ul className="text-sm text-sand space-y-1">
-              {product.dimensions && <li><b>Dimensions:</b> {product.dimensions}</li>}
+              {(product.dimension_wide || product.dimension_deep || product.dimension_high) && (
+                <li>
+                  <b>Dimensions:</b>
+                  {product.dimension_wide && <span> W: {product.dimension_wide}</span>}
+                  {product.dimension_deep && <span> × D: {product.dimension_deep}</span>}
+                  {product.dimension_high && <span> × H: {product.dimension_high}</span>}
+                </li>
+              )}
               {product.condition && <li><b>Condition:</b> {product.condition}</li>}
               {product.origin && <li><b>Origin:</b> {product.origin}</li>}
               {product.period && <li><b>Period:</b> {product.period}</li>}
+              {product.weight && <li><b>Weight:</b> {product.weight}</li>}
             </ul>
           </div>
           {/* Delivery Info */}

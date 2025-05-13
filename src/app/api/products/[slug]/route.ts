@@ -57,7 +57,7 @@ export async function PUT(req: Request, context: any) {
     return withCors(NextResponse.json({ error: 'Invalid JSON' }, { status: 400 }));
   }
   try {
-    const { categoryIds, images, title, description, price, currency, status, mainImageId, dimensions, condition, origin, period, featured } = body;
+    const { categoryIds, images, title, description, price, currency, status, mainImageId, dimension_wide, dimension_deep, dimension_high, weight, condition, origin, period, featured } = body;
     if (!title || !price) {
       return withCors(NextResponse.json({ error: 'Title and price are required' }, { status: 400 }));
     }
@@ -67,8 +67,13 @@ export async function PUT(req: Request, context: any) {
     const product = productRes.rows[0];
     // Update product fields
     await pool.query(
-      `UPDATE "Product" SET title=$1, description=$2, price=$3, currency=$4, status=$5, "mainImageId"=$6, dimensions=$7, condition=$8, origin=$9, period=$10, featured=$11, updated=NOW() WHERE id=$12`,
-      [title, description, parseFloat(price), currency, status, mainImageId, dimensions, condition, origin, period, featured, product.id]
+      `UPDATE "Product" SET title=$1, description=$2, price=$3, currency=$4, status=$5, "mainImageId"=$6, dimension_wide=$7, dimension_deep=$8, dimension_high=$9, weight=$10, condition=$11, origin=$12, period=$13, featured=$14, updated=NOW() WHERE id=$15`,
+      [title, description, parseFloat(price), currency, status, mainImageId,
+       dimension_wide !== undefined && !isNaN(Number(dimension_wide)) ? Number(dimension_wide) : null,
+       dimension_deep !== undefined && !isNaN(Number(dimension_deep)) ? Number(dimension_deep) : null,
+       dimension_high !== undefined && !isNaN(Number(dimension_high)) ? Number(dimension_high) : null,
+       weight !== undefined && !isNaN(Number(weight)) ? Number(weight) : null,
+       condition, origin, period, featured, product.id]
     );
     // Update categories if provided
     if (Array.isArray(categoryIds)) {

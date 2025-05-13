@@ -23,3 +23,7 @@
 [2024-05-12  about] Update: About page now features full brand story and philosophy, styled for elegance and clarity. 
 [2024-05-12  legal] Update: Returns, Reviews, and Privacy pages now feature unique, original Traditio Interiors content, styled for clarity and trust. 
 [2024-05-13] Documentation update: All docs updated to reflect ProductGrid refactor, SOLD badge logic, sort dropdown in showroom, and admin image management stub. See main docs/changes.log for full summary of recent changes. 
+[2025-05-14] Admin DB page tables now use accordions: each table can be expanded/collapsed for clarity and easier navigation. See main docs/changes.log for details. 
+[2025-05-14] Admin DB page: The 'Source' table is now displayed as 'Supplier' for clarity. See main docs/changes.log for details. 
+[2025-05-14] Product table: 'dimensions' field removed and replaced with 'dimension_wide', 'dimension_deep', and 'dimension_high'. All code, API, and seed logic updated. See main docs/changes.log for details. 
+[2025-05-14] Product table: Added 'weight' field and updated all code, API, admin UI, and seed logic. See main docs/changes.log for details. 

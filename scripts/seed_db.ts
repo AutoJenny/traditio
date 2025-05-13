@@ -42,8 +42,13 @@ async function main() {
     console.log('Inserting products...');
     for (const prod of products) {
       await client.query(
-        'INSERT INTO "Product" (id, slug, title, description, price, currency, status, "mainImageId", dimensions, condition, origin, period, featured, "created", "updated") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)',
-        [prod.id, prod.slug, prod.title, prod.description, prod.price, prod.currency, prod.status, prod.mainImageId, prod.dimensions, prod.condition, prod.origin, prod.period, prod.featured, prod.created, prod.updated]
+        'INSERT INTO "Product" (id, slug, title, description, price, currency, status, "mainImageId", dimension_wide, dimension_deep, dimension_high, weight, condition, origin, period, featured, "created", "updated") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18)',
+        [prod.id, prod.slug, prod.title, prod.description, prod.price, prod.currency, prod.status, prod.mainImageId,
+         prod.dimension_wide !== undefined && !isNaN(Number(prod.dimension_wide)) ? Number(prod.dimension_wide) : null,
+         prod.dimension_deep !== undefined && !isNaN(Number(prod.dimension_deep)) ? Number(prod.dimension_deep) : null,
+         prod.dimension_high !== undefined && !isNaN(Number(prod.dimension_high)) ? Number(prod.dimension_high) : null,
+         prod.weight !== undefined && !isNaN(Number(prod.weight)) ? Number(prod.weight) : null,
+         prod.condition, prod.origin, prod.period, prod.featured, prod.created, prod.updated]
       );
     }
 

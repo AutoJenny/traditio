@@ -20,9 +20,19 @@ export async function GET() {
         WHERE table_name = $1 AND table_schema = 'public'
         ORDER BY ordinal_position
       `, [table]);
+      // Fetch all rows of data
+      let rows = [];
+      try {
+        const dataRes = await pool.query(`SELECT * FROM "${table}"`);
+        rows = dataRes.rows;
+      } catch (e) {
+        // Table may be empty or have permissions issues; ignore
+        rows = [];
+      }
       tableDetails.push({
         name: table,
-        columns: columnsRes.rows.map(col => ({ name: col.column_name, type: col.data_type }))
+        columns: columnsRes.rows.map(col => ({ name: col.column_name, type: col.data_type })),
+        rows
       });
     }
     return NextResponse.json({ tables: tableDetails });

@@ -240,8 +240,20 @@ export default function AdminProductEdit() {
               <textarea name="description" value={product.description || ""} onChange={handleChange} className="w-full border rounded p-2" rows={3} />
             </div>
             <div>
-              <label className="block font-bold mb-1">Dimensions</label>
-              <input name="dimensions" value={product.dimensions || ""} onChange={handleChange} className="w-full border rounded p-2" />
+              <label className="block font-bold mb-1">Dimensions (Wide)</label>
+              <input name="dimension_wide" type="number" step="any" value={product.dimension_wide || ""} onChange={handleChange} className="w-full border rounded p-2 mb-2" />
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Dimensions (Deep)</label>
+              <input name="dimension_deep" type="number" step="any" value={product.dimension_deep || ""} onChange={handleChange} className="w-full border rounded p-2 mb-2" />
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Dimensions (High)</label>
+              <input name="dimension_high" type="number" step="any" value={product.dimension_high || ""} onChange={handleChange} className="w-full border rounded p-2" />
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Weight</label>
+              <input name="weight" type="number" step="any" value={product.weight || ""} onChange={handleChange} className="w-full border rounded p-2 mb-2" />
             </div>
             <div>
               <label className="block font-bold mb-1">Condition</label>

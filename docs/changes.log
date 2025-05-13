@@ -117,3 +117,11 @@
 [2025-05-14  admin] Add: Product Edit page now displays the product's slug at the top for visual confirmation.
 
 [2025-05-14  admin] Update: Add New Product now opens a modal for Title input, creates product with canonical slug, and redirects to edit page. Draft logic removed.
+
+[2025-05-14  admin] Update: Admin DB page tables are now displayed as accordions. Each table can be expanded/collapsed for clarity and easier navigation.
+
+[2025-05-14  admin] Update: The 'Source' table on the admin DB page is now displayed as 'Supplier' for clarity.
+
+[2025-05-14  admin] Update: Product table 'dimensions' field removed and replaced with 'dimension_wide', 'dimension_deep', and 'dimension_high'. All code, API, and seed logic updated accordingly.
+
+[2025-05-14  admin] Update: Added 'weight' field to Product table and updated all code, API, admin UI, and seed logic accordingly.

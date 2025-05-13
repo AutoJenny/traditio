@@ -56,8 +56,8 @@ export async function POST(req: Request) {
     const tempSlug = title ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'product';
     // Step 2: Insert product (without images)
     const insertProductRes = await pool.query(
-      `INSERT INTO "Product" (title, slug, description, price, currency, status, featured, dimensions, condition, origin, period, created, updated)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW(), NOW()) RETURNING *`,
+      `INSERT INTO "Product" (title, slug, description, price, currency, status, featured, dimension_wide, dimension_deep, dimension_high, weight, condition, origin, period, created, updated)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, NOW(), NOW()) RETURNING *`,
       [
         title,
         tempSlug,
@@ -66,7 +66,10 @@ export async function POST(req: Request) {
         data.currency || 'GBP',
         data.status || 'available',
         data.featured || false,
-        data.dimensions || '',
+        data.dimension_wide !== undefined && !isNaN(Number(data.dimension_wide)) ? Number(data.dimension_wide) : null,
+        data.dimension_deep !== undefined && !isNaN(Number(data.dimension_deep)) ? Number(data.dimension_deep) : null,
+        data.dimension_high !== undefined && !isNaN(Number(data.dimension_high)) ? Number(data.dimension_high) : null,
+        data.weight !== undefined && !isNaN(Number(data.weight)) ? Number(data.weight) : null,
         data.condition || '',
         data.origin || '',
         data.period || ''
@@ -106,8 +109,8 @@ export async function PUT(req: Request) {
       // Generate a unique draft slug
       const draftSlug = `draft-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
       const insertRes = await pool.query(
-        `INSERT INTO "Product" (status, slug, title, description, price, currency, featured, dimensions, condition, origin, period, created, updated)
-         VALUES ('draft', $1, 'Draft', 'Draft', 0, 'GBP', false, '', '', '', '', NOW(), NOW()) RETURNING id`,
+        `INSERT INTO "Product" (status, slug, title, description, price, currency, featured, dimension_wide, dimension_deep, dimension_high, weight, condition, origin, period, created, updated)
+         VALUES ('draft', $1, 'Draft', 'Draft', 0, 'GBP', false, '', '', '', '', '', '', '', NOW(), NOW()) RETURNING id`,
         [draftSlug]
       );
       return NextResponse.json({ id: insertRes.rows[0].id });
