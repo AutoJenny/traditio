@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { TransformWrapper, TransformComponent, useControls } from 'react-zoom-pan-pinch';
 import ProductGrid from "../../../components/ProductGrid";
+import ProductEnquiryForm from '../../../components/ProductEnquiryForm';
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -117,6 +118,7 @@ export default function ProductDetail() {
         <h2 className="font-heading text-2xl mb-6 text-espresso">Related Products</h2>
         <ProductGrid products={related} gridClassName="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" />
       </section>
+      <ProductEnquiryForm productSlug={product.slug} />
     </main>
   );
 } 

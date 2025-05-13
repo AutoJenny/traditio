@@ -1,10 +1,5 @@
 {
-  "/api/messages/route": "app/api/messages/route.js",
-  "/api/contact/route": "app/api/contact/route.js",
-  "/api/categories/route": "app/api/categories/route.js",
-  "/api/products/route": "app/api/products/route.js",
   "/api/products/[slug]/route": "app/api/products/[slug]/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
   "/admin/messages/page": "app/admin/messages/page.js",
   "/admin/messages/[id]/page": "app/admin/messages/[id]/page.js",
   "/contact/page": "app/contact/page.js",
