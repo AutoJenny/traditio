@@ -3,7 +3,7 @@ import pool from '../../../../lib/db';
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, name, phone, message, productSlug } = await req.json();
+    const { email, name, phone, message, productSlug, pageUrl } = await req.json();
     if (!email || !message || !productSlug) {
       return NextResponse.json({ error: 'Email, message, and productSlug are required.' }, { status: 400 });
     }
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     }
     const product = productRes.rows[0];
     // Create message
-    await pool.query('INSERT INTO "Message" ("customerId", content, productId, created, status) VALUES ($1, $2, $3, NOW(), $4)', [customer.id, message, product.id, 'unread']);
+    await pool.query('INSERT INTO "Message" ("customerId", content, productId, "pageUrl", created, status) VALUES ($1, $2, $3, $4, NOW(), $5)', [customer.id, message, product.id, pageUrl || null, 'unread']);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Enquiry form error:', error);

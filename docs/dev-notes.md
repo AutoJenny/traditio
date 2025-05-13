@@ -23,4 +23,6 @@
 - Never use or spawn alternate ports (e.g., 3001) for development. This causes confusion and bugs.
 - Always ensure http://localhost:3000 is the only active dev server.
 
-- Admin product list: Edit is a blue button, Delete is a trash icon button that sends a DELETE request (not a PUT) to /api/products/[slug]. 
+- Admin product list: Edit is a blue button, Delete is a trash icon button that sends a DELETE request (not a PUT) to /api/products/[slug].
+
+- Product enquiry form now includes pageUrl (page source) in the message payload, and the API stores it in the Message table. This matches the contact form and helps track the source of each enquiry. 
