@@ -15,4 +15,9 @@
 - To reseed the database, run `ts-node scripts/seed_db.ts` (or `node scripts/seed_db.js` if compiled).
 - This script will clear and repopulate the Category, Product, Image, and ProductCategory tables using the JSON files in the project root.
 
-- /api/products/[slug] now supports DELETE for soft-deleting products (status='deleted'). 
+- /api/products/[slug] now supports DELETE for soft-deleting products (status='deleted').
+
+# IMPORTANT: Always use port 3000 for dev server
+- If port 3000 is blocked, stop the process using it and restart the dev server.
+- Never use or spawn alternate ports (e.g., 3001) for development. This causes confusion and bugs.
+- Always ensure http://localhost:3000 is the only active dev server. 

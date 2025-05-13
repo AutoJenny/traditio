@@ -1,3 +1,8 @@
+# IMPORTANT: Always use port 3000 for dev server
+- If port 3000 is blocked, stop the process using it and restart the dev server.
+- Never use or spawn alternate ports (e.g., 3001) for development. This causes confusion and bugs.
+- Always ensure http://localhost:3000 is the only active dev server.
+
 # Traditio Project
 
 **NOTE (2025-05-12): Prisma is no longer used.**
