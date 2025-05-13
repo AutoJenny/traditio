@@ -106,7 +106,7 @@ function main() {
                 case 12:
                     if (!(_a < products_1.length)) return [3 /*break*/, 15];
                     prod = products_1[_a];
-                    return [4 /*yield*/, client.query('INSERT INTO "Product" (id, slug, title, description, price, currency, status, "mainImageId", dimensions, condition, origin, period, featured, "createdAt", "updatedAt") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)', [prod.id, prod.slug, prod.title, prod.description, prod.price, prod.currency, prod.status, prod.mainImageId, prod.dimensions, prod.condition, prod.origin, prod.period, prod.featured, prod.createdAt, prod.updatedAt])];
+                    return [4 /*yield*/, client.query('INSERT INTO "Product" (id, slug, title, description, price, currency, status, "mainImageId", dimensions, condition, origin, period, featured, "created", "updated") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)', [prod.id, prod.slug, prod.title, prod.description, prod.price, prod.currency, prod.status, prod.mainImageId, prod.dimensions, prod.condition, prod.origin, prod.period, prod.featured, prod.created, prod.updated])];
                 case 13:
                     _d.sent();
                     _d.label = 14;

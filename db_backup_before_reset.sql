@@ -148,8 +148,8 @@ CREATE TABLE public."Product" (
     origin text,
     period text,
     featured boolean DEFAULT false NOT NULL,
-    "createdAt" timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    "updatedAt" timestamp(3) without time zone NOT NULL
+    "created" timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    "updated" timestamp(3) without time zone NOT NULL
 );
 
 
@@ -323,7 +323,7 @@ COPY public."Image" (id, url, alt, "productId", "order") FROM stdin;
 -- Data for Name: Product; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Product" (id, slug, title, description, price, currency, status, "mainImageId", dimensions, condition, origin, period, featured, "createdAt", "updatedAt") FROM stdin;
+COPY public."Product" (id, slug, title, description, price, currency, status, "mainImageId", dimensions, condition, origin, period, featured, "created", "updated") FROM stdin;
 115	paris-bistro-stool_115	Paris Bistro Stool	Classic French bistro stool.	130	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.024
 116	velvet-sofa_116	Velvet Sofa	Plush velvet 3-seater.	1500	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.025
 118	vintage-steamer-trunk_118	Vintage Steamer Trunk	Leather and brass trunk.	390	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.025

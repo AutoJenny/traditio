@@ -18,12 +18,12 @@ export async function GET(req: Request, context: any) {
   const slug = params.slug;
   console.log('GET handler called for', slug);
   try {
-    const productRes = await pool.query('SELECT *, "createdAt" as created, "updatedAt" as updated FROM "Product" WHERE slug = $1', [slug]);
+    const productRes = await pool.query('SELECT *, "created" as created, "updated" as updated FROM "Product" WHERE slug = $1', [slug]);
     if (productRes.rows.length === 0) {
       return withCors(NextResponse.json({ error: 'Product not found' }, { status: 404 }));
     }
     const product = productRes.rows[0];
-    const { createdAt, updatedAt, ...rest } = product;
+    const { created, updated, ...rest } = product;
     const { rows: images } = await pool.query('SELECT * FROM "Image" WHERE "productId" = $1', [product.id]);
     const { rows: categories } = await pool.query(`
       SELECT pc."productId", c.*
@@ -33,8 +33,8 @@ export async function GET(req: Request, context: any) {
     `, [product.id]);
     const normalizedProduct = {
       ...rest,
-      created: product.created || product.createdAt,
-      updated: product.updated || product.updatedAt,
+      created: product.created || created,
+      updated: product.updated || updated,
       images,
       categories
     };
@@ -119,7 +119,7 @@ export async function DELETE(req: Request, context: any) {
       return withCors(NextResponse.json({ error: 'Product not found' }, { status: 404 }));
     }
     const product = productRes.rows[0];
-    // Soft delete: set status to 'deleted' and update updatedAt, regardless of completeness
+    // Soft delete: set status to 'deleted' and update updated, regardless of completeness
     await pool.query('UPDATE "Product" SET status = $1, updated = NOW() WHERE id = $2', ['deleted', product.id]);
     // Fetch updated product
     const updatedProductRes = await pool.query('SELECT * FROM "Product" WHERE id = $1', [product.id]);

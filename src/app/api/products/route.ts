@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import pool from '../../../../lib/db';
 
-export async function GET(req) {
+export async function GET(req: Request) {
   try {
     const url = req?.url ? new URL(req.url, 'http://localhost') : null;
     const showDeleted = url && url.searchParams.get('showDeleted');
     // Fetch products (optionally including deleted)
     const { rows: products } = await pool.query(`
-      SELECT *, "createdAt" as created, "updatedAt" as updated FROM "Product"${showDeleted ? '' : ' WHERE status != \'deleted\''} ORDER BY "createdAt" DESC
+      SELECT *, created as created, updated as updated FROM "Product"${showDeleted ? '' : ' WHERE status != \'deleted\''} ORDER BY created DESC
     `);
 
     // Fetch all images for these products
@@ -31,11 +31,11 @@ export async function GET(req) {
 
     // Attach images and categories to products, and normalize created/updated fields
     const productsWithDetails = products.map(prod => {
-      const { createdAt, updatedAt, ...rest } = prod;
+      const { created, updated, ...rest } = prod;
       return {
         ...rest,
-        created: prod.created || prod.createdAt,
-        updated: prod.updated || prod.updatedAt,
+        created: prod.created,
+        updated: prod.updated,
         images: images.filter(img => img.productId === prod.id),
         categories: categories.filter(cat => cat.productId === prod.id)
       };
@@ -48,7 +48,7 @@ export async function GET(req) {
   }
 }
 
-export async function POST(req) {
+export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { categoryIds, title, price, ...data } = body;
@@ -98,7 +98,7 @@ export async function POST(req) {
   }
 }
 
-export async function PUT(req) {
+export async function PUT(req: Request) {
   // This is a workaround for Next.js API routes: use PUT to /api/products?init=1
   const url = new URL(req.url, 'http://localhost');
   if (url.searchParams.get('init') === '1') {

@@ -33,8 +33,8 @@ async function createBuddha() {
         origin: 'Tibet',
         period: 'c. 11th century',
         featured: true,
-        createdAt: new Date('2025-05-11T17:54:04.39'),
-        updatedAt: new Date('2025-05-11T20:09:29.287')
+        created: new Date('2025-05-11T17:54:04.39'),
+        updated: new Date('2025-05-11T20:09:29.287')
       }
     });
     

@@ -50,8 +50,8 @@ async function loadProducts() {
         // Convert date strings to Date objects
         const data = {
           ...prod,
-          createdAt: new Date(prod.createdAt),
-          updatedAt: new Date(prod.updatedAt)
+          created: new Date(prod.created),
+          updated: new Date(prod.updated)
         };
         
         await prisma.product.create({ data });

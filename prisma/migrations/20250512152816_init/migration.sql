@@ -26,8 +26,8 @@ CREATE TABLE "Product" (
     "origin" TEXT,
     "period" TEXT,
     "featured" BOOLEAN NOT NULL DEFAULT false,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated" TIMESTAMP(3) NOT NULL,
     "reservedUntil" TIMESTAMP(3),
     "reservedById" INTEGER,
 
@@ -77,7 +77,7 @@ CREATE TABLE "Customer" (
     "email" TEXT NOT NULL,
     "phone" TEXT,
     "newsletter" BOOLEAN NOT NULL DEFAULT false,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Customer_pkey" PRIMARY KEY ("id")
 );
@@ -87,7 +87,7 @@ CREATE TABLE "Message" (
     "id" SERIAL NOT NULL,
     "customerId" INTEGER NOT NULL,
     "content" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "productSlug" TEXT,
 
     CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
