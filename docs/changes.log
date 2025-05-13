@@ -101,3 +101,5 @@
 - Updated documentation and migration logs accordingly.
 
 [2025-05-13  admin] Update: All three main links on the admin landing page now have visually appealing icons for products, messages, and customers.
+
+[2025-05-13  admin] DB schema: Renamed Product table columns 'createdAt' and 'updatedAt' to 'created' and 'updated' to match codebase. All code and data should now use these names.
