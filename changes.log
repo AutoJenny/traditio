@@ -44,4 +44,4 @@
 
 [YYYY-MM-DD] Product detail page: 'Enquire about this item' button now reveals and scrolls to the enquiry form below, instead of doing nothing. Improves UX and makes the form discoverable. 
 
-[YYYY-MM-DD] Fix: Product enquiry API now inserts into Message using productSlug and correct columns, matching the DB schema. Resolves internal server error on form submit. 
+[YYYY-MM-DD] Fix: Enquiry API now matches actual Message table schema (uses 'message', adds ipAddress/userAgent, removes productSlug). Resolves form submission error. 

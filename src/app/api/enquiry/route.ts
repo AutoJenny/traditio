@@ -24,9 +24,11 @@ export async function POST(req: NextRequest) {
     }
     const product = productRes.rows[0];
     // Create message
+    const ipAddress = req.headers.get('x-forwarded-for') || req.ip || null;
+    const userAgent = req.headers.get('user-agent') || null;
     await pool.query(
-      'INSERT INTO "Message" ("customerId", content, "productSlug", "pageUrl") VALUES ($1, $2, $3, $4)',
-      [customer.id, message, product.slug, pageUrl || null]
+      'INSERT INTO "Message" ("customerId", message, "pageUrl", "ipAddress", "userAgent") VALUES ($1, $2, $3, $4, $5)',
+      [customer.id, message, pageUrl || null, ipAddress, userAgent]
     );
     return NextResponse.json({ success: true });
   } catch (error) {
