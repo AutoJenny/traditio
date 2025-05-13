@@ -12,11 +12,15 @@
 - Admin product list: Edit button is now a small blue circle with a pen icon instead of text.
 - Show Deleted checkbox now works: API supports ?showDeleted=1 to include deleted products; frontend refetches accordingly.
 - Product enquiry API (/api/enquiry) now stores pageUrl (page source) with each message, matching the contact form. This allows admins to see which product page the enquiry was sent from.
+- All Customer and Message field names now match live DB schema (content, created, updated, etc). Admin/messages page and API now work. New DB dump created and docs updated with schema reference.
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 
 - Fixed showroom category filtering: updated frontend logic to use cat.category.slug, matching the API response structure so category filtering now works as expected.
 - Restored DnD image management UI to admin product images page: drag-and-drop reordering, alt text editing, image upload, and save functionality are now available again. See changes.log for details.
+
+## 2024-05-14
+- Fixed admin messages blank view bug: updated /api/messages and /api/messages/[id] endpoints to select created/updated (not createdAt/updatedAt), matching UI expectations and the live DB schema. Messages now display correctly when clicked in the admin panel.
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 

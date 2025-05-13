@@ -16,6 +16,17 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: update_updated_column(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.update_updated_column() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$ BEGIN NEW.updated = NOW(); RETURN NEW; END; $$;
+
+
+ALTER FUNCTION public.update_updated_column() OWNER TO postgres;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -99,10 +110,12 @@ ALTER SEQUENCE public."Category_id_seq" OWNED BY public."Category".id;
 
 CREATE TABLE public."Customer" (
     id integer NOT NULL,
-    name text NOT NULL,
+    name text,
     email text NOT NULL,
     phone text,
-    "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+    newsletter boolean DEFAULT false NOT NULL,
+    created timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -174,11 +187,12 @@ ALTER SEQUENCE public."Image_id_seq" OWNED BY public."Image".id;
 CREATE TABLE public."Message" (
     id integer NOT NULL,
     "customerId" integer NOT NULL,
-    message text NOT NULL,
+    content text NOT NULL,
+    created timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    "productSlug" text,
     "pageUrl" text,
-    "ipAddress" text,
-    "userAgent" text,
-    "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+    status text DEFAULT 'unread'::text NOT NULL
 );
 
 
@@ -225,14 +239,7 @@ CREATE TABLE public."Product" (
     period text,
     featured boolean DEFAULT false NOT NULL,
     "createdAt" timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    "updatedAt" timestamp(3) without time zone NOT NULL,
-    "acquisitionCurrency" text DEFAULT 'GBP'::text,
-    "acquisitionDate" timestamp(3) without time zone,
-    "acquisitionNotes" text,
-    "acquisitionPrice" double precision,
-    "acquisitionReceipt" text,
-    provenance text,
-    "sourceId" integer
+    "updatedAt" timestamp(3) without time zone NOT NULL
 );
 
 
@@ -502,10 +509,12 @@ COPY public."Category" (id, slug, name, description, "parentId", "order") FROM s
 -- Data for Name: Customer; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Customer" (id, name, email, phone, "createdAt") FROM stdin;
-2	nick	nickfiddes@gmail.com	12214	2025-05-12 17:55:10.021857
-1	asdf	applestore@nickfiddes.com	242	2025-05-12 17:51:03.487451
-3	asdf	nick@scotwebshops.com	3424	2025-05-12 18:03:56.56727
+COPY public."Customer" (id, name, email, phone, newsletter, created, updated) FROM stdin;
+1	asdfsdf	dify@nickfiddes.com	45345	f	2025-05-13 10:55:56.126	2025-05-13 10:57:23.126
+2	Bob	bob@bobster.com	3945ewtrt	f	2025-05-13 11:42:43.875	2025-05-13 11:42:43.875
+3	Megan	lsjf@lsjdflj.com	94359875	f	2025-05-13 11:58:30.034	2025-05-13 11:58:30.034
+4	Dan Rose	difdy@nickfiddes.com	33333333	f	2025-05-13 12:16:12.993	2025-05-13 12:16:12.993
+5	asdffa	quivr@nickfiddes.com	23423	f	2025-05-13 12:34:35.747	2025-05-13 12:35:50.821
 \.
 
 
@@ -514,19 +523,23 @@ COPY public."Customer" (id, name, email, phone, "createdAt") FROM stdin;
 --
 
 COPY public."Image" (id, url, alt, "productId", "order") FROM stdin;
-21	/images/products/draft-1747000717807-3966/draft-1747000717807-3966_1.jpeg	\N	131	0
-22	/images/products/large-terracotta-pot_104/large-terracotta-pot_104_1.jpeg	\N	104	0
-23	/images/products/louis-xvi-chair_114/louis-xvi-chair_114_1.jpeg	\N	114	0
-24	/images/products/louis-xvi-chair_114/louis-xvi-chair_114_2.jpeg	\N	114	1
-25	/images/products/marble-console-table_120/marble-console-table_120_1.jpeg	\N	120	0
-26	/images/products/marble-console-table_120/marble-console-table_120_2.jpeg	\N	120	1
-27	/images/products/rare-buddha_101/rare-buddha_101_1.jpeg	\N	101	0
-28	/images/products/rare-buddha_101/rare-buddha_101_2.jpeg	\N	101	1
-29	/images/products/rare-buddha_101/rare-buddha_101_3.jpeg	\N	101	2
-30	/images/products/rare-buddha_101/rare-buddha_101_4.jpeg	\N	101	3
-33	/images/products/butler-s-tray-table-133/butler-s-tray-table-133_1.jpeg	\N	133	0
-34	/images/products/art-nouveau-mirror_109/art-nouveau-mirror_109_2.jpeg	\N	109	0
-35	/images/products/art-nouveau-mirror_109/art-nouveau-mirror_109_1.jpeg	\N	109	1
+1	/images/products/test/IMG_1603.jpeg	Rare Buddha angle 1	\N	\N
+2	/images/products/test/IMG_1604.jpeg	Rare Buddha angle 2	\N	\N
+3	/images/products/test/IMG_1606.jpeg	Rare Buddha angle 3	\N	\N
+4	/images/products/test/IMG_1607.jpeg	Rare Buddha angle 4	\N	\N
+5	/images/products/rare-buddha_101/rare-buddha_101_1.jpeg	Rare Buddha angle 1	101	0
+7	/images/products/rare-buddha_101/rare-buddha_101_2.jpeg	Rare Buddha angle 3	101	1
+6	/images/products/rare-buddha_101/rare-buddha_101_3.jpeg	Rare Buddha angle 2	101	2
+8	/images/products/rare-buddha_101/rare-buddha_101_4.jpeg	Rare Buddha angle 4	101	3
+11	/images/products/large-terracotta-pot_104/large-terracotta-pot_104_1.jpeg	\N	104	0
+12	/images/products/louis-xvi-chair_114/louis-xvi-chair_114_1.jpeg	\N	114	0
+13	/images/products/louis-xvi-chair_114/louis-xvi-chair_114_2.jpeg	\N	114	1
+14	/images/products/marble-console-table_120/marble-console-table_120_1.jpeg	\N	120	0
+15	/images/products/marble-console-table_120/marble-console-table_120_2.jpeg	\N	120	1
+16	/images/products/draft-1747000717807-3966/draft-1747000717807-3966_1.jpeg	\N	131	0
+17	/images/products/butler-s-tray-table-133/butler-s-tray-table-133_1.jpeg	\N	133	0
+46	/images/products/art-nouveau-mirror_109/art-nouveau-mirror_109_3.jpeg	\N	109	0
+44	/images/products/art-nouveau-mirror_109/art-nouveau-mirror_109_1.jpeg	\N	109	1
 \.
 
 
@@ -534,7 +547,12 @@ COPY public."Image" (id, url, alt, "productId", "order") FROM stdin;
 -- Data for Name: Message; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Message" (id, "customerId", message, "pageUrl", "ipAddress", "userAgent", "createdAt") FROM stdin;
+COPY public."Message" (id, "customerId", content, created, updated, "productSlug", "pageUrl", status) FROM stdin;
+1	1	asdfs a	2025-05-13 11:01:30.907	2025-05-13 11:49:32.547	\N	/contact	deleted
+2	2	Hello ! This is a message. Hello ! This is a message. Hello ! This is a message. Hello ! This is a message. Hello ! This is a message. Hello ! This is a message. Hello ! This is a message. Hello ! This is a message. Hello ! This is a message. Hello ! This is a message. 	2025-05-13 11:42:43.877	2025-05-13 11:53:32.716	\N	/contact	read
+3	3	Wowser Wowser Wowser Wowser Wowser Wowser Wowser Wowser Wowser Wowser Wowser Wowser Wowser Wowser Wowser 	2025-05-13 11:58:30.035	2025-05-13 11:58:30.035	\N	/contact	unread
+4	4	asdfasdf	2025-05-13 12:16:12.994	2025-05-13 12:16:12.994	\N	/contact	unread
+5	5	asfsdaf	2025-05-13 12:35:50.83	2025-05-13 12:35:50.83	art-nouveau-mirror_109	/showroom/art-nouveau-mirror_109	unread
 \.
 
 
@@ -542,46 +560,46 @@ COPY public."Message" (id, "customerId", message, "pageUrl", "ipAddress", "userA
 -- Data for Name: Product; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Product" (id, slug, title, description, price, currency, status, "mainImageId", dimensions, condition, origin, period, featured, "createdAt", "updatedAt", "acquisitionCurrency", "acquisitionDate", "acquisitionNotes", "acquisitionPrice", "acquisitionReceipt", provenance, "sourceId") FROM stdin;
-1	draft-1747032025271-4727	Draft	Draft	0	GBP	draft	\N					f	2025-05-12 05:40:25.272	2025-05-12 05:40:25.272	GBP	\N	\N	\N	\N	\N	\N
-2	draft-1747032832772-4562	Draft	Draft	0	GBP	draft	\N					f	2025-05-12 05:53:52.774	2025-05-12 05:53:52.774	GBP	\N	\N	\N	\N	\N	\N
-115	paris-bistro-stool_115	Paris Bistro Stool	Classic French bistro stool.	130	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.024	GBP	\N	\N	\N	\N	\N	\N
-116	velvet-sofa_116	Velvet Sofa	Plush velvet 3-seater.	1500	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.025	GBP	\N	\N	\N	\N	\N	\N
-118	vintage-steamer-trunk_118	Vintage Steamer Trunk	Leather and brass trunk.	390	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.025	GBP	\N	\N	\N	\N	\N	\N
-119	carved-bookcase_119	Carved Bookcase	Tall carved bookcase.	800	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.026	GBP	\N	\N	\N	\N	\N	\N
-110	trumeau-mirror_110	Trumeau Mirror	Antique French trumeau.	480	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.016	GBP	\N	\N	\N	\N	\N	\N
-111	persian-rug_111	Persian Rug	Hand-knotted wool rug.	900	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.017	GBP	\N	\N	\N	\N	\N	\N
-112	kilim-runner_112	Kilim Runner	Colorful kilim runner.	320	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.018	GBP	\N	\N	\N	\N	\N	\N
-113	aubusson-tapestry_113	Aubusson Tapestry	French tapestry panel.	1100	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.019	GBP	\N	\N	\N	\N	\N	\N
-99	bronze-art-deco-statue_99	Bronze Art Deco Statue	Elegant 1920s bronze statue.	340	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.019	GBP	\N	\N	\N	\N	\N	\N
-100	gilded-frame_100	Gilded Frame	Ornate 19th-century frame.	95	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.02	GBP	\N	\N	\N	\N	\N	\N
-102	stone-birdbath_102	Stone Birdbath	Classic garden birdbath.	210	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.021	GBP	\N	\N	\N	\N	\N	\N
-103	iron-garden-bench_103	Iron Garden Bench	Victorian-style bench.	450	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.022	GBP	\N	\N	\N	\N	\N	\N
-106	brass-table-lamp_106	Brass Table Lamp	Classic brass lamp.	180	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.023	GBP	\N	\N	\N	\N	\N	\N
-107	industrial-wall-sconce_107	Industrial Wall Sconce	Vintage industrial sconce.	75	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.023	GBP	\N	\N	\N	\N	\N	\N
-122	round-side-table_122	Round Side Table	Small round side table.	220	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.027	GBP	\N	\N	\N	\N	\N	\N
-124	cast-iron-garden-urn_124	Cast Iron Garden Urn	Heavy cast iron urn.	320	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.029	GBP	\N	\N	\N	\N	\N	\N
-125	opaline-glass-lamp_125	Opaline Glass Lamp	French opaline lamp.	260	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.029	GBP	\N	\N	\N	\N	\N	\N
-126	triptych-mirror_126	Triptych Mirror	Three-panel mirror.	410	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.03	GBP	\N	\N	\N	\N	\N	\N
-127	moroccan-rug_127	Moroccan Rug	Handwoven Moroccan rug.	780	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.03	GBP	\N	\N	\N	\N	\N	\N
-128	leather-club-chair_128	Leather Club Chair	Classic leather club chair.	950	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.031	GBP	\N	\N	\N	\N	\N	\N
-129	wine-cabinet_129	Wine Cabinet	French wine storage.	1200	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.032	GBP	\N	\N	\N	\N	\N	\N
-130	nesting-tables_130	Nesting Tables	Set of three tables.	330	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:26:00.032	GBP	\N	\N	\N	\N	\N	\N
-108	ornate-gold-mirror_108	Ornate Gold Mirror	Large gilded mirror.	350	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 19:13:25.375	GBP	\N	\N	\N	\N	\N	\N
-98	vintage-french-vase_98	Vintage French Vase	A beautiful hand-painted vase.	120	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 19:13:32.828	GBP	\N	\N	\N	\N	\N	\N
-105	crystal-chandelier_105	Crystal Chandelier	Sparkling French chandelier.	1200	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 16:54:04.39	2025-05-11 18:38:56.372	GBP	\N	\N	\N	\N	\N	\N
-123	bamboo-plant-stand_123	Bamboo Plant Stand	Art Deco plant stand.	140	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 16:54:04.39	2025-05-11 20:08:14.856	GBP	\N	\N	\N	\N	\N	\N
-121	farmhouse-dining-table_121	Farmhouse Dining Table	Rustic oak table.	1800	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 16:54:04.39	2025-05-11 20:08:19.378	GBP	\N	\N	\N	\N	\N	\N
-117	french-armoire_117	French Armoire	19th-century oak armoire.	2100	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 16:54:04.39	2025-05-11 20:08:27.041	GBP	\N	\N	\N	\N	\N	\N
-132	draft-1747001086450-4247	Draft	Draft	0	GBP	draft	\N					f	2025-05-11 21:04:46.451	2025-05-11 21:04:46.451	GBP	\N	\N	\N	\N	\N	\N
-134	draft-1747002719068-5025	Draft	Draft	0	GBP	draft	\N					f	2025-05-11 21:31:59.07	2025-05-11 21:31:59.07	GBP	\N	\N	\N	\N	\N	\N
-131	draft-1747000717807-3966	Butler's Tray Table 1	Draft	250	GBP	deleted	21					f	2025-05-11 20:58:37.809	2025-05-12 07:38:44.385	GBP	\N	\N	\N	\N	\N	\N
-104	large-terracotta-pot_104	Large Terracotta Pot	Handmade terracotta.	60	GBP	available	22	\N	\N	\N	\N	t	2025-05-11 16:54:04.39	2025-05-12 07:38:44.392	GBP	\N	\N	\N	\N	\N	\N
-114	louis-xvi-chair_114	Louis XVI Chair	Carved wood, upholstered.	600	GBP	available	23	\N	\N	\N	\N	t	2025-05-11 16:54:04.39	2025-05-12 07:38:44.396	GBP	\N	\N	\N	\N	\N	\N
-120	marble-console-table_120	Marble Console Table	Louis XV style console.	950	GBP	available	25	\N	\N	\N	\N	t	2025-05-11 16:54:04.39	2025-05-12 07:38:44.399	GBP	\N	\N	\N	\N	\N	\N
-101	rare-buddha_101	Rare Buddha	A unique and rare Buddha statue for testing porpoises.	15500	GBP	sold	27	6" high	As new	Tibet	c. 11th century	t	2025-05-11 16:54:04.39	2025-05-12 07:39:24.648	GBP	\N	\N	\N	\N	\N	\N
-109	art-nouveau-mirror_109	Art Nouveau Mirror	Curved gold frame. Kinda groovy.	202000	GBP	sold	\N	\N	fine	\N	\N	t	2025-05-11 16:54:04.39	2025-05-12 20:21:24.008	GBP	\N	\N	\N	\N	\N	\N
-133	butler-s-tray-table-133	Butler's Tray Table	Draft	250	GBP	draft	\N					t	2025-05-11 21:07:06.142	2025-05-12 19:11:29.145	GBP	\N	\N	\N	\N	\N	\N
+COPY public."Product" (id, slug, title, description, price, currency, status, "mainImageId", dimensions, condition, origin, period, featured, "createdAt", "updatedAt") FROM stdin;
+115	paris-bistro-stool_115	Paris Bistro Stool	Classic French bistro stool.	130	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.024
+116	velvet-sofa_116	Velvet Sofa	Plush velvet 3-seater.	1500	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.025
+118	vintage-steamer-trunk_118	Vintage Steamer Trunk	Leather and brass trunk.	390	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.025
+119	carved-bookcase_119	Carved Bookcase	Tall carved bookcase.	800	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.026
+110	trumeau-mirror_110	Trumeau Mirror	Antique French trumeau.	480	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.016
+111	persian-rug_111	Persian Rug	Hand-knotted wool rug.	900	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.017
+112	kilim-runner_112	Kilim Runner	Colorful kilim runner.	320	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.018
+113	aubusson-tapestry_113	Aubusson Tapestry	French tapestry panel.	1100	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.019
+99	bronze-art-deco-statue_99	Bronze Art Deco Statue	Elegant 1920s bronze statue.	340	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.019
+100	gilded-frame_100	Gilded Frame	Ornate 19th-century frame.	95	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.02
+102	stone-birdbath_102	Stone Birdbath	Classic garden birdbath.	210	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.021
+103	iron-garden-bench_103	Iron Garden Bench	Victorian-style bench.	450	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.022
+107	industrial-wall-sconce_107	Industrial Wall Sconce	Vintage industrial sconce.	75	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.023
+122	round-side-table_122	Round Side Table	Small round side table.	220	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.027
+124	cast-iron-garden-urn_124	Cast Iron Garden Urn	Heavy cast iron urn.	320	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.029
+125	opaline-glass-lamp_125	Opaline Glass Lamp	French opaline lamp.	260	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.029
+126	triptych-mirror_126	Triptych Mirror	Three-panel mirror.	410	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.03
+127	moroccan-rug_127	Moroccan Rug	Handwoven Moroccan rug.	780	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.03
+128	leather-club-chair_128	Leather Club Chair	Classic leather club chair.	950	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.031
+129	wine-cabinet_129	Wine Cabinet	French wine storage.	1200	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.032
+130	nesting-tables_130	Nesting Tables	Set of three tables.	330	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:26:00.032
+108	ornate-gold-mirror_108	Ornate Gold Mirror	Large gilded mirror.	350	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 20:13:25.375
+98	vintage-french-vase_98	Vintage French Vase	A beautiful hand-painted vase.	120	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 20:13:32.828
+105	crystal-chandelier_105	Crystal Chandelier	Sparkling French chandelier.	1200	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-11 19:38:56.372
+104	large-terracotta-pot_104	Large Terracotta Pot	Handmade terracotta.	60	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 20:22:00.613
+101	rare-buddha_101	Rare Buddha	A unique and rare Buddha statue for testing porpoises.	15500	GBP	sold	\N	6" high	As new	Tibet	c. 11th century	t	2025-05-11 17:54:04.39	2025-05-11 20:09:29.287
+131	draft-1747000717807-3966	Butler's Tray Table 1	Draft	250	GBP	deleted	\N					f	2025-05-11 21:58:37.809	2025-05-11 22:14:08.31
+133	butler-s-tray-table-133	Butler's Tray Table	Draft	250	GBP	draft	\N					t	2025-05-11 22:07:06.142	2025-05-11 22:14:31.064
+114	louis-xvi-chair_114	Louis XVI Chair	Carved wood, upholstered.	600	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 20:23:30.257
+121	farmhouse-dining-table_121	Farmhouse Dining Table	Rustic oak table.	1800	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 21:08:19.378
+117	french-armoire_117	French Armoire	19th-century oak armoire.	2100	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 21:08:27.041
+120	marble-console-table_120	Marble Console Table	Louis XV style console.	950	GBP	available	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-11 21:14:56.955
+2	draft-1747032832772-4562	Draft	Draft	0	GBP	deleted	\N					f	2025-05-12 06:53:52.774	2025-05-13 10:25:12.42
+123	bamboo-plant-stand_123	Bamboo Plant Stand	Art Deco plant stand.	140	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-12 23:11:09.522
+132	draft-1747001086450-4247	Draft	Draft	0	GBP	deleted	\N					f	2025-05-11 22:04:46.451	2025-05-13 10:34:10.195
+134	draft-1747002719068-5025	Draft	Draft	0	GBP	deleted	\N					f	2025-05-11 22:31:59.07	2025-05-13 10:34:19.495
+1	draft-1747032025271-4727	Draft	Draft	0	GBP	deleted	\N					f	2025-05-12 06:40:25.272	2025-05-13 10:35:53.524
+106	brass-table-lamp_106	Brass Table Lamp	Classic brass lamp.	180	GBP	available	\N	\N	\N	\N	\N	f	2025-05-11 17:54:04.39	2025-05-13 10:38:32.947
+109	art-nouveau-mirror_109	Art Nouveau Mirror	Curved gold frame.	202000	GBP	sold	\N	\N	\N	\N	\N	t	2025-05-11 17:54:04.39	2025-05-12 23:32:35.948
 \.
 
 
@@ -590,10 +608,35 @@ COPY public."Product" (id, slug, title, description, price, currency, status, "m
 --
 
 COPY public."ProductCategory" ("productId", "categoryId") FROM stdin;
-133	32
+99	25
+100	25
+102	26
+103	26
+124	26
+107	27
+125	27
+110	28
+126	28
+111	29
+112	29
+113	29
+127	29
+115	30
+116	30
+128	30
+118	31
+119	31
+129	31
+122	32
+130	32
+101	25
+101	26
+104	26
+114	30
 109	25
 109	27
 109	28
+106	27
 \.
 
 
@@ -634,6 +677,8 @@ COPY public."Tag" (id, name) FROM stdin;
 --
 
 COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count) FROM stdin;
+95eeab03-71f7-4cbf-92fc-829684de16ff	b316510062254293bda47c17d8f3a033190d66acd15db85b6273d9ec6949fbce	2025-05-12 22:05:42.868758+01	20250512152816_init	\N	\N	2025-05-12 22:05:42.853019+01	1
+12f0f684-acd1-4cce-b3b4-f9dc808612a3	1fea95eed9aa692f339fbfb286c4a3d6797dad370669c2cf6d6867016c42076d	2025-05-12 22:05:42.871436+01	20250512153614_bob	\N	\N	2025-05-12 22:05:42.869056+01	1
 2db28263-f8d6-4521-90b1-f36940bb8f4a	d1f9b607dcf117f89d089740a165d6e6baf0dda4a8c2eb2f8ecbe662d83d6b76	2025-05-12 07:31:36.717925+01	20250511145459_init	\N	\N	2025-05-12 07:31:36.708445+01	1
 83952cb3-0969-4d45-b8ba-84000b20b068	ba97a7530c94287c4889a96bac7047404febfeea98b21eca7ea1b2b9c34fe5cf	2025-05-12 07:31:36.720749+01	20250511171929_product_multicategory	\N	\N	2025-05-12 07:31:36.718219+01	1
 \.
@@ -657,21 +702,21 @@ SELECT pg_catalog.setval('public."Category_id_seq"', 32, true);
 -- Name: Customer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Customer_id_seq"', 3, true);
+SELECT pg_catalog.setval('public."Customer_id_seq"', 5, true);
 
 
 --
 -- Name: Image_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Image_id_seq"', 35, true);
+SELECT pg_catalog.setval('public."Image_id_seq"', 46, true);
 
 
 --
 -- Name: Message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Message_id_seq"', 1, false);
+SELECT pg_catalog.setval('public."Message_id_seq"', 5, true);
 
 
 --
@@ -716,6 +761,14 @@ ALTER TABLE ONLY public."Badge"
 
 ALTER TABLE ONLY public."Category"
     ADD CONSTRAINT "Category_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Customer Customer_email_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Customer"
+    ADD CONSTRAINT "Customer_email_unique" UNIQUE (email);
 
 
 --
@@ -806,6 +859,27 @@ CREATE UNIQUE INDEX "Category_slug_key" ON public."Category" USING btree (slug);
 
 
 --
+-- Name: Customer_createdAt_idx; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Customer_createdAt_idx" ON public."Customer" USING btree (created);
+
+
+--
+-- Name: Customer_email_idx; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Customer_email_idx" ON public."Customer" USING btree (email);
+
+
+--
+-- Name: Message_createdAt_idx; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "Message_createdAt_idx" ON public."Message" USING btree (created);
+
+
+--
 -- Name: Product_mainImageId_key; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -831,6 +905,20 @@ CREATE UNIQUE INDEX "Source_name_key" ON public."Source" USING btree (name);
 --
 
 CREATE UNIQUE INDEX "Tag_name_key" ON public."Tag" USING btree (name);
+
+
+--
+-- Name: Customer customer_updated; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER customer_updated BEFORE UPDATE ON public."Customer" FOR EACH ROW EXECUTE FUNCTION public.update_updated_column();
+
+
+--
+-- Name: Message message_updated; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER message_updated BEFORE UPDATE ON public."Message" FOR EACH ROW EXECUTE FUNCTION public.update_updated_column();
 
 
 --
@@ -911,14 +999,6 @@ ALTER TABLE ONLY public."ProductTag"
 
 ALTER TABLE ONLY public."Product"
     ADD CONSTRAINT "Product_mainImageId_fkey" FOREIGN KEY ("mainImageId") REFERENCES public."Image"(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
-
---
--- Name: Product Product_sourceId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public."Product"
-    ADD CONSTRAINT "Product_sourceId_fkey" FOREIGN KEY ("sourceId") REFERENCES public."Source"(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --

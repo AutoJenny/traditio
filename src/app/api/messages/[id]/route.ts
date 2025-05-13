@@ -5,7 +5,7 @@ export async function GET(req, { params }) {
   try {
     const id = Number(params.id);
     const { rows } = await pool.query(`
-      SELECT m.id, m."customerId", m.message, m."pageUrl", m."ipAddress", m."userAgent", m."createdAt", c.name as customer_name, c.email as customer_email
+      SELECT m.id, m."customerId", m."content", m."pageUrl", m."created" as created, m."updated" as updated, m."productSlug", m."status", c.name as customer_name, c.email as customer_email
       FROM "Message" m
       JOIN "Customer" c ON m."customerId" = c.id
       WHERE m.id = $1

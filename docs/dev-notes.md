@@ -25,4 +25,25 @@
 
 - Admin product list: Edit is a blue button, Delete is a trash icon button that sends a DELETE request (not a PUT) to /api/products/[slug].
 
-- Product enquiry form now includes pageUrl (page source) in the message payload, and the API stores it in the Message table. This matches the contact form and helps track the source of each enquiry. 
+- Product enquiry form now includes pageUrl (page source) in the message payload, and the API stores it in the Message table. This matches the contact form and helps track the source of each enquiry.
+
+# Database Schema (as of latest dump)
+
+## Customer
+- id (integer, PK)
+- name (text)
+- email (text, unique)
+- phone (text)
+- newsletter (boolean, default false)
+- created (timestamp, default NOW())
+- updated (timestamp, default NOW())
+
+## Message
+- id (integer, PK)
+- customerId (integer, FK to Customer)
+- content (text)
+- created (timestamp, default NOW())
+- updated (timestamp, default NOW())
+- productSlug (text, nullable)
+- pageUrl (text, nullable)
+- status (text, default 'unread') 
