@@ -114,13 +114,13 @@ export default function AdminProductList() {
                       <Link href={`/admin/products/${prod.slug}/images`}>
                         <img src={prod.images[0].url} alt={prod.title} className="w-16 h-16 object-cover rounded hover:ring-2 hover:ring-sand-500 transition" />
                         {prod.status === 'sold' && (
-                          <span className="absolute top-1 right-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity inline-block bg-red-400 text-white text-xs rounded px-2 py-0.5 uppercase font-bold">SOLD</span>
+                          <span className="absolute top-1 right-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity inline-block bg-gray-700 text-white text-xs rounded px-2 py-0.5 uppercase font-bold">SOLD</span>
                         )}
                       </Link>
                     ) : (
                       <Link href={`/admin/products/${prod.slug}/images`} className="text-2xl">🪑
                         {prod.status === 'sold' && (
-                          <span className="absolute top-1 right-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity inline-block bg-red-400 text-white text-xs rounded px-2 py-0.5 uppercase font-bold">SOLD</span>
+                          <span className="absolute top-1 right-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity inline-block bg-gray-700 text-white text-xs rounded px-2 py-0.5 uppercase font-bold">SOLD</span>
                         )}
                       </Link>
                     )}
@@ -138,18 +138,16 @@ export default function AdminProductList() {
                       value={prod.featured ? 'y' : 'n'}
                       onChange={async (e) => {
                         const newVal = e.target.value === 'y';
-                        // Optimistically update UI
                         setProducts((prev) => prev.map((p) => p.id === prod.id ? { ...p, featured: newVal } : p));
-                        // Update backend
                         await fetch(`/api/products/${prod.slug}`, {
                           method: 'PUT',
                           headers: { 'Content-Type': 'application/json' },
                           body: JSON.stringify({ ...prod, featured: newVal }),
                         });
                       }}
-                      className="border rounded px-2 py-1"
+                      className={`border rounded px-2 py-1 ${prod.featured ? 'bg-green-200 text-espresso font-bold' : ''}`}
                     >
-                      <option value="y">y</option>
+                      <option value="y">{prod.featured ? 'yes' : 'n'}</option>
                       <option value="n">n</option>
                     </select>
                   </td>
