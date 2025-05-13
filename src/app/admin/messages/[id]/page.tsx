@@ -42,9 +42,9 @@ function timeAgo(dateString: string) {
   return `${Math.floor(diff / 31536000)} year${Math.floor(diff / 31536000) === 1 ? '' : 's'} ago`;
 }
 
-function formatGBP(pence: number) {
-  if (typeof pence !== 'number' || isNaN(pence)) return '';
-  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(pence / 100);
+function formatGBP(pounds: number) {
+  if (typeof pounds !== 'number' || isNaN(pounds)) return '';
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(pounds);
 }
 
 export default function AdminMessageDetail() {
