@@ -42,6 +42,11 @@ function timeAgo(dateString: string) {
   return `${Math.floor(diff / 31536000)} year${Math.floor(diff / 31536000) === 1 ? '' : 's'} ago`;
 }
 
+function formatGBP(pence: number) {
+  if (typeof pence !== 'number' || isNaN(pence)) return '';
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(pence / 100);
+}
+
 export default function AdminMessageDetail() {
   const { id } = useParams();
   const router = useRouter();
@@ -137,7 +142,7 @@ export default function AdminMessageDetail() {
                   className="w-56 h-56 object-cover rounded mb-2 border border-sand-300 shadow"
                 />
               </a>
-              <div className="text-brass-700 font-semibold text-xl mb-1">{product.price ? `£${(product.price / 100).toLocaleString()}` : ""}</div>
+              <div className="text-brass-700 font-semibold text-xl mb-1">{product.price ? formatGBP(product.price) : ""}</div>
               <div className="text-sand-500 text-sm">Added: {product.created ? timeAgo(product.created) : ""}</div>
             </div>
           )}
