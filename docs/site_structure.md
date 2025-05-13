@@ -104,6 +104,7 @@ traditio/
     - **Images**: Image summary and link to image management
     - **Sale**: (Planned) Sale details and workflow
   - Tab switching is handled in React state; each tab displays its relevant form or summary.
+- `/admin/db` → Admin Database page: lists all tables and fields in the database using a new /api/db endpoint. Linked from the admin dashboard as the fourth main link.
 
 ---
 

@@ -49,4 +49,5 @@
 - status (text, default 'unread')
 
 - [2024-05-13] Hardened product image update flow: backend now rejects updates that would remove all images, and frontend warns/prevents saving if no images are present. This prevents accidental image loss during product updates.
-- [2024-05-13] Improved admin product image upload: after uploading an image, the page now auto-saves the image order/state to the backend, making the flow foolproof and preventing accidental image loss or state mismatch. 
+- [2024-05-13] Improved admin product image upload: after uploading an image, the page now auto-saves the image order/state to the backend, making the flow foolproof and preventing accidental image loss or state mismatch.
+- [2024-05-13] Added admin Database page: a fourth link on the admin dashboard now leads to a page that lists all tables and fields in the database, using a new /api/db endpoint. 

@@ -17,6 +17,7 @@
 - Admin message detail UI: Product panel is now aligned right with title, large image, price, and 'Added: <date>' in 'ago' format. Message content is now displayed on a white background for clarity.
 - Hardened product image update flow: backend now rejects updates that would remove all images, and frontend warns/prevents saving if no images are present. See changes.log for details.
 - Improved admin product image upload: after uploading an image, the page now auto-saves the image order/state to the backend, making the flow foolproof and preventing accidental image loss or state mismatch. See changes.log for details.
+- Added admin Database page: a fourth link on the admin dashboard now leads to a page that lists all tables and fields in the database, using a new /api/db endpoint. See changes.log for details.
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 
