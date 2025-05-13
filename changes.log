@@ -37,3 +37,5 @@
 [YYYY-MM-DD] Show Deleted checkbox now works: API supports ?showDeleted=1 to include deleted products; frontend refetches accordingly. 
 
 [YYYY-MM-DD] Commented out Sign In and basket icon links in the header (layout.tsx), not deleted. 
+
+[YYYY-MM-DD] Contact API now stores customers and messages in the new tables, linking messages to customers, and uses the correct schema fields. 

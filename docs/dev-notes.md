@@ -2,6 +2,7 @@
 - All database access, migrations, and seeding are now handled via raw SQL and the `pg` package.
 - The Prisma schema, client, and migration tools have been fully removed from the project.
 - All future DB changes should be made by editing migration SQL files directly and updating scripts as needed.
+- Migration SQL files are stored in prisma/migrations/ for convenience, but are applied manually using psql (Prisma tooling is not used).
 
 ## Migration Policy (2025-05-12)
 - All old/corrupt Prisma migration scripts have been deleted.
