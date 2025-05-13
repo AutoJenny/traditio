@@ -46,4 +46,6 @@
 - updated (timestamp, default NOW())
 - productSlug (text, nullable)
 - pageUrl (text, nullable)
-- status (text, default 'unread') 
+- status (text, default 'unread')
+
+- [2024-05-13] Hardened product image update flow: backend now rejects updates that would remove all images, and frontend warns/prevents saving if no images are present. This prevents accidental image loss during product updates. 

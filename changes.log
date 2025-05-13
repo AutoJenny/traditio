@@ -45,3 +45,5 @@
 [YYYY-MM-DD] Product detail page: 'Enquire about this item' button now reveals and scrolls to the enquiry form below, instead of doing nothing. Improves UX and makes the form discoverable. 
 
 [YYYY-MM-DD] Fix: Enquiry API now matches actual Message table schema (uses 'message', adds ipAddress/userAgent, removes productSlug). Resolves form submission error. 
+
+[2024-05-13] Hardened product image update flow: backend now rejects updates that would remove all images, and frontend warns/prevents saving if no images are present. Both changes prevent accidental image loss. 

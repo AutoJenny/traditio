@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 
 export default function AdminProductList() {
@@ -9,6 +9,9 @@ export default function AdminProductList() {
   const [showDeleted, setShowDeleted] = useState(false);
   const [categories, setCategories] = useState<any[]>([]);
   const [categoryFilter, setCategoryFilter] = useState('ALL');
+  const [showModal, setShowModal] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -54,31 +57,65 @@ export default function AdminProductList() {
           </label>
         </div>
         <button
-          onClick={async () => {
-            setCreating(true);
-            const res = await fetch('/api/products?init=1', { method: 'PUT' });
-            const data = await res.json();
-            if (data.id) {
-              // Fetch the product to get its slug
-              const prodRes = await fetch(`/api/products`);
-              const allProducts = await prodRes.json();
-              const newProduct = allProducts.find((p: any) => p.id === data.id);
-              if (newProduct && newProduct.slug) {
-                window.location.href = `/admin/products/${newProduct.slug}`;
-              } else {
-                window.location.href = `/admin/products/${data.id}`;
-              }
-            } else {
-              alert('Failed to create new product');
-            }
-            setCreating(false);
+          onClick={() => {
+            setShowModal(true);
+            setTimeout(() => inputRef.current?.focus(), 100);
           }}
           className="bg-brass text-espresso font-bold rounded px-6 py-2 border-2 border-brass shadow hover:bg-espresso hover:text-ivory transition"
-          disabled={creating}
         >
-          {creating ? 'Creating...' : 'Add New Product'}
+          Add New Product
         </button>
       </div>
+      {/* Modal for new product creation */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+            <button className="absolute top-2 right-2 text-2xl text-sand-500 hover:text-red-600" onClick={() => setShowModal(false)}>&times;</button>
+            <h2 className="text-xl font-bold mb-4 text-espresso">Create New Product</h2>
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                if (!newTitle.trim()) return;
+                setCreating(true);
+                const res = await fetch("/api/products", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ title: newTitle.trim() }),
+                });
+                const data = await res.json();
+                setCreating(false);
+                setShowModal(false);
+                setNewTitle("");
+                if (data.product && data.product.slug) {
+                  window.location.href = `/admin/products/${data.product.slug}`;
+                } else {
+                  alert("Failed to create product");
+                }
+              }}
+              className="space-y-4"
+            >
+              <div>
+                <label className="block font-bold mb-1">Title <span className="text-red-500">*</span></label>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={newTitle}
+                  onChange={e => setNewTitle(e.target.value)}
+                  className="w-full border rounded p-2"
+                  required
+                  minLength={2}
+                  maxLength={100}
+                  placeholder="Product title"
+                />
+              </div>
+              <div className="flex gap-4 mt-6">
+                <button type="submit" disabled={creating || !newTitle.trim()} className="bg-brass text-espresso font-bold rounded px-6 py-2 border-2 border-brass shadow hover:bg-espresso hover:text-ivory transition">{creating ? "Creating..." : "Create"}</button>
+                <button type="button" onClick={() => setShowModal(false)} className="bg-sand text-espresso rounded px-6 py-2 border-2 border-sand shadow hover:bg-espresso hover:text-ivory transition">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
       {loading ? (
         <div className="text-center py-16">Loading...</div>
       ) : (

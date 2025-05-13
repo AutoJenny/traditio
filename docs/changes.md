@@ -15,6 +15,7 @@
 - All Customer and Message field names now match live DB schema (content, created, updated, etc). Admin/messages page and API now work. New DB dump created and docs updated with schema reference.
 - Admin messages UI: Page column now shows only the last part of the URL (e.g., art-nouveau-mirror_109). Product column displays the main product image as a thumbnail if available, otherwise falls back to the slug text.
 - Admin message detail UI: Product panel is now aligned right with title, large image, price, and 'Added: <date>' in 'ago' format. Message content is now displayed on a white background for clarity.
+- Hardened product image update flow: backend now rejects updates that would remove all images, and frontend warns/prevents saving if no images are present. See changes.log for details.
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 

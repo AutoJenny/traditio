@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 export default function AdminProductEdit() {
@@ -15,6 +15,9 @@ export default function AdminProductEdit() {
   const [activeTab, setActiveTab] = useState('Description');
   // Accept both id and slug for routing
   const productIdOrSlug = slug;
+  const [showImageWarning, setShowImageWarning] = useState(false);
+  const [pendingSave, setPendingSave] = useState<any>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -76,16 +79,32 @@ export default function AdminProductEdit() {
     }
   }
 
+  async function fetchLatestImages() {
+    const res = await fetch(`/api/products/${slug}`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.product.images || [];
+  }
+
   async function handleSave(e: any) {
     e.preventDefault();
     setSaving(true);
     setError("");
+    // Always fetch latest images before saving
+    const latestImages = await fetchLatestImages();
+    const imagesToSave = (product.images && product.images.length > 0) ? product.images : latestImages;
+    if (!imagesToSave || imagesToSave.length === 0) {
+      setShowImageWarning(true);
+      setPendingSave(() => () => handleSave(e));
+      setSaving(false);
+      return;
+    }
     try {
       // Sanitize payload
       const cleanProduct = {
         ...product,
         categoryIds: (product.categoryIds || []).filter((id: any) => typeof id === 'number' && id > 0),
-        images: (product.images || []).map((img: any) => ({
+        images: imagesToSave.map((img: any) => ({
           url: img.url,
           ...(img.alt !== undefined ? { alt: img.alt } : {}),
           ...(typeof img.order === 'number' ? { order: img.order } : {}),
@@ -170,7 +189,7 @@ export default function AdminProductEdit() {
       )}
       {activeTab === 'Description' && (
         <>
-          <form onSubmit={handleSave} className="space-y-4">
+          <form onSubmit={handleSave} ref={formRef} className="space-y-4">
             {error && <div className="mb-4 text-red-600">{error}</div>}
             <div>
               <label className="block font-bold mb-1">Title</label>
@@ -253,6 +272,18 @@ export default function AdminProductEdit() {
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /></svg>
             </button>
           </div>
+          {/* Image removal warning modal */}
+          {showImageWarning && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+              <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+                <h2 className="text-xl font-bold mb-4 text-espresso">No Images Attached</h2>
+                <p className="mb-4 text-sand-700">Saving now will remove all images from this product. This is not allowed. Please add at least one image before saving.</p>
+                <div className="flex gap-4 mt-6">
+                  <button type="button" onClick={() => setShowImageWarning(false)} className="bg-sand text-espresso rounded px-6 py-2 border-2 border-sand shadow hover:bg-espresso hover:text-ivory transition">OK</button>
+                </div>
+              </div>
+            </div>
+          )}
         </>
       )}
       {activeTab === 'Images' && (

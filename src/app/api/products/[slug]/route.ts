@@ -82,6 +82,12 @@ export async function PUT(req: Request, context: any) {
     }
     // Update images if provided
     if (Array.isArray(images)) {
+      if (images.length === 0) {
+        console.warn(`Attempted to update product ${product.id} with empty images array. Update rejected.`);
+        return withCors(NextResponse.json({ error: 'Cannot remove all images. At least one image is required.' }, { status: 400 }));
+      }
+      // Log deletion for audit
+      console.log(`Deleting all images for product ${product.id} before re-inserting new images.`);
       await pool.query('DELETE FROM "Image" WHERE "productId" = $1', [product.id]);
       for (const img of images) {
         await pool.query(
