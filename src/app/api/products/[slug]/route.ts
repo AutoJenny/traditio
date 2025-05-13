@@ -14,7 +14,7 @@ export async function OPTIONS() {
 }
 
 export async function GET(req: Request, context: any) {
-  const { params } = await context;
+  const params = await context.params;
   const slug = params.slug;
   console.log('GET handler called for', slug);
   try {
@@ -46,7 +46,7 @@ export async function GET(req: Request, context: any) {
 }
 
 export async function PUT(req: Request, context: any) {
-  const { params } = await context;
+  const params = await context.params;
   const slug = params.slug;
   console.log('PUT handler called for', slug);
   let body;
@@ -108,7 +108,7 @@ export async function PUT(req: Request, context: any) {
 }
 
 export async function DELETE(req: Request, context: any) {
-  const { params } = await context;
+  const params = await context.params;
   const slug = params.slug;
   console.log('DELETE handler called for', slug);
   try {

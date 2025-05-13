@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import pool from '../../../../../lib/db';
 
-export async function GET(req, { params }) {
+export async function GET(req, context) {
   try {
+    const params = await context.params;
     const id = Number(params.id);
     const { rows } = await pool.query(`
       SELECT m.id, m."customerId", m."content", m."pageUrl", m."created" as created, m."updated" as updated, m."productSlug", m."status", c.name as customer_name, c.email as customer_email
@@ -17,8 +18,9 @@ export async function GET(req, { params }) {
   }
 }
 
-export async function PUT(req, { params }) {
+export async function PUT(req, context) {
   try {
+    const params = await context.params;
     const id = Number(params.id);
     const { status } = await req.json();
     await pool.query('UPDATE "Message" SET status = $1 WHERE id = $2', [status, id]);
