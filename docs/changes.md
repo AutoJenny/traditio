@@ -8,6 +8,7 @@
 - The project is now ready for safe, reliable future migrations.
 - Manually created Customer and Message tables in the database to support the contact form, due to Prisma migration drift. This is a temporary workaround until migration history is rebuilt.
 - Migrated Product-Category relationship to pure many-to-many: dropped categoryId from Product, all relationships now via ProductCategory join table, and updated seed script accordingly. See changes.log for details.
+- Added DELETE handler to /api/products/[slug] for soft-deleting products (sets status='deleted').
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 

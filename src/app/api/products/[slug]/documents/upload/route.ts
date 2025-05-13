@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '../../../../../../../lib/prisma';
+import pool from '../../../../../../../lib/db';
 import fs from 'fs';
 import path from 'path';
 
@@ -8,8 +8,9 @@ const PUBLIC_DIR = path.join(process.cwd(), 'public/documents/products');
 export async function POST(req, context) {
   const { slug } = context.params;
   // Find product
-  const product = await prisma.product.findUnique({ where: { slug } });
-  if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 });
+  const productRes = await pool.query('SELECT * FROM "Product" WHERE slug = $1', [slug]);
+  if (productRes.rows.length === 0) return NextResponse.json({ error: 'Product not found' }, { status: 404 });
+  const product = productRes.rows[0];
 
   // Parse form data
   const formData = await req.formData();
@@ -31,18 +32,14 @@ export async function POST(req, context) {
     const buffer = Buffer.from(arrayBuffer);
     fs.writeFileSync(destPath, buffer);
     const url = `/documents/products/${slug}/${filename}`;
-    const doc = await prisma.productDocument.create({
-      data: {
-        url,
-        productId: product.id,
-        type: docType,
-        notes: notes,
-      },
-    });
-    newDocs.push(doc);
+    const insertRes = await pool.query(
+      'INSERT INTO "ProductDocument" (url, "productId", type, notes, "uploadedAt") VALUES ($1, $2, $3, $4, NOW()) RETURNING *',
+      [url, product.id, docType, notes]
+    );
+    newDocs.push(insertRes.rows[0]);
   }
 
   // Return updated documents
-  const documents = await prisma.productDocument.findMany({ where: { productId: product.id }, orderBy: { uploadedAt: 'asc' } });
-  return NextResponse.json({ documents });
+  const docsRes = await pool.query('SELECT * FROM "ProductDocument" WHERE "productId" = $1 ORDER BY "uploadedAt" ASC', [product.id]);
+  return NextResponse.json({ documents: docsRes.rows });
 } 

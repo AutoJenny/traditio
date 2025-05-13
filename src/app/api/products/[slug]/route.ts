@@ -93,4 +93,26 @@ export async function GET(req, context) {
   } catch (error) {
     return withCors(NextResponse.json({ error: typeof error === 'object' && error && 'message' in error ? (error).message : String(error) }, { status: 500 }));
   }
+}
+
+export async function DELETE(req, context) {
+  const { params } = await context;
+  const slug = params.slug;
+  try {
+    // Find product by slug
+    const productRes = await pool.query('SELECT * FROM "Product" WHERE slug = $1', [slug]);
+    if (productRes.rows.length === 0) {
+      return withCors(NextResponse.json({ error: 'Product not found' }, { status: 404 }));
+    }
+    const product = productRes.rows[0];
+    // Soft delete: set status to 'deleted' and update updatedAt
+    await pool.query('UPDATE "Product" SET status = $1, "updatedAt" = NOW() WHERE id = $2', ['deleted', product.id]);
+    // Fetch updated product
+    const updatedProductRes = await pool.query('SELECT * FROM "Product" WHERE id = $1', [product.id]);
+    const updatedProduct = updatedProductRes.rows[0];
+    return withCors(NextResponse.json({ product: updatedProduct }));
+  } catch (error) {
+    console.error('DELETE /api/products/[slug] error:', error);
+    return withCors(NextResponse.json({ error: typeof error === 'object' && error && 'message' in error ? error.message : String(error) }, { status: 500 }));
+  }
 } 

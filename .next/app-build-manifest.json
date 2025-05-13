@@ -11,10 +11,10 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/admin/products/[slug]/page": [
+    "/admin/products/[slug]/images/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/admin/products/[slug]/page.js"
+      "static/chunks/app/admin/products/[slug]/images/page.js"
     ],
     "/showroom/page": [
       "static/chunks/webpack.js",
@@ -31,20 +31,35 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/products/route.js"
     ],
-    "/showroom/[slug]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/showroom/[slug]/page.js"
-    ],
     "/admin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/admin/page.js"
     ],
-    "/about/page": [
+    "/admin/products/[slug]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/about/page.js"
+      "static/chunks/app/admin/products/[slug]/page.js"
+    ],
+    "/api/products/[slug]/images/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/products/[slug]/images/route.js"
+    ],
+    "/api/images/[id]/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/images/[id]/route.js"
+    ],
+    "/api/products/[slug]/images/upload/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/products/[slug]/images/upload/route.js"
+    ],
+    "/showroom/[slug]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/showroom/[slug]/page.js"
     ],
     "/page": [
       "static/chunks/webpack.js",

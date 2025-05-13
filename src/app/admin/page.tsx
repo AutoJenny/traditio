@@ -96,7 +96,7 @@ export default function AdminProductList() {
           </thead>
           <tbody>
             {products
-              .filter((prod: any) => showDeleted || prod.status !== 'deleted')
+              .filter((prod: any) => showDeleted ? prod.status === 'deleted' : prod.status !== 'deleted')
               .filter((prod: any) =>
                 categoryFilter === 'ALL' ||
                 (prod.categories && prod.categories.some((cat: any) => String(cat.id) === String(categoryFilter)))

@@ -39,7 +39,7 @@ traditio/
 │   │       ├── products/
 │   │       │   ├── route.ts      # /api/products (GET: list featured products)
 │   │       │   └── [slug]/
-│   │       │       └── route.ts  # /api/products/[slug] (GET: product detail)
+│   │       │       └── route.ts  # /api/products/[slug] (GET: product detail, PUT: update product, DELETE: soft-delete product)
 │   │       └── categories/
 │   │           └── route.ts      # /api/categories (GET: list categories)
 │   └── generated/
@@ -54,7 +54,7 @@ traditio/
 │   ├── images/
 │   │   ├── products/       # Product images (organized by folder)
 │   │   └── site/           # Site-wide images (e.g., logo)
-│   └── ...                 # Other static assets (SVGs, CSS, etc.)
+│   │   └── ...                 # Other static assets (SVGs, CSS, etc.)
 ├── package.json
 ├── next.config.ts
 ├── tsconfig.json
@@ -84,11 +84,11 @@ traditio/
 
 ### API Endpoints (Route Handlers)
 - `/api/products`         → `src/app/api/products/route.ts` (GET: list featured products)
-- `/api/products/[slug]`  → `src/app/api/products/[slug]/route.ts` (GET: product detail + related)
+- `/api/products/[slug]`  → `src/app/api/products/[slug]/route.ts` (GET: product detail, PUT: update product, DELETE: soft-delete product)
 - `/api/categories`       → `src/app/api/categories/route.ts` (GET: list categories)
 
 ### Admin Pages
-- `/admin/products/[slug]/images` → Admin image management stub page (upload, reorder, set main, alt, delete coming soon)
+- `/admin/products/[slug]/images` → Admin image management page (upload, reorder, set main, alt, delete supported)
 - `/admin/products/[slug]` → **Tabbed admin product edit page** (file: `src/app/admin/products/[slug]/page.tsx`)
   - Features a tabbed interface with the following tabs:
     - **Source**: (Planned) Acquisition source, date, price, provenance, and document upload

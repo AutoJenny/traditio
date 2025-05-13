@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '../../../../lib/prisma';
+import pool from '../../../../lib/db';
 
 export async function POST(req: NextRequest) {
   try {
@@ -8,24 +8,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Email, message, and productSlug are required.' }, { status: 400 });
     }
     // Upsert customer
-    const customer = await prisma.customer.upsert({
-      where: { email },
-      update: { name: name || undefined, phone: phone || undefined },
-      create: { email, name: name || undefined, phone: phone || undefined },
-    });
+    let customerRes = await pool.query('SELECT * FROM "Customer" WHERE email = $1', [email]);
+    let customer;
+    if (customerRes.rows.length > 0) {
+      customer = customerRes.rows[0];
+      await pool.query('UPDATE "Customer" SET name = $1, phone = $2 WHERE id = $3', [name || customer.name, phone || customer.phone, customer.id]);
+    } else {
+      const insertRes = await pool.query('INSERT INTO "Customer" (email, name, phone, newsletter, createdAt) VALUES ($1, $2, $3, false, NOW()) RETURNING *', [email, name, phone]);
+      customer = insertRes.rows[0];
+    }
     // Look up product by slug
-    const product = await prisma.product.findUnique({ where: { slug: productSlug } });
-    if (!product) {
+    const productRes = await pool.query('SELECT * FROM "Product" WHERE slug = $1', [productSlug]);
+    if (productRes.rows.length === 0) {
       return NextResponse.json({ error: 'Product not found.' }, { status: 404 });
     }
+    const product = productRes.rows[0];
     // Create message
-    await prisma.message.create({
-      data: {
-        customerId: customer.id,
-        message: message,
-        productId: product.id,
-      },
-    });
+    await pool.query('INSERT INTO "Message" (customerId, message, productId, createdAt) VALUES ($1, $2, $3, NOW())', [customer.id, message, product.id]);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Enquiry form error:', error);

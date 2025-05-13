@@ -13,4 +13,6 @@
 ## Database Seeding (2025-05-13)
 - Prisma is no longer used in this project. All seeding and DB access is now via raw SQL and the `pg` package.
 - To reseed the database, run `ts-node scripts/seed_db.ts` (or `node scripts/seed_db.js` if compiled).
-- This script will clear and repopulate the Category, Product, Image, and ProductCategory tables using the JSON files in the project root. 
+- This script will clear and repopulate the Category, Product, Image, and ProductCategory tables using the JSON files in the project root.
+
+- /api/products/[slug] now supports DELETE for soft-deleting products (status='deleted'). 

@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import pool from '../../../../lib/db';
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,25 +8,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
     }
     // Find or create customer
-    let customer = await prisma.customer.findUnique({ where: { email } });
-    if (!customer) {
-      customer = await prisma.customer.create({ data: { name, email, phone } });
-    } else if (customer.name !== name || customer.phone !== phone) {
-      // Optionally update name/phone if changed
-      customer = await prisma.customer.update({ where: { id: customer.id }, data: { name, phone } });
+    let customerRes = await pool.query('SELECT * FROM "Customer" WHERE email = $1', [email]);
+    let customer;
+    if (customerRes.rows.length > 0) {
+      customer = customerRes.rows[0];
+      if (customer.name !== name || customer.phone !== phone) {
+        await pool.query('UPDATE "Customer" SET name = $1, phone = $2 WHERE id = $3', [name, phone, customer.id]);
+      }
+    } else {
+      const insertRes = await pool.query('INSERT INTO "Customer" (name, email, phone, newsletter, createdAt) VALUES ($1, $2, $3, false, NOW()) RETURNING *', [name, email, phone]);
+      customer = insertRes.rows[0];
     }
     // Create message
     const ipAddress = req.headers.get('x-forwarded-for') || req.ip || null;
     const userAgent = req.headers.get('user-agent') || null;
-    await prisma.message.create({
-      data: {
-        customerId: customer.id,
-        message,
-        pageUrl,
-        ipAddress,
-        userAgent,
-      },
-    });
+    await pool.query('INSERT INTO "Message" (customerId, message, pageUrl, ipAddress, userAgent, createdAt) VALUES ($1, $2, $3, $4, $5, NOW())', [customer.id, message, pageUrl, ipAddress, userAgent]);
     return NextResponse.json({ success: true });
   } catch (err: any) {
     return NextResponse.json({ error: err.message || 'Server error' }, { status: 500 });

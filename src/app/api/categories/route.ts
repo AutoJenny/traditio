@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '../../../../lib/prisma';
+import pool from '../../../../lib/db';
 
 function withCors(response) {
   response.headers.set('Access-Control-Allow-Origin', '*');
@@ -13,9 +13,7 @@ export async function OPTIONS() {
 }
 
 export async function GET() {
-  const categories = await prisma.category.findMany({
-    orderBy: { order: 'asc' },
-  });
+  const { rows: categories } = await pool.query('SELECT * FROM "Category" ORDER BY "order" ASC');
   const response = NextResponse.json(categories);
   return withCors(response);
 } 

@@ -19,3 +19,9 @@
 [2024-05-13] Fixed category update in product PUT handler: now uses explicit deleteMany/createMany for ProductCategory join table, ensuring updates persist for many-to-many relations. 
 
 [2024-05-13] Fixed showroom category filtering: updated filter logic in src/app/showroom/page.tsx to use cat.category.slug instead of cat.slug, matching the API response structure. 
+
+[2024-05-13] Restored DnD image management UI to src/app/admin/products/[slug]/images/page.tsx from backup. The page now supports drag-and-drop reordering, alt text editing, image upload, and save functionality. 
+
+[2024-05-13 15:00] Created scripts/seed_db.ts to clear and repopulate Category, Product, Image, and ProductCategory tables using categories.json, products.json, images.jsonl, and product_categories.json. Uses pg and lib/db.ts. This replaces all previous Prisma-based seeding. 
+
+[2024-05-18  DELETE handler for product soft-delete] Added DELETE handler to src/app/api/products/[slug]/route.ts to support soft-deleting products by setting status to 'deleted'. 
