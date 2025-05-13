@@ -1,0 +1,63 @@
+   ▲ Next.js 15.3.2
+   - Local:        http://localhost:3000
+   - Network:      http://10.0.4.32:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1030ms
+ ○ Compiling /admin ...
+ ✓ Compiled /admin in 1670ms (756 modules)
+ GET /admin 200 in 1897ms
+ ✓ Compiled in 86ms (330 modules)
+ ✓ Compiled /api/products/[slug] in 197ms (404 modules)
+PUT handler called for draft-1747032832772-4562
+ PUT /api/products/draft-1747032832772-4562 400 in 529ms
+ ✓ Compiled /admin in 55ms (429 modules)
+ GET /admin 200 in 161ms
+ ✓ Compiled /api/categories in 94ms (750 modules)
+ ✓ Compiled in 61ms (320 modules)
+ GET /apple-touch-icon-precomposed.png 404 in 298ms
+ GET /apple-touch-icon.png 404 in 289ms
+ GET /api/categories 200 in 263ms
+ GET /api/products 200 in 269ms
+PUT handler called for draft-1747032832772-4562
+ PUT /api/products/draft-1747032832772-4562 400 in 47ms
+ ✓ Compiled / in 267ms (757 modules)
+ GET / 200 in 395ms
+ GET /admin 200 in 26ms
+ ✓ Compiled /api/categories in 54ms (436 modules)
+ ✓ Compiled (438 modules)
+ GET /api/categories 200 in 148ms
+ GET /api/products 200 in 154ms
+ ✓ Compiled /api/products/[slug] in 75ms (440 modules)
+PUT handler called for draft-1747032832772-4562
+ PUT /api/products/draft-1747032832772-4562 400 in 139ms
+DELETE handler called for draft-1747032832772-4562
+DELETE: Product soft-deleted draft-1747032832772-4562
+ DELETE /api/products/draft-1747032832772-4562 200 in 45ms
+ ✓ Compiled in 192ms (335 modules)
+ GET /admin 200 in 38ms
+ GET /admin 200 in 14ms
+ GET /admin 200 in 92ms
+ GET /api/categories 200 in 22ms
+ GET /api/products 200 in 27ms
+PUT handler called for brass-table-lamp_106
+ PUT /api/products/brass-table-lamp_106 200 in 36ms
+PUT handler called for draft-1747032025271-4727
+ PUT /api/products/draft-1747032025271-4727 400 in 47ms
+ ✓ Compiled in 102ms (335 modules)
+ GET /admin 200 in 20ms
+ ✓ Compiled in 82ms (335 modules)
+ GET /admin 200 in 9ms
+ GET /admin 200 in 18ms
+ GET /admin 200 in 11ms
+ GET /admin 200 in 41ms
+ GET /api/categories 200 in 17ms
+ GET /api/products 200 in 19ms
+PUT handler called for draft-1747032025271-4727
+ PUT /api/products/draft-1747032025271-4727 400 in 29ms
+PUT handler called for draft-1747002719068-5025
+ PUT /api/products/draft-1747002719068-5025 400 in 39ms
+ GET /admin 200 in 23ms
+ GET /api/products 200 in 15ms
+ GET /api/categories 200 in 16ms

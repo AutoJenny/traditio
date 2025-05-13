@@ -25,3 +25,11 @@
 [2024-05-13 15:00] Created scripts/seed_db.ts to clear and repopulate Category, Product, Image, and ProductCategory tables using categories.json, products.json, images.jsonl, and product_categories.json. Uses pg and lib/db.ts. This replaces all previous Prisma-based seeding. 
 
 [2024-05-18  DELETE handler for product soft-delete] Added DELETE handler to src/app/api/products/[slug]/route.ts to support soft-deleting products by setting status to 'deleted'. 
+
+[2024-05-18  await context.params fix] Updated all handlers in src/app/api/products/[slug]/route.ts to use 'const { params } = await context;' and 'const slug = params.slug;' as required by Next.js 15+ dynamic API routes. 
+
+[2025-05-13 admin delete refactor] Refactored admin product edit page: delete button is now a prominent trash icon outside the form, ensuring it always sends DELETE and never triggers a PUT. 
+
+[YYYY-MM-DD] Admin UI: Edit button is now a blue button, Delete is a trash icon button that sends a DELETE request to the API (not a PUT). Ensured delete is distinct and works as expected. UI and API behavior now match requirements. 
+
+[YYYY-MM-DD] Admin product list: Edit button is now a small blue circle with a pen icon instead of text. 

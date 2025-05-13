@@ -44,7 +44,7 @@ traditio/
 │   │       ├── products/
 │   │       │   ├── route.ts      # /api/products (GET: list featured products)
 │   │       │   └── [slug]/
-│   │       │       └── route.ts  # /api/products/[slug] (GET: product detail, PUT: update product, DELETE: soft-delete product)
+│   │       │       └── route.ts  # /api/products/[slug] (GET: product detail, PUT: update product, DELETE: delete product)
 │   │       └── categories/
 │   │           └── route.ts      # /api/categories (GET: list categories)
 │   └── generated/
@@ -89,12 +89,12 @@ traditio/
 
 ### API Endpoints (Route Handlers)
 - `/api/products`         → `src/app/api/products/route.ts` (GET: list featured products)
-- `/api/products/[slug]`  → `src/app/api/products/[slug]/route.ts` (GET: product detail, PUT: update product, DELETE: soft-delete product)
+- `/api/products/[slug]`  → `src/app/api/products/[slug]/route.ts` (GET: product detail, PUT: update product, DELETE: delete product)
 - `/api/categories`       → `src/app/api/categories/route.ts` (GET: list categories)
 
 ### Admin Pages
 - `/admin/products/[slug]/images` → Admin image management page (upload, reorder, set main, alt, delete supported)
-- `/admin/products/[slug]` → **Tabbed admin product edit page** (file: `src/app/admin/products/[slug]/page.tsx`)
+- `/admin/products/[slug]` → **Tabbed admin product edit page** (file: `src/app/admin/products/[slug]/page.tsx`). In the product list, Edit is a blue button and Delete is a trash icon button that sends a DELETE request.
   - Features a tabbed interface with the following tabs:
     - **Source**: (Planned) Acquisition source, date, price, provenance, and document upload
     - **Description**: Title, price, status, categories, description, dimensions, condition, origin, period

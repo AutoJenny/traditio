@@ -168,77 +168,91 @@ export default function AdminProductEdit() {
         </div>
       )}
       {activeTab === 'Description' && (
-        <form onSubmit={handleSave} className="space-y-4">
-          {error && <div className="mb-4 text-red-600">{error}</div>}
-          <div>
-            <label className="block font-bold mb-1">Title</label>
-            <input name="title" value={product.title || ""} onChange={handleChange} className="w-full border rounded p-2" />
-          </div>
-          <div>
-            <label className="block font-bold mb-1">Price</label>
-            <input
-              name="price"
-              type="text"
-              value={priceFocused ? (product.price || '') : formatPrice(product.price) || ''}
-              onChange={handlePriceChange}
-              onFocus={handlePriceFocus}
-              onBlur={handlePriceBlur}
-              className="w-full border rounded p-2"
-              inputMode="decimal"
-            />
-          </div>
-          <div>
-            <label className="block font-bold mb-1">Status</label>
-            <select name="status" value={product.status || "draft"} onChange={handleChange} className="w-full border rounded p-2" disabled={!product.title || !product.price}>
-              <option value="draft">Draft</option>
-              <option value="available">Available</option>
-              <option value="sold">Sold</option>
-              <option value="deleted">Deleted</option>
-            </select>
-          </div>
-          <div>
-            <label className="block font-bold mb-1">Categories</label>
-            <div className="flex flex-wrap gap-2">
-              {categories.map((cat: any) => (
-                <label key={cat.id} className="flex items-center gap-1">
-                  <input
-                    type="checkbox"
-                    name="categoryIds"
-                    value={cat.id}
-                    checked={product.categoryIds.includes(Number(cat.id))}
-                    onChange={handleChange}
-                    disabled={!product.title || !product.price}
-                  />
-                  {cat.name}
-                </label>
-              ))}
+        <>
+          <form onSubmit={handleSave} className="space-y-4">
+            {error && <div className="mb-4 text-red-600">{error}</div>}
+            <div>
+              <label className="block font-bold mb-1">Title</label>
+              <input name="title" value={product.title || ""} onChange={handleChange} className="w-full border rounded p-2" />
             </div>
+            <div>
+              <label className="block font-bold mb-1">Price</label>
+              <input
+                name="price"
+                type="text"
+                value={priceFocused ? (product.price || '') : formatPrice(product.price) || ''}
+                onChange={handlePriceChange}
+                onFocus={handlePriceFocus}
+                onBlur={handlePriceBlur}
+                className="w-full border rounded p-2"
+                inputMode="decimal"
+              />
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Status</label>
+              <select name="status" value={product.status || "draft"} onChange={handleChange} className="w-full border rounded p-2" disabled={!product.title || !product.price}>
+                <option value="draft">Draft</option>
+                <option value="available">Available</option>
+                <option value="sold">Sold</option>
+                <option value="deleted">Deleted</option>
+              </select>
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Categories</label>
+              <div className="flex flex-wrap gap-2">
+                {categories.map((cat: any) => (
+                  <label key={cat.id} className="flex items-center gap-1">
+                    <input
+                      type="checkbox"
+                      name="categoryIds"
+                      value={cat.id}
+                      checked={product.categoryIds.includes(Number(cat.id))}
+                      onChange={handleChange}
+                      disabled={!product.title || !product.price}
+                    />
+                    {cat.name}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Description</label>
+              <textarea name="description" value={product.description || ""} onChange={handleChange} className="w-full border rounded p-2" rows={3} />
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Dimensions</label>
+              <input name="dimensions" value={product.dimensions || ""} onChange={handleChange} className="w-full border rounded p-2" />
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Condition</label>
+              <input name="condition" value={product.condition || ""} onChange={handleChange} className="w-full border rounded p-2" />
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Origin</label>
+              <input name="origin" value={product.origin || ""} onChange={handleChange} className="w-full border rounded p-2" />
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Period</label>
+              <input name="period" value={product.period || ""} onChange={handleChange} className="w-full border rounded p-2" />
+            </div>
+            <div className="flex gap-4 mt-6">
+              <button type="submit" disabled={saving} className="bg-brass text-espresso font-bold rounded px-6 py-2 border-2 border-brass shadow hover:bg-espresso hover:text-ivory transition">{saving ? "Saving..." : "Save"}</button>
+            </div>
+          </form>
+          {/* Delete icon button outside the form */}
+          <div className="flex justify-end mt-4">
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={saving}
+              aria-label="Delete product"
+              className="p-2 rounded-full bg-red-600 hover:bg-red-700 text-white shadow border-2 border-red-700 transition flex items-center justify-center"
+              title="Delete product"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /></svg>
+            </button>
           </div>
-          <div>
-            <label className="block font-bold mb-1">Description</label>
-            <textarea name="description" value={product.description || ""} onChange={handleChange} className="w-full border rounded p-2" rows={3} />
-          </div>
-          <div>
-            <label className="block font-bold mb-1">Dimensions</label>
-            <input name="dimensions" value={product.dimensions || ""} onChange={handleChange} className="w-full border rounded p-2" />
-          </div>
-          <div>
-            <label className="block font-bold mb-1">Condition</label>
-            <input name="condition" value={product.condition || ""} onChange={handleChange} className="w-full border rounded p-2" />
-          </div>
-          <div>
-            <label className="block font-bold mb-1">Origin</label>
-            <input name="origin" value={product.origin || ""} onChange={handleChange} className="w-full border rounded p-2" />
-          </div>
-          <div>
-            <label className="block font-bold mb-1">Period</label>
-            <input name="period" value={product.period || ""} onChange={handleChange} className="w-full border rounded p-2" />
-          </div>
-          <div className="flex gap-4 mt-6">
-            <button type="submit" disabled={saving} className="bg-brass text-espresso font-bold rounded px-6 py-2 border-2 border-brass shadow hover:bg-espresso hover:text-ivory transition">{saving ? "Saving..." : "Save"}</button>
-            <button type="button" onClick={handleDelete} disabled={saving} className="bg-red-600 text-white font-bold rounded px-6 py-2 border-2 border-red-600 shadow hover:bg-espresso hover:text-ivory transition">Delete</button>
-          </div>
-        </form>
+        </>
       )}
       {activeTab === 'Images' && (
         <div>
