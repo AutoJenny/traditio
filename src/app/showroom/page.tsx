@@ -11,7 +11,7 @@ export default function Showroom() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
-  const [sort, setSort] = useState<string>('az');
+  const [sort, setSort] = useState<string>('newest');
 
   useEffect(() => {
     async function fetchData() {
