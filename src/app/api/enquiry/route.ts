@@ -24,7 +24,10 @@ export async function POST(req: NextRequest) {
     }
     const product = productRes.rows[0];
     // Create message
-    await pool.query('INSERT INTO "Message" ("customerId", content, productId, "pageUrl", created, status) VALUES ($1, $2, $3, $4, NOW(), $5)', [customer.id, message, product.id, pageUrl || null, 'unread']);
+    await pool.query(
+      'INSERT INTO "Message" ("customerId", content, "productSlug", "pageUrl") VALUES ($1, $2, $3, $4)',
+      [customer.id, message, product.slug, pageUrl || null]
+    );
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Enquiry form error:', error);

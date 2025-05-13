@@ -1,10 +1,8 @@
 {
   "/api/messages/route": "app/api/messages/route.js",
-  "/api/products/[slug]/route": "app/api/products/[slug]/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
   "/admin/messages/page": "app/admin/messages/page.js",
   "/admin/messages/[id]/page": "app/admin/messages/[id]/page.js",
   "/contact/page": "app/contact/page.js",
-  "/showroom/page": "app/showroom/page.js",
-  "/showroom/[slug]/page": "app/showroom/[slug]/page.js"
+  "/showroom/[slug]/page": "app/showroom/[slug]/page.js",
+  "/showroom/page": "app/showroom/page.js"
 }
