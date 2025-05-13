@@ -7,7 +7,7 @@ export async function GET(req) {
     const showDeleted = url && url.searchParams.get('showDeleted');
     // Fetch products (optionally including deleted)
     const { rows: products } = await pool.query(`
-      SELECT * FROM "Product"${showDeleted ? '' : ' WHERE status != \'deleted\''} ORDER BY "createdAt" DESC
+      SELECT * FROM "Product"${showDeleted ? '' : ' WHERE status != \'deleted\''} ORDER BY "created" DESC
     `);
 
     // Fetch all images for these products
@@ -51,7 +51,7 @@ export async function POST(req) {
     const tempSlug = title ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'product';
     // Step 2: Insert product (without images)
     const insertProductRes = await pool.query(
-      `INSERT INTO "Product" (title, slug, description, price, currency, status, featured, dimensions, condition, origin, period, createdAt, updatedAt)
+      `INSERT INTO "Product" (title, slug, description, price, currency, status, featured, dimensions, condition, origin, period, created, updated)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW(), NOW()) RETURNING *`,
       [
         title,
@@ -101,7 +101,7 @@ export async function PUT(req) {
       // Generate a unique draft slug
       const draftSlug = `draft-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
       const insertRes = await pool.query(
-        `INSERT INTO "Product" (status, slug, title, description, price, currency, featured, dimensions, condition, origin, period, createdAt, updatedAt)
+        `INSERT INTO "Product" (status, slug, title, description, price, currency, featured, dimensions, condition, origin, period, created, updated)
          VALUES ('draft', $1, 'Draft', 'Draft', 0, 'GBP', false, '', '', '', '', NOW(), NOW()) RETURNING id`,
         [draftSlug]
       );

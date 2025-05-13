@@ -59,7 +59,7 @@ export async function PUT(req: Request, context: any) {
     const product = productRes.rows[0];
     // Update product fields
     await pool.query(
-      `UPDATE "Product" SET title=$1, description=$2, price=$3, currency=$4, status=$5, "mainImageId"=$6, dimensions=$7, condition=$8, origin=$9, period=$10, featured=$11, "updatedAt"=NOW() WHERE id=$12`,
+      `UPDATE "Product" SET title=$1, description=$2, price=$3, currency=$4, status=$5, "mainImageId"=$6, dimensions=$7, condition=$8, origin=$9, period=$10, featured=$11, updated=NOW() WHERE id=$12`,
       [title, description, parseFloat(price), currency, status, mainImageId, dimensions, condition, origin, period, featured, product.id]
     );
     // Update categories if provided
@@ -112,7 +112,7 @@ export async function DELETE(req: Request, context: any) {
     }
     const product = productRes.rows[0];
     // Soft delete: set status to 'deleted' and update updatedAt, regardless of completeness
-    await pool.query('UPDATE "Product" SET status = $1, "updatedAt" = NOW() WHERE id = $2', ['deleted', product.id]);
+    await pool.query('UPDATE "Product" SET status = $1, updated = NOW() WHERE id = $2', ['deleted', product.id]);
     // Fetch updated product
     const updatedProductRes = await pool.query('SELECT * FROM "Product" WHERE id = $1', [product.id]);
     const updatedProduct = updatedProductRes.rows[0];
