@@ -1,11 +1,9 @@
 {
   "/api/messages/[id]/route": "app/api/messages/[id]/route.js",
   "/api/products/[slug]/route": "app/api/products/[slug]/route.js",
-  "/api/messages/route": "app/api/messages/route.js",
-  "/api/categories/route": "app/api/categories/route.js",
   "/page": "app/page.js",
-  "/admin/messages/[id]/page": "app/admin/messages/[id]/page.js",
   "/admin/messages/page": "app/admin/messages/page.js",
+  "/admin/messages/[id]/page": "app/admin/messages/[id]/page.js",
   "/admin/page": "app/admin/page.js",
   "/admin/products/[slug]/page": "app/admin/products/[slug]/page.js"
 }

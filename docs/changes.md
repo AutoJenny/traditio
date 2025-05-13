@@ -14,6 +14,7 @@
 - Product enquiry API (/api/enquiry) now stores pageUrl (page source) with each message, matching the contact form. This allows admins to see which product page the enquiry was sent from.
 - All Customer and Message field names now match live DB schema (content, created, updated, etc). Admin/messages page and API now work. New DB dump created and docs updated with schema reference.
 - Admin messages UI: Page column now shows only the last part of the URL (e.g., art-nouveau-mirror_109). Product column displays the main product image as a thumbnail if available, otherwise falls back to the slug text.
+- Admin message detail UI: Product panel is now aligned right with title, large image, price, and 'Added: <date>' in 'ago' format. Message content is now displayed on a white background for clarity.
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 
