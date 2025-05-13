@@ -76,7 +76,7 @@
 
 [2024-05-13] Documentation update: Updated /docs/site_structure.md, /docs/traditio_style_guide.md, and /docs/plans/traditio_site_build_checklist.md to reflect ProductGrid refactor, SOLD badge logic, sort dropdown in showroom, and admin image management stub. See /docs/plans/changes.log for summary entry.
 
-[2024-05-13  admin] Restore: Restored the full tabbed admin product edit UI in src/app/admin/products/[slug]/page.tsx (Source, Description, Images, Sale tabs). Updated /docs/site_structure.md to explicitly document the tabbed interface, tab names, and file location for future maintainers.
+[2024-05-13  admin] Restore: Admin product list page restored to pre-link-only version (cf128c8). Now displays product table with admin controls, category filter, and show deleted toggle. See src/app/admin/products/page.tsx.
 
 [2024-05-14 backup] Complete backup system implemented: PostgreSQL dumps (both data-only and full schema+data), JSON exports with slug-based references, file backups for images and documents, hourly conditional backups, and backup rotation with cleanup scripts. Comprehensive documentation added in docs/backup-procedure.md.
 
