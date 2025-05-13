@@ -33,12 +33,13 @@ export default function Showroom() {
 
   if (loading) return <div className="text-center py-16">Loading...</div>;
 
-  // Filter products by selected category
-  const filteredProducts = selectedCategory === 'all'
+  // Filter products by selected category and status
+  const filteredProducts = (selectedCategory === 'all'
     ? products
     : products.filter((prod: any) =>
         prod.categories && prod.categories.some((cat: any) => cat.slug === selectedCategory)
-      );
+      )
+  ).filter((prod: any) => !['draft', 'sold', 'deleted'].includes((prod.status || '').toLowerCase()));
 
   // Sort filtered products
   const sortedProducts = [...filteredProducts].sort((a, b) => {

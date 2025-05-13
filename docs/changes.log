@@ -105,3 +105,5 @@
 [2025-05-13  admin] DB schema: Renamed Product table columns and all code/data/docs references from 'createdAt' and 'updatedAt' to 'created' and 'updated' (no 'At').
 
 [2025-05-14  admin] Global cleanup: Searched and destroyed all instances of 'createdAt'/'updatedAt' in code, data, and docs. Only 'created'/'updated' remain everywhere for consistency.
+
+[2025-05-14  showroom] Update: Showroom page now excludes products with status 'draft', 'sold', or 'deleted' from the product grid and category views.
