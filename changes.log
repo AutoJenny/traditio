@@ -41,3 +41,5 @@
 [YYYY-MM-DD] Contact API now stores customers and messages in the new tables, linking messages to customers, and uses the correct schema fields. 
 
 [YYYY-MM-DD] Updated /api/enquiry API to store pageUrl in the Message table, so product enquiries now include the page source with the message, matching the contact form. 
+
+[YYYY-MM-DD] Product detail page: 'Enquire about this item' button now reveals and scrolls to the enquiry form below, instead of doing nothing. Improves UX and makes the form discoverable. 
