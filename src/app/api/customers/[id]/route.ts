@@ -7,7 +7,7 @@ export async function GET(req, { params }) {
     const custRes = await pool.query('SELECT * FROM "Customer" WHERE id = $1', [id]);
     if (custRes.rows.length === 0) return NextResponse.json({ error: 'Customer not found' }, { status: 404 });
     const customer = custRes.rows[0];
-    const msgRes = await pool.query('SELECT * FROM "Message" WHERE "customerId" = $1 ORDER BY "createdAt" DESC', [id]);
+    const msgRes = await pool.query('SELECT * FROM "Message" WHERE "customerId" = $1 ORDER BY created DESC', [id]);
     const messages = msgRes.rows;
     return NextResponse.json({ ...customer, messages });
   } catch (err: any) {

@@ -91,9 +91,6 @@ export default function AdminProductEdit() {
           ...(typeof img.order === 'number' ? { order: img.order } : {}),
         })),
       };
-      delete cleanProduct.categories;
-      delete cleanProduct.createdAt;
-      delete cleanProduct.updatedAt;
       const res = await fetch(`/api/products/${slug}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

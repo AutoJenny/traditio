@@ -30,7 +30,15 @@ export async function GET(req: Request, context: any) {
       JOIN "Category" c ON pc."categoryId" = c.id
       WHERE pc."productId" = $1
     `, [product.id]);
-    return withCors(NextResponse.json({ product: { ...product, images, categories } }));
+    // Alias createdAt/updatedAt to created/updated for consistency
+    const normalizedProduct = {
+      ...product,
+      created: product.created || product.createdAt,
+      updated: product.updated || product.updatedAt,
+      images,
+      categories
+    };
+    return withCors(NextResponse.json({ product: normalizedProduct }));
   } catch (error) {
     console.error('GET /api/products/[slug] error:', error);
     return withCors(NextResponse.json({ error: typeof error === 'object' && error && 'message' in error ? (error as any).message : String(error) }, { status: 500 }));

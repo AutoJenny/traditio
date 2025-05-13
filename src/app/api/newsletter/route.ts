@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       customer = customerRes.rows[0];
       await pool.query('UPDATE "Customer" SET name = $1, phone = $2 WHERE id = $3', [name || customer.name, phone || customer.phone, customer.id]);
     } else {
-      const insertRes = await pool.query('INSERT INTO "Customer" (name, email, phone, "createdAt") VALUES ($1, $2, $3, NOW()) RETURNING *', [name, email, phone]);
+      const insertRes = await pool.query('INSERT INTO "Customer" (name, email, phone, created) VALUES ($1, $2, $3, NOW()) RETURNING *', [name, email, phone]);
       customer = insertRes.rows[0];
     }
     return NextResponse.json({ success: true, customerId: customer.id });
