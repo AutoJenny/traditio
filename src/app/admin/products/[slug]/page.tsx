@@ -139,6 +139,10 @@ export default function AdminProductEdit() {
   return (
     <main className="max-w-2xl mx-auto py-12 px-4">
       <h1 className="font-heading text-2xl md:text-3xl font-bold uppercase text-espresso mb-6">Edit Product</h1>
+      {/* Show the product slug for visual confirmation */}
+      {product?.slug && (
+        <div className="mb-4 text-sand-500 text-sm font-mono">Slug: <span className="font-bold">{product.slug}</span></div>
+      )}
       {/* Draft indicator */}
       {(!product.title || !product.price) && (
         <div className="mb-4 px-4 py-2 bg-yellow-100 text-yellow-800 font-semibold rounded border-l-4 border-yellow-400">
