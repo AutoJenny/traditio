@@ -62,7 +62,7 @@ export async function POST(req: Request) {
         title,
         tempSlug,
         data.description || '',
-        parseFloat(price),
+        price !== undefined ? parseFloat(price) : 0,
         data.currency || 'GBP',
         data.status || 'available',
         data.featured || false,
@@ -79,7 +79,7 @@ export async function POST(req: Request) {
     // Step 4: Insert categories
     if (categoryIds && categoryIds.length > 0) {
       await pool.query(
-        `INSERT INTO "ProductCategory" ("productId", "categoryId") VALUES ${categoryIds.map((_, i) => `($1, $${i + 2})`).join(', ')}`,
+        `INSERT INTO "ProductCategory" ("productId", "categoryId") VALUES ${categoryIds.map((_: unknown, i: number) => `($1, $${i + 2})`).join(', ')}`,
         [product.id, ...categoryIds.map(Number)]
       );
     }
