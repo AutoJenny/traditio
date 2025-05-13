@@ -7,7 +7,7 @@ export async function GET() {
     const custRes = await pool.query('SELECT * FROM "Customer" ORDER BY name, email');
     const customers = custRes.rows;
     // Get all messages
-    const msgRes = await pool.query('SELECT * FROM "Message" ORDER BY created DESC');
+    const msgRes = await pool.query('SELECT * FROM "Message" ORDER BY "createdAt" DESC');
     const messages = msgRes.rows;
     // Attach messages to customers
     const customersWithMessages = customers.map(cust => ({

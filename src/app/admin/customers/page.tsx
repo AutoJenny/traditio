@@ -21,7 +21,7 @@ export default function AdminCustomersPage() {
   if (sort === "az") {
     sortedCustomers.sort((a, b) => (a.name || a.email || "").localeCompare(b.name || b.email || ""));
   } else {
-    sortedCustomers.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+    sortedCustomers.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
   return (
@@ -55,8 +55,8 @@ export default function AdminCustomersPage() {
               <tr key={cust.id} className="border-b border-sand hover:bg-sand-100 cursor-pointer transition" onClick={() => window.location.href = `/admin/customers/${cust.id}`} tabIndex={0} role="button" aria-label={`View customer ${cust.name || cust.email}`}>
                 <td className="p-2">{cust.name || <span className="text-sand-400 italic">(No name)</span>}</td>
                 <td className="p-2">{cust.email}</td>
-                <td className="p-2 whitespace-nowrap">{cust.created ? new Date(cust.created).toLocaleString() : ""}</td>
-                <td className="p-2 whitespace-nowrap">{cust.updated ? new Date(cust.updated).toLocaleString() : ""}</td>
+                <td className="p-2 whitespace-nowrap">{cust.createdAt ? new Date(cust.createdAt).toLocaleString() : ""}</td>
+                <td className="p-2 whitespace-nowrap">{cust.updatedAt ? new Date(cust.updatedAt).toLocaleString() : ""}</td>
               </tr>
             ))}
           </tbody>

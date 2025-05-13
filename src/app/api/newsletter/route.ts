@@ -12,9 +12,9 @@ export async function POST(req: NextRequest) {
     let customer;
     if (customerRes.rows.length > 0) {
       customer = customerRes.rows[0];
-      await pool.query('UPDATE "Customer" SET newsletter = true, name = $1, phone = $2 WHERE id = $3', [name || customer.name, phone || customer.phone, customer.id]);
+      await pool.query('UPDATE "Customer" SET name = $1, phone = $2 WHERE id = $3', [name || customer.name, phone || customer.phone, customer.id]);
     } else {
-      const insertRes = await pool.query('INSERT INTO "Customer" (email, name, phone, newsletter, createdAt) VALUES ($1, $2, $3, true, NOW()) RETURNING *', [email, name, phone]);
+      const insertRes = await pool.query('INSERT INTO "Customer" (name, email, phone, "createdAt") VALUES ($1, $2, $3, NOW()) RETURNING *', [name, email, phone]);
       customer = insertRes.rows[0];
     }
     return NextResponse.json({ success: true, customerId: customer.id });

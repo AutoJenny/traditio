@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       customer = customerRes.rows[0];
       await pool.query('UPDATE "Customer" SET name = $1, phone = $2 WHERE id = $3', [name || customer.name, phone || customer.phone, customer.id]);
     } else {
-      const insertRes = await pool.query('INSERT INTO "Customer" (email, name, phone, newsletter, createdAt) VALUES ($1, $2, $3, false, NOW()) RETURNING *', [email, name, phone]);
+      const insertRes = await pool.query('INSERT INTO "Customer" (name, email, phone, newsletter, created, updated) VALUES ($1, $2, $3, false, NOW(), NOW()) RETURNING *', [name, email, phone]);
       customer = insertRes.rows[0];
     }
     // Look up product by slug
@@ -27,12 +27,15 @@ export async function POST(req: NextRequest) {
     const ipAddress = req.headers.get('x-forwarded-for') || req.ip || null;
     const userAgent = req.headers.get('user-agent') || null;
     await pool.query(
-      'INSERT INTO "Message" ("customerId", message, "pageUrl", "ipAddress", "userAgent") VALUES ($1, $2, $3, $4, $5)',
-      [customer.id, message, pageUrl || null, ipAddress, userAgent]
+      'INSERT INTO "Message" ("customerId", "content", "created", "updated", "productSlug", "pageUrl", "status") VALUES ($1, $2, NOW(), NOW(), $3, $4, $5)',
+      [customer.id, message, productSlug || null, pageUrl || null, 'unread']
     );
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Enquiry form error:', error);
-    return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });
+    if (error instanceof Error) {
+      console.error('Stack:', error.stack);
+    }
+    return NextResponse.json({ error: error.message || 'Internal server error.' }, { status: 500 });
   }
 } 

@@ -25,7 +25,7 @@ export default function AdminCustomerDetail() {
         <>
           <h1 className="font-heading text-3xl md:text-4xl font-bold uppercase text-espresso mb-4">{customer.name || customer.email}</h1>
           <div className="mb-2 text-sand-700">{customer.email}</div>
-          <div className="mb-4 text-sand-500 text-sm">Joined: {customer.created ? new Date(customer.created).toLocaleString() : ""} | Updated: {customer.updated ? new Date(customer.updated).toLocaleString() : ""}</div>
+          <div className="mb-4 text-sand-500 text-sm">Joined: {customer.createdAt ? new Date(customer.createdAt).toLocaleString() : ""}</div>
           <h2 className="text-xl font-bold text-brass mb-2 mt-8">Messages</h2>
           <ul className="space-y-3">
             {customer.messages && customer.messages.length > 0 ? (
