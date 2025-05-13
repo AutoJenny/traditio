@@ -1,7 +1,7 @@
 {
-  "/admin/page": "app/admin/page.js",
   "/admin/messages/[id]/page": "app/admin/messages/[id]/page.js",
+  "/admin/page": "app/admin/page.js",
   "/admin/customers/page": "app/admin/customers/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/admin/customers/[id]/page": "app/admin/customers/[id]/page.js"
+  "/admin/customers/[id]/page": "app/admin/customers/[id]/page.js",
+  "/contact/page": "app/contact/page.js"
 }

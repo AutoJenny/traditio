@@ -20,11 +20,9 @@ export async function POST(req: NextRequest) {
       customer = insertRes.rows[0];
     }
     // Create message
-    const ipAddress = req.headers.get('x-forwarded-for') || req.ip || null;
-    const userAgent = req.headers.get('user-agent') || null;
     await pool.query(
-      'INSERT INTO "Message" ("customerId", content, "pageUrl", "ipAddress", "userAgent", created) VALUES ($1, $2, $3, $4, $5, NOW())',
-      [customer.id, message, pageUrl || null, ipAddress, userAgent]
+      'INSERT INTO "Message" ("customerId", content, "pageUrl", created, status, "productSlug") VALUES ($1, $2, $3, NOW(), $4, $5)',
+      [customer.id, message, pageUrl || null, 'unread', null]
     );
     return NextResponse.json({ success: true });
   } catch (err: any) {
