@@ -23,8 +23,8 @@ export async function POST(req: NextRequest) {
     const ipAddress = req.headers.get('x-forwarded-for') || req.ip || null;
     const userAgent = req.headers.get('user-agent') || null;
     await pool.query(
-      'INSERT INTO "Message" ("customerId", content, "pageUrl", "productSlug", created, updated) VALUES ($1, $2, $3, $4, NOW(), NOW())',
-      [customer.id, message, pageUrl || null, null]
+      'INSERT INTO "Message" ("customerId", content, "pageUrl", "productSlug", created, updated, status) VALUES ($1, $2, $3, $4, NOW(), NOW(), $5)',
+      [customer.id, message, pageUrl || null, null, 'unread']
     );
     return NextResponse.json({ success: true });
   } catch (err: any) {

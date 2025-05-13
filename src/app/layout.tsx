@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import AdminUnreadMailIcon from "../components/AdminUnreadMailIcon";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,6 +48,7 @@ export default function RootLayout({
           </ul>
           <div className="flex items-center gap-6">
             <Link href="/admin" className="bg-brass text-espresso font-bold rounded px-4 py-2 border-2 border-brass uppercase shadow hover:bg-espresso hover:text-ivory transition">Edit</Link>
+            <AdminUnreadMailIcon />
             {/* <Link href="/account" className="hover:text-brass transition-colors duration-200">Sign In</Link> */}
             {/* <Link href="/cart" className="relative hover:text-brass transition-colors duration-200">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 inline">

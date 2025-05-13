@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     }
     const product = productRes.rows[0];
     // Create message
-    await pool.query('INSERT INTO "Message" ("customerId", content, productId, created) VALUES ($1, $2, $3, NOW())', [customer.id, message, product.id]);
+    await pool.query('INSERT INTO "Message" ("customerId", content, productId, created, status) VALUES ($1, $2, $3, NOW(), $4)', [customer.id, message, product.id, 'unread']);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Enquiry form error:', error);
