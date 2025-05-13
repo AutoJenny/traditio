@@ -13,6 +13,27 @@ function timeAgo(dateString: string) {
   return `${Math.floor(diff / 31536000)} year${Math.floor(diff / 31536000) === 1 ? '' : 's'} ago`;
 }
 
+function getLastPathSegment(url: string) {
+  if (!url) return "";
+  const parts = url.split("/").filter(Boolean);
+  return parts[parts.length - 1] || "";
+}
+
+async function fetchProductImage(slug: string): Promise<string | null> {
+  if (!slug) return null;
+  try {
+    const res = await fetch(`/api/products/${slug}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (data.product && data.product.images && data.product.images.length > 0) {
+      return data.product.images[0].url;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export default function AdminMessagesPage() {
   const [messages, setMessages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -22,7 +43,15 @@ export default function AdminMessagesPage() {
     async function fetchMessages() {
       const res = await fetch("/api/messages");
       const data = await res.json();
-      setMessages(data);
+      // For each message, if it has a productSlug, fetch the main image
+      const messagesWithImages = await Promise.all(data.map(async (msg: any) => {
+        if (msg.productSlug) {
+          const imageUrl = await fetchProductImage(msg.productSlug);
+          return { ...msg, productImage: imageUrl };
+        }
+        return msg;
+      }));
+      setMessages(messagesWithImages);
       setLoading(false);
     }
     fetchMessages();
@@ -67,8 +96,14 @@ export default function AdminMessagesPage() {
                 <td className="p-2">{msg.customer_name || msg.customerName || ""}</td>
                 <td className="p-2">{msg.customer_email || msg.customerEmail || ""}</td>
                 <td className="p-2 max-w-[320px] truncate">{msg.content.length > 100 ? msg.content.slice(0, 100) + '…' : msg.content}</td>
-                <td className="p-2">{msg.productSlug || ""}</td>
-                <td className="p-2">{msg.pageUrl || ""}</td>
+                <td className="p-2">
+                  {msg.productImage ? (
+                    <img src={msg.productImage} alt={msg.productSlug} className="w-12 h-12 object-cover rounded shadow inline-block mr-2 align-middle" />
+                  ) : (
+                    msg.productSlug || ""
+                  )}
+                </td>
+                <td className="p-2">{getLastPathSegment(msg.pageUrl) || ""}</td>
                 <td className="p-2">
                   <span className={`inline-block px-2 py-1 rounded text-xs font-bold ${msg.status === 'unread' ? 'bg-yellow-200 text-yellow-800' : msg.status === 'read' ? 'bg-green-200 text-green-800' : 'bg-sand-300 text-sand-700'}`}>{msg.status}</span>
                 </td>

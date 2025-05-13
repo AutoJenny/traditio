@@ -41,10 +41,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/messages/[id]/route.js"
     ],
-    "/_not-found/page": [
+    "/api/products/[slug]/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/api/products/[slug]/route.js"
     ]
   }
 }
