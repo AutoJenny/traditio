@@ -22,7 +22,7 @@ export async function PUT(req, context) {
 
   // Fetch updated images
   const updatedImagesRes = await pool.query(
-    'SELECT * FROM "Image" WHERE "productId" = $1 ORDER BY order ASC',
+    'SELECT * FROM "Image" WHERE "productId" = $1 ORDER BY "order" ASC',
     [product.id]
   );
 
