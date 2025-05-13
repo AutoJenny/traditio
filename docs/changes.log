@@ -111,3 +111,5 @@
 [2025-05-14  showroom] Add: 'Newest' sort option to showroom page, sorting products by most recently created first.
 
 [2025-05-14  showroom] Change: Showroom page now defaults to 'Newest' sort order, showing most recently created products first.
+
+[2025-05-14  admin] Fix: Featured dropdown in admin products page now always shows 'yes' and 'no' as options, regardless of current value.

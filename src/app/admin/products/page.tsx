@@ -147,8 +147,8 @@ export default function AdminProductList() {
                       }}
                       className={`border rounded px-2 py-1 ${prod.featured ? 'bg-green-200 text-espresso font-bold' : ''}`}
                     >
-                      <option value="y">{prod.featured ? 'yes' : 'n'}</option>
-                      <option value="n">n</option>
+                      <option value="y">yes</option>
+                      <option value="n">no</option>
                     </select>
                   </td>
                   <td className="p-2">£{prod.price}</td>
