@@ -18,11 +18,12 @@ export async function GET(req: Request, context: any) {
   const slug = params.slug;
   console.log('GET handler called for', slug);
   try {
-    const productRes = await pool.query('SELECT * FROM "Product" WHERE slug = $1', [slug]);
+    const productRes = await pool.query('SELECT *, "createdAt" as created, "updatedAt" as updated FROM "Product" WHERE slug = $1', [slug]);
     if (productRes.rows.length === 0) {
       return withCors(NextResponse.json({ error: 'Product not found' }, { status: 404 }));
     }
     const product = productRes.rows[0];
+    const { createdAt, updatedAt, ...rest } = product;
     const { rows: images } = await pool.query('SELECT * FROM "Image" WHERE "productId" = $1', [product.id]);
     const { rows: categories } = await pool.query(`
       SELECT pc."productId", c.*
@@ -30,9 +31,8 @@ export async function GET(req: Request, context: any) {
       JOIN "Category" c ON pc."categoryId" = c.id
       WHERE pc."productId" = $1
     `, [product.id]);
-    // Alias createdAt/updatedAt to created/updated for consistency
     const normalizedProduct = {
-      ...product,
+      ...rest,
       created: product.created || product.createdAt,
       updated: product.updated || product.updatedAt,
       images,

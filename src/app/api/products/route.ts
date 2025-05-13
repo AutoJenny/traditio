@@ -7,7 +7,7 @@ export async function GET(req) {
     const showDeleted = url && url.searchParams.get('showDeleted');
     // Fetch products (optionally including deleted)
     const { rows: products } = await pool.query(`
-      SELECT * FROM "Product"${showDeleted ? '' : ' WHERE status != \'deleted\''} ORDER BY "created" DESC
+      SELECT *, "createdAt" as created, "updatedAt" as updated FROM "Product"${showDeleted ? '' : ' WHERE status != \'deleted\''} ORDER BY "createdAt" DESC
     `);
 
     // Fetch all images for these products
@@ -29,12 +29,17 @@ export async function GET(req) {
       categories = catRes.rows;
     }
 
-    // Attach images and categories to products
-    const productsWithDetails = products.map(prod => ({
-      ...prod,
-      images: images.filter(img => img.productId === prod.id),
-      categories: categories.filter(cat => cat.productId === prod.id)
-    }));
+    // Attach images and categories to products, and normalize created/updated fields
+    const productsWithDetails = products.map(prod => {
+      const { createdAt, updatedAt, ...rest } = prod;
+      return {
+        ...rest,
+        created: prod.created || prod.createdAt,
+        updated: prod.updated || prod.updatedAt,
+        images: images.filter(img => img.productId === prod.id),
+        categories: categories.filter(cat => cat.productId === prod.id)
+      };
+    });
 
     return NextResponse.json(productsWithDetails);
   } catch (error) {
