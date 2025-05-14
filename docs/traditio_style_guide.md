@@ -84,8 +84,8 @@
   - Mobile: Hamburger menu, slide-down nav
 - **Footer:**
   - Full width, max content width matches container
-  - Top: newsletter signup, contact info
-  - Bottom: legal links, copyright
+  - Top: newsletter signup, contact info (address, 'Contact Us' link, hours)
+  - Bottom: legal links (Delivery, Returns, Privacy, Reviews, Terms & Conditions), copyright
 - **Spacing:**
   - Section vertical spacing: ~64px desktop, ~32px mobile
   - Card vertical margin: ~32px
@@ -115,9 +115,9 @@
 - Hover: underline or color change, 200-300ms ease-in-out
 
 ### Footer
-- Contact details, address, phone, email, hours
+- Contact details, address, phone, 'Contact Us' link, hours
 - Newsletter signup: input + button, privacy note
-- Legal links
+- Legal links (Delivery, Returns, Privacy, Reviews, Terms & Conditions)
 
 ### Homepage
 - Hero: Large headline, minimal, centered, CTA button
@@ -183,7 +183,7 @@
   - **Accessibility:** All links/buttons have visible focus states.
 
 - [x] Footer
-  - **Layout:** Full-width, max content width ~1200px, centered. Top: Newsletter signup (input + button), contact info (address, phone, email, hours). Bottom: Legal links (Delivery, Contact, Returns, Privacy, Reviews), copyright. Vertical spacing: ~32px between sections.
+  - **Layout:** Full-width, max content width ~1200px, centered. Top: Newsletter signup (input + button), contact info (address, 'Contact Us' link, hours). Bottom: Legal links (Delivery, Returns, Privacy, Reviews, Terms & Conditions), copyright. Vertical spacing: ~32px between sections.
   - **Typography:** Body: ~1rem, muted sand color for legal links. Headings: Small caps, bold.
   - **Colors:** Background: Ivory (#F8F5F0). Text: Espresso (#3A2E2B), legal links in Muted Sand (#D6CFC6).
   - **Spacing:** Padding: ~32px top/bottom. Input/button: 12px 24px.
@@ -255,3 +255,5 @@
 ### Admin Image Management Page (Stub)
 - Linked from admin product edit page
 - Currently shows summary and link; features for upload, reorder, set main, alt text, delete coming soon
+
+### New /terms page: Friendly, clear, legally compliant Terms & Conditions

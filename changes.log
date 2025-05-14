@@ -87,3 +87,8 @@
 [2024-05-02] Updated showroom product details page to:
 - Show 'Materials' and 'Provenance' fields in the Details accordion if they have content
 - Remove 'Origin' field from Details
+
+[2024-05-02] Footer updated:
+- Removed email link under address, replaced with 'Contact Us' link
+- Moved 'Contact' link from Legal, added 'Terms & Conditions' under Legal
+- Created new /terms page with friendly, clear, legally compliant T&C content

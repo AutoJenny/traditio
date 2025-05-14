@@ -66,7 +66,7 @@ export default function RootLayout({
             <div>
               <h3 className="font-heading text-lg mb-2 uppercase tracking-wider">Contact</h3>
               <p>Traditio Interiors<br/>Edinburgh, Scotland</p>
-              <p className="mt-2">Email: <a href="mailto:info@traditio.com" className="hover:underline">info@traditio.com</a></p>
+              <p className="mt-2"><a href="/contact" className="hover:underline font-bold">Contact Us</a></p>
             </div>
             <div>
               <h3 className="font-heading text-lg mb-2 uppercase tracking-wider">Newsletter</h3>
@@ -80,10 +80,10 @@ export default function RootLayout({
               <h3 className="font-heading text-lg mb-2 uppercase tracking-wider">Legal</h3>
               <ul className="flex flex-col gap-1">
                 <li><a href="/delivery" className="hover:underline">Delivery</a></li>
-                <li><a href="/contact" className="hover:underline">Contact</a></li>
                 <li><a href="/returns" className="hover:underline">Returns</a></li>
                 <li><a href="/privacy" className="hover:underline">Privacy</a></li>
                 <li><a href="/reviews" className="hover:underline">Reviews</a></li>
+                <li><a href="/terms" className="hover:underline">Terms & Conditions</a></li>
               </ul>
               <p className="mt-4 text-xs text-sand">&copy; {new Date().getFullYear()} Traditio Interiors. All rights reserved.</p>
             </div>
