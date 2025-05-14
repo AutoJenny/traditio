@@ -116,3 +116,9 @@
 [YYYY-MM-DD] UI: Added asterisks beside required fields (Name, Email, Message, Phone) in ContactForm to indicate they are mandatory.
 
 [YYYY-MM-DD] UI: Made phone field optional in ContactForm (no longer required, asterisk removed from label).
+
+[YYYY-MM-DD] UI: Commented out social media share links (Facebook, Twitter, Pinterest) on showroom product page, not deleted for easy restoration.
+
+[YYYY-MM-DD] UI: Updated Details accordion info icon to a custom SVG (i in a circle) in deep sand color, replacing the previous emoji/icon.
+
+[YYYY-MM-DD] UI: Made Details accordion info icon even larger and used an italic 'i' in the SVG for improved prominence and style.
