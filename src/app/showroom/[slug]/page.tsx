@@ -64,6 +64,10 @@ export default function ProductDetail() {
   const enquiryFormRef = useRef<HTMLDivElement>(null);
   const [unitSystem, setUnitSystem] = useState<'Metric' | 'Imperial'>('Metric');
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [allProducts, setAllProducts] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [sort, setSort] = useState<string>('newest');
 
   useEffect(() => {
     async function fetchProduct() {
@@ -82,6 +86,56 @@ export default function ProductDetail() {
     fetchProduct();
   }, [slug]);
 
+  // Fetch all products and categories for navigation
+  useEffect(() => {
+    async function fetchNavData() {
+      const catRes = await fetch('/api/categories');
+      setCategories(await catRes.json());
+      const prodRes = await fetch('/api/products');
+      setAllProducts(await prodRes.json());
+    }
+    fetchNavData();
+  }, []);
+
+  // Determine selected category from URL (if present), else use localStorage, else default to 'all'
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const cat = url.searchParams.get('category');
+    if (cat) {
+      setSelectedCategory(cat);
+      localStorage.setItem('showroomSelectedCategory', cat);
+    } else {
+      const storedCat = localStorage.getItem('showroomSelectedCategory');
+      setSelectedCategory(storedCat || 'all');
+    }
+  }, [slug]);
+
+  // Filter and sort products for navigation
+  const filteredProducts = (selectedCategory === 'all'
+    ? allProducts
+    : allProducts.filter((prod: any) =>
+        prod.categories && prod.categories.some((cat: any) => cat.slug === selectedCategory)
+      )
+  ).filter((prod: any) => !['draft', 'sold', 'deleted'].includes((prod.status || '').toLowerCase()));
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (sort === 'price-asc') return (a.price || 0) - (b.price || 0);
+    if (sort === 'price-desc') return (b.price || 0) - (a.price || 0);
+    if (sort === 'newest') {
+      const aDate = a.created ? new Date(a.created).getTime() : 0;
+      const bDate = b.created ? new Date(b.created).getTime() : 0;
+      return bDate - aDate;
+    }
+    // Default: A-Z
+    return (a.title || '').localeCompare(b.title || '');
+  });
+
+  // Find current product index
+  const currentIdx = sortedProducts.findIndex((p: any) => p.slug === slug);
+  const prevProduct = currentIdx > 0 ? sortedProducts[currentIdx - 1] : null;
+  const nextProduct = currentIdx >= 0 && currentIdx < sortedProducts.length - 1 ? sortedProducts[currentIdx + 1] : null;
+  const categoryObj = selectedCategory === 'all' ? null : categories.find((c: any) => c.slug === selectedCategory);
+
   function formatPrice(value: string | number) {
     if (value === null || value === undefined) return '';
     const num = typeof value === 'number' ? value : parseFloat(value.toString().replace(/,/g, ''));
@@ -94,6 +148,28 @@ export default function ProductDetail() {
 
   return (
     <main className="max-w-5xl mx-auto py-12 px-4 md:px-0">
+      {/* Category Navigation Bar */}
+      <div className="flex items-center justify-center gap-4 mb-6 text-sand text-sm font-body">
+        <button
+          disabled={!prevProduct}
+          onClick={() => prevProduct && window.location.assign(`/showroom/${prevProduct.slug}?category=${selectedCategory}`)}
+          className={`px-2 py-1 rounded-full border border-sand bg-ivory hover:bg-sand transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed`}
+          aria-label="Previous product"
+        >
+          &lt;
+        </button>
+        <span className="min-w-[120px] text-center font-semibold">
+          {categoryObj ? categoryObj.name : 'All Products'}
+        </span>
+        <button
+          disabled={!nextProduct}
+          onClick={() => nextProduct && window.location.assign(`/showroom/${nextProduct.slug}?category=${selectedCategory}`)}
+          className={`px-2 py-1 rounded-full border border-sand bg-ivory hover:bg-sand transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed`}
+          aria-label="Next product"
+        >
+          &gt;
+        </button>
+      </div>
       {/* Edit link at top right */}
       <div className="flex justify-end">
         <a

@@ -92,3 +92,7 @@
 - Removed email link under address, replaced with 'Contact Us' link
 - Moved 'Contact' link from Legal, added 'Terms & Conditions' under Legal
 - Created new /terms page with friendly, clear, legally compliant T&C content
+
+[2024-05-15  showroom] Add: Product details page now features a category navigation bar with Previous/Next icons, showing the selected category (or All Products) and allowing navigation to previous/next product in the current category. Subtle styling, placed below the header and above the product title. Product order matches showroom sort logic.
+
+[2024-05-15  showroom] Fix: Product details page now remembers and displays the active category as you click Previous/Next, using localStorage to persist the user's last selected category. Showroom page now saves category selection to localStorage. Navigation and label always match user's last intent.

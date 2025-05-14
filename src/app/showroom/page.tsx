@@ -54,6 +54,12 @@ export default function Showroom() {
     return (a.title || '').localeCompare(b.title || '');
   });
 
+  // When user selects a category, persist it in localStorage
+  const handleCategorySelect = (cat: string) => {
+    setSelectedCategory(cat);
+    localStorage.setItem('showroomSelectedCategory', cat);
+  };
+
   return (
     <main className="max-w-6xl mx-auto py-16 px-4">
       <div className="relative mb-10 flex items-center justify-center">
@@ -77,7 +83,7 @@ export default function Showroom() {
           <li key="all">
             <button
               className={`px-2 py-1 border-b-2 ${selectedCategory === 'all' ? 'border-brass text-brass' : 'border-transparent hover:border-brass hover:text-brass'} transition-colors duration-200`}
-              onClick={() => setSelectedCategory('all')}
+              onClick={() => handleCategorySelect('all')}
             >
               All
             </button>
@@ -86,7 +92,7 @@ export default function Showroom() {
             <li key={cat.slug}>
               <button
                 className={`px-2 py-1 border-b-2 ${selectedCategory === cat.slug ? 'border-brass text-brass' : 'border-transparent hover:border-brass hover:text-brass'} transition-colors duration-200`}
-                onClick={() => setSelectedCategory(cat.slug)}
+                onClick={() => handleCategorySelect(cat.slug)}
               >
                 {cat.name}
               </button>

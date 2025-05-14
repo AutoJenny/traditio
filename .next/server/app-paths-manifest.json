@@ -1,8 +1,11 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
+  "/api/categories/route": "app/api/categories/route.js",
+  "/api/products/[slug]/route": "app/api/products/[slug]/route.js",
+  "/api/products/route": "app/api/products/route.js",
+  "/api/messages/route": "app/api/messages/route.js",
   "/terms/page": "app/terms/page.js",
-  "/admin/products/page": "app/admin/products/page.js",
   "/showroom/[slug]/page": "app/showroom/[slug]/page.js",
+  "/admin/products/page": "app/admin/products/page.js",
   "/admin/products/[slug]/page": "app/admin/products/[slug]/page.js",
   "/showroom/page": "app/showroom/page.js"
 }

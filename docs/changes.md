@@ -30,4 +30,9 @@
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 
 
+## 2024-05-15
+- Showroom Details section now only displays Provenance, Period, and Materials if they have content. Improves clarity and avoids empty fields in product details. No schema change required. See changes.log for details.
+- Product details page now features a category navigation bar with Previous/Next icons, showing the selected category (or All Products) and allowing navigation to previous/next product in the current category. Subtle styling, placed below the header and above the product title. Product order matches showroom sort logic. See changes.log for details.
+- Product details page now remembers and displays the active category as you click Previous/Next, using localStorage to persist the user's last selected category. Showroom page now saves category selection to localStorage. Navigation and label always match user's last intent. See changes.log for details.
+
 // Prisma is no longer used. All DB access is via direct SQL using the pg package. Migrations are managed by editing and running SQL files directly. Do not use or reference Prisma or its schema.
