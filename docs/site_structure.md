@@ -100,7 +100,7 @@ traditio/
   - Backend now rejects updates that would remove all images, and frontend warns/prevents saving if no images are present. This prevents accidental image loss.
   - Features a tabbed interface with the following tabs:
     - **Source**: (Planned) Acquisition source, date, price, provenance, and document upload
-    - **Description**: Title, price, status, categories, description, dimensions, condition, origin, period
+    - **Description**: Title, price, status, categories, description, dimensions, condition, period, materials, provenance
     - **Images**: Image summary and link to image management
     - **Sale**: (Planned) Sale details and workflow
   - Tab switching is handled in React state; each tab displays its relevant form or summary.
@@ -143,7 +143,7 @@ traditio/
 - **Each route** is a folder with a `page.tsx` file (and optionally a `layout.tsx`).
 - **API endpoints** are colocated in `src/app/api/` using route handlers.
 - **Dynamic routes** use `[param]` folder syntax.
-- **Prisma** is the only DB access layer; never import Prisma client directly except via `lib/prisma.ts`.
+- **Prisma** is deprecated. Do not use it. Access the DB directly
 - **Static assets** are always referenced from `/public`.
 
 ---
@@ -153,8 +153,8 @@ traditio/
 1. `npm install` (from the project root)
 2. `npm run dev` (starts on http://localhost:3000)
 3. Edit files in `src/app/` to add or change routes/pages.
-4. For backend/API changes, edit files in `src/app/api/` and/or `prisma/`.
-5. For DB changes, update `prisma/schema.prisma`, run `npx prisma migrate dev`, and update seed data as needed.
+4. For backend/API changes, edit files in `src/app/api/`
+5. For DB changes, update directly. Do not use prisma.
 
 ---
 

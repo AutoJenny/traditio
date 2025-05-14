@@ -23,8 +23,8 @@ async function main() {
   // Create a mapping of base slugs to full slugs
   const baseSlugToFullSlug = {};
   for (const product of dbProducts) {
-    // Extract base slug by removing the ID suffix (_123)
-    const baseSlug = product.slug.replace(/_\d+$/, '');
+    // Extract base slug by removing the ID suffix (dash and digits)
+    const baseSlug = product.slug.replace(/-\d+$/, '');
     baseSlugToFullSlug[baseSlug] = product.slug;
   }
   
@@ -47,7 +47,7 @@ async function main() {
     
     // If no direct match, try base slug match
     if (!matchedSlug) {
-      const baseSlug = dirName.replace(/_\d+$/, '');
+      const baseSlug = dirName.replace(/-\d+$/, '');
       matchedSlug = baseSlugToFullSlug[baseSlug];
     }
     

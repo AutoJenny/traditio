@@ -9,6 +9,7 @@
 - All database access, migrations, and seeding are now handled via raw SQL and the `pg` package.
 - The Prisma schema, client, and migration tools have been fully removed from the project.
 - All future DB changes should be made by editing migration SQL files directly and updating scripts as needed.
+- DB details are found in /Users/nickfiddes/Code/projects/traditio/.env or /Users/nickfiddes/Code/projects/traditio/.envrc
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
@@ -34,17 +35,8 @@ You can start editing the page by modifying `src/app/page.tsx`. The page auto-up
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Important: Documentation
 
-To learn more about Next.js, take a look at the following resources:
+**Read the /docs directory fully before starting any new project or different task.**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**After completing a project or task update any /docs to maintain accuracy. Also add a note to the changes.log. Also commit to git**

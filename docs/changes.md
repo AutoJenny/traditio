@@ -3,7 +3,7 @@
 - Updated Prisma schema to add productId relation to Message model.
 - Ran migration and reset database to apply schema changes.
 - Deleted all old/corrupt Prisma migration scripts to avoid confusion and future issues.
-- Generated a new baseline migration (`baseline.sql`) reflecting the current live database structure.
+- Created a new baseline migration (`baseline.sql`) reflecting the current live database structure.
 - Created a full SQL backup of the database before making any changes, stored in `prisma/exports/`.
 - The project is now ready for safe, reliable future migrations.
 - Manually created Customer and Message tables in the database to support the contact form, due to Prisma migration drift. This is a temporary workaround until migration history is rebuilt.
@@ -29,3 +29,5 @@
 
 ## 2024-05-13
 - Fixed admin product category persistence: robust backend join table update, correct frontend mapping, CORS, and logging. See changes.log for details. 
+
+// Prisma is no longer used. All DB access is via direct SQL using the pg package. Migrations are managed by editing and running SQL files directly. Do not use or reference Prisma or its schema.

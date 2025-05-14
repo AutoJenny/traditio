@@ -77,3 +77,13 @@
 [YYYY-MM-DD] API update: GET /api/products/[slug] now joins Condition table and returns grade and rubric for the product's condition_id.
 
 [YYYY-MM-DD] Showroom product page: displays condition grade, rubric, and notes (if present) in the Details accordion under a Condition sub-heading.
+
+[YYYY-MM-DD] Added 'materials' field to Product model (Prisma schema), admin edit page, main product page (Details), API routes, and seed script.
+
+[YYYY-MM-DD] Removed all Prisma usage from product API and scripts. All product database logic now uses direct SQL via pg. Added support for 'materials' field throughout.
+
+[YYYY-MM-DD] Removed 'origin' field from Product table and UI. Added 'provenance' field to Product table, admin edit page, and main product page (Details section).
+
+[2024-05-02] Updated showroom product details page to:
+- Show 'Materials' and 'Provenance' fields in the Details accordion if they have content
+- Remove 'Origin' field from Details

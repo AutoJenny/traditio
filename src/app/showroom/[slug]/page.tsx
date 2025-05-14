@@ -162,8 +162,9 @@ export default function ProductDetail() {
               )}
               {product.weight && <div><b>Weight:</b> {unitSystem === 'Metric' ? formatWeightMetric(parseFloat(product.weight)) : formatWeightImperial(parseFloat(product.weight))}</div>}
               {product.condition && <div><b>Condition:</b> {product.condition}</div>}
-              {product.origin && <div><b>Origin:</b> {product.origin}</div>}
               {product.period && <div><b>Period:</b> {product.period}</div>}
+              {product.materials && <div><b>Materials:</b> {product.materials}</div>}
+              {product.provenance && <div><b>Provenance:</b> {product.provenance}</div>}
               {/* Condition details */}
               {(product.condition_grade || product.condition_rubric || product.condition_notes) && (
                 <div className="mt-4">

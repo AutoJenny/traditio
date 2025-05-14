@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { slugify } from '../../../lib/slugify';
 
 export default function AdminProductList() {
   const [products, setProducts] = useState<any[]>([]);
@@ -77,10 +78,11 @@ export default function AdminProductList() {
                 e.preventDefault();
                 if (!newTitle.trim()) return;
                 setCreating(true);
+                const slug = slugify(newTitle.trim());
                 const res = await fetch("/api/products", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ title: newTitle.trim() }),
+                  body: JSON.stringify({ title: newTitle.trim(), slug }),
                 });
                 const data = await res.json();
                 setCreating(false);

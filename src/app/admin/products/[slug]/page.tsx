@@ -11,6 +11,7 @@ export default function AdminProductEdit() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   // Track if price input is focused
   const [priceFocused, setPriceFocused] = useState(false);
   const [activeTab, setActiveTab] = useState('Description');
@@ -19,6 +20,7 @@ export default function AdminProductEdit() {
   const [showImageWarning, setShowImageWarning] = useState(false);
   const [pendingSave, setPendingSave] = useState<any>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -93,6 +95,7 @@ export default function AdminProductEdit() {
     e.preventDefault();
     setSaving(true);
     setError("");
+    setSuccess(false);
     try {
       // Sanitize payload: exclude images
       const { images, ...rest } = product;
@@ -115,6 +118,14 @@ export default function AdminProductEdit() {
           categoryIds: data.product.categories?.map((cat: any) => Number(cat.id)) || [],
           images: data.product.images || [],
         });
+        setSuccess(true);
+        setTimeout(() => setSuccess(false), 2000);
+        // Scroll to the success message
+        setTimeout(() => {
+          if (successRef.current) {
+            successRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 50);
       } else {
         router.refresh();
       }
@@ -169,6 +180,10 @@ export default function AdminProductEdit() {
           Draft: Please add a title and price to complete this product.
         </div>
       )}
+      {/* Success message anchor */}
+      <div ref={successRef}></div>
+      {/* Success message */}
+      {success && <div className="mb-4 text-green-600 font-semibold">Saved</div>}
       {/* Tab Bar */}
       <div className="flex mb-8 border-b-2 border-sand-300">
         {['Source', 'Description', 'Images', 'Sale'].map(tab => (
@@ -292,15 +307,20 @@ export default function AdminProductEdit() {
               </div>
             </div>
             <div>
-              <label className="block font-bold mb-1">Origin</label>
-              <input name="origin" value={product.origin || ""} onChange={handleChange} className="w-full border rounded p-2" />
-            </div>
-            <div>
               <label className="block font-bold mb-1">Period</label>
               <input name="period" value={product.period || ""} onChange={handleChange} className="w-full border rounded p-2" />
             </div>
-            <div className="flex gap-4 mt-6">
+            <div>
+              <label className="block font-bold mb-1">Materials</label>
+              <input name="materials" value={product.materials || ""} onChange={handleChange} className="w-full border rounded p-2" />
+            </div>
+            <div>
+              <label className="block font-bold mb-1">Provenance</label>
+              <input name="provenance" value={product.provenance || ""} onChange={handleChange} className="w-full border rounded p-2" />
+            </div>
+            <div className="flex gap-4 mt-6 items-center">
               <button type="submit" disabled={saving} className="bg-brass text-espresso font-bold rounded px-6 py-2 border-2 border-brass shadow hover:bg-espresso hover:text-ivory transition">{saving ? "Saving..." : "Save"}</button>
+              {error && <span className="text-red-600 ml-2">{error}</span>}
             </div>
           </form>
           {/* Delete icon button outside the form */}

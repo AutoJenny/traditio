@@ -45,7 +45,8 @@ export async function GET(req: Request, context: any) {
       images,
       categories,
       condition_grade: condition?.grade || null,
-      condition_rubric: condition?.grade_rubric || null
+      condition_rubric: condition?.grade_rubric || null,
+      materials: product.materials || null
     };
     return withCors(NextResponse.json({ product: normalizedProduct }));
   } catch (error) {
@@ -66,7 +67,7 @@ export async function PUT(req: Request, context: any) {
     return withCors(NextResponse.json({ error: 'Invalid JSON' }, { status: 400 }));
   }
   try {
-    const { categoryIds, images, title, description, price, currency, status, mainImageId, dimension_wide, dimension_deep, dimension_high, weight, condition_id, condition_notes, origin, period, featured } = body;
+    const { categoryIds, images, title, description, price, currency, status, mainImageId, dimension_wide, dimension_deep, dimension_high, weight, condition_id, condition_notes, provenance, period, featured, materials } = body;
     if (!title || !price) {
       return withCors(NextResponse.json({ error: 'Title and price are required' }, { status: 400 }));
     }
@@ -76,7 +77,7 @@ export async function PUT(req: Request, context: any) {
     const product = productRes.rows[0];
     // Update product fields
     await pool.query(
-      `UPDATE "Product" SET title=$1, description=$2, price=$3, currency=$4, status=$5, "mainImageId"=$6, dimension_wide=$7, dimension_deep=$8, dimension_high=$9, weight=$10, condition_id=$11, condition_notes=$12, origin=$13, period=$14, featured=$15, updated=NOW() WHERE id=$16`,
+      `UPDATE "Product" SET title=$1, description=$2, price=$3, currency=$4, status=$5, "mainImageId"=$6, dimension_wide=$7, dimension_deep=$8, dimension_high=$9, weight=$10, condition_id=$11, condition_notes=$12, provenance=$13, period=$14, featured=$15, materials=$16, updated=NOW() WHERE id=$17`,
       [title, description, parseFloat(price), currency, status, mainImageId,
        dimension_wide !== undefined && !isNaN(Number(dimension_wide)) ? Number(dimension_wide) : null,
        dimension_deep !== undefined && !isNaN(Number(dimension_deep)) ? Number(dimension_deep) : null,
@@ -84,7 +85,7 @@ export async function PUT(req: Request, context: any) {
        weight !== undefined && !isNaN(Number(weight)) ? Number(weight) : null,
        condition_id !== undefined && condition_id !== '' ? Number(condition_id) : null,
        condition_notes || null,
-       origin, period, featured, product.id]
+       provenance || null, period, featured, materials || null, product.id]
     );
     // Update categories if provided
     if (Array.isArray(categoryIds)) {

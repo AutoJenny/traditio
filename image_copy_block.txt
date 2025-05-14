@@ -1,19 +1,19 @@
 COPY public."Image" (id, url, alt, "productId", "order") FROM stdin;
-1	/images/products/test/IMG_1603.jpeg	Rare Buddha angle 1	\N	\N
-2	/images/products/test/IMG_1604.jpeg	Rare Buddha angle 2	\N	\N
-3	/images/products/test/IMG_1606.jpeg	Rare Buddha angle 3	\N	\N
-4	/images/products/test/IMG_1607.jpeg	Rare Buddha angle 4	\N	\N
-5	/images/products/rare-buddha_101/rare-buddha_101_1.jpeg	Rare Buddha angle 1	101	0
-7	/images/products/rare-buddha_101/rare-buddha_101_2.jpeg	Rare Buddha angle 3	101	1
-6	/images/products/rare-buddha_101/rare-buddha_101_3.jpeg	Rare Buddha angle 2	101	2
-8	/images/products/rare-buddha_101/rare-buddha_101_4.jpeg	Rare Buddha angle 4	101	3
-10	/images/products/art-nouveau-mirror_109/art-nouveau-mirror_109_2.jpeg	\N	109	0
-9	/images/products/art-nouveau-mirror_109/art-nouveau-mirror_109_1.jpeg	\N	109	1
-11	/images/products/large-terracotta-pot_104/large-terracotta-pot_104_1.jpeg	\N	104	0
-12	/images/products/louis-xvi-chair_114/louis-xvi-chair_114_1.jpeg	\N	114	0
-13	/images/products/louis-xvi-chair_114/louis-xvi-chair_114_2.jpeg	\N	114	1
-14	/images/products/marble-console-table_120/marble-console-table_120_1.jpeg	\N	120	0
-15	/images/products/marble-console-table_120/marble-console-table_120_2.jpeg	\N	120	1
-16	/images/products/draft-1747000717807-3966/draft-1747000717807-3966_1.jpeg	\N	131	0
-17	/images/products/butler-s-tray-table-133/butler-s-tray-table-133_1.jpeg	\N	133	0
+1	/images/products/test/IMG-1603.jpeg	Rare Buddha angle 1	\N	\N
+2	/images/products/test/IMG-1604.jpeg	Rare Buddha angle 2	\N	\N
+3	/images/products/test/IMG-1606.jpeg	Rare Buddha angle 3	\N	\N
+4	/images/products/test/IMG-1607.jpeg	Rare Buddha angle 4	\N	\N
+5	/images/products/rare-buddha-101/rare-buddha-101-1.jpeg	Rare Buddha angle 1	101	0
+7	/images/products/rare-buddha-101/rare-buddha-101-2.jpeg	Rare Buddha angle 3	101	1
+6	/images/products/rare-buddha-101/rare-buddha-101-3.jpeg	Rare Buddha angle 2	101	2
+8	/images/products/rare-buddha-101/rare-buddha-101-4.jpeg	Rare Buddha angle 4	101	3
+10	/images/products/art-nouveau-mirror-109/art-nouveau-mirror-109-2.jpeg	\N	109	0
+9	/images/products/art-nouveau-mirror-109/art-nouveau-mirror-109-1.jpeg	\N	109	1
+11	/images/products/large-terracotta-pot-104/large-terracotta-pot-104-1.jpeg	\N	104	0
+12	/images/products/louis-xvi-chair-114/louis-xvi-chair-114-1.jpeg	\N	114	0
+13	/images/products/louis-xvi-chair-114/louis-xvi-chair-114-2.jpeg	\N	114	1
+14	/images/products/marble-console-table-120/marble-console-table-120-1.jpeg	\N	120	0
+15	/images/products/marble-console-table-120/marble-console-table-120-2.jpeg	\N	120	1
+16	/images/products/draft-1747000717807-3966/draft-1747000717807-3966-1.jpeg	\N	131	0
+17	/images/products/butler-s-tray-table-133/butler-s-tray-table-133-1.jpeg	\N	133	0
 \.
