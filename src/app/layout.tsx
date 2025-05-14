@@ -42,7 +42,6 @@ export default function RootLayout({
             <li><Link href="/" className="hover:text-brass transition-colors duration-200">Home</Link></li>
             <li><Link href="/about" className="hover:text-brass transition-colors duration-200">About</Link></li>
             <li><Link href="/showroom" className="hover:text-brass transition-colors duration-200">Showroom</Link></li>
-            <li><Link href="/blog" className="hover:text-brass transition-colors duration-200">Blog</Link></li>
             <li><Link href="/viewings" className="hover:text-brass transition-colors duration-200">Viewings</Link></li>
             <li><Link href="/delivery" className="hover:text-brass transition-colors duration-200">Delivery</Link></li>
             <li><Link href="/contact" className="hover:text-brass transition-colors duration-200">Contact</Link></li>

@@ -135,7 +135,7 @@
 - Info: Title, price, description, dimensions, condition, origin, SOLD badge
 - Add to cart: prominent, disabled if sold
 - Delivery info: expandable/collapsible
-- Social share: Facebook, Twitter, Pinterest
+- Social share: Facebook, Twitter, Pinterest (currently commented out in code; not visible to users, but code is retained for easy restoration)
 - Related products
 
 ### Other Pages
