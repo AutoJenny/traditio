@@ -108,3 +108,11 @@
 [2024-05-15  admin] Update: Admin messages page now displays the name and phone recorded with each message (not just the current customer name), and shows the phone number if present. API updated to return these fields.
 
 [2024-05-15  customer] Fix: Customer name and phone are now only set on first contact/newsletter form submission. Once set, they are never overwritten by subsequent forms. Ensures original contact info is preserved in Customer table.
+
+[2024-05-15  nav] Update: Removed the Blog link from the main navigation header.
+
+[YYYY-MM-DD] Fixed React warning: duplicate key in country code <select> in ContactForm. Now uses both code and name for unique keys.
+
+[YYYY-MM-DD] UI: Added asterisks beside required fields (Name, Email, Message, Phone) in ContactForm to indicate they are mandatory.
+
+[YYYY-MM-DD] UI: Made phone field optional in ContactForm (no longer required, asterisk removed from label).
