@@ -7,6 +7,7 @@ export default function AdminProductEdit() {
   const router = useRouter();
   const [product, setProduct] = useState<any>(null);
   const [categories, setCategories] = useState<any[]>([]);
+  const [conditions, setConditions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -21,14 +22,16 @@ export default function AdminProductEdit() {
 
   useEffect(() => {
     async function fetchData() {
-      const [catRes, prodRes] = await Promise.all([
+      const [catRes, prodRes, condRes] = await Promise.all([
         fetch("/api/categories"),
         fetch(`/api/products/${slug}`),
+        fetch("/api/conditions"),
       ]);
       const cats = await catRes.json();
       const prodData = await prodRes.json();
+      const conds = await condRes.json();
       setCategories(cats);
-      // Flatten categories to array of IDs for form
+      setConditions(conds);
       setProduct({
         ...prodData.product,
         categoryIds: prodData.product?.categories?.map((cat: any) => Number(cat.id)) || [],
@@ -90,25 +93,12 @@ export default function AdminProductEdit() {
     e.preventDefault();
     setSaving(true);
     setError("");
-    // Always fetch latest images before saving
-    const latestImages = await fetchLatestImages();
-    const imagesToSave = (product.images && product.images.length > 0) ? product.images : latestImages;
-    if (!imagesToSave || imagesToSave.length === 0) {
-      setShowImageWarning(true);
-      setPendingSave(() => () => handleSave(e));
-      setSaving(false);
-      return;
-    }
     try {
-      // Sanitize payload
+      // Sanitize payload: exclude images
+      const { images, ...rest } = product;
       const cleanProduct = {
-        ...product,
+        ...rest,
         categoryIds: (product.categoryIds || []).filter((id: any) => typeof id === 'number' && id > 0),
-        images: imagesToSave.map((img: any) => ({
-          url: img.url,
-          ...(img.alt !== undefined ? { alt: img.alt } : {}),
-          ...(typeof img.order === 'number' ? { order: img.order } : {}),
-        })),
       };
       const res = await fetch(`/api/products/${slug}`, {
         method: "PUT",
@@ -117,7 +107,6 @@ export default function AdminProductEdit() {
       });
       if (!res.ok) throw new Error("Failed to save");
       const data = await res.json();
-      // If the slug has changed, redirect to the new canonical URL
       if (data.product && data.product.slug && data.product.slug !== slug) {
         router.push(`/admin/products/${data.product.slug}`);
       } else if (data.product) {
@@ -126,7 +115,6 @@ export default function AdminProductEdit() {
           categoryIds: data.product.categories?.map((cat: any) => Number(cat.id)) || [],
           images: data.product.images || [],
         });
-        // Optionally, show a success message here
       } else {
         router.refresh();
       }
@@ -270,7 +258,38 @@ export default function AdminProductEdit() {
             </div>
             <div>
               <label className="block font-bold mb-1">Condition</label>
-              <input name="condition" value={product.condition || ""} onChange={handleChange} className="w-full border rounded p-2" />
+              <div className="border rounded p-3 bg-sand-50 space-y-2">
+                <div>
+                  <label className="block text-sm font-semibold mb-1">Grade</label>
+                  <select
+                    name="condition_id"
+                    value={product.condition_id || ''}
+                    onChange={handleChange}
+                    className="w-full border rounded p-2"
+                  >
+                    <option value="">Select grade...</option>
+                    {conditions.map((cond: any) => (
+                      <option key={cond.id} value={cond.id}>{cond.grade}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-1">Rubric</label>
+                  <div className="text-xs text-sand-700 bg-white border rounded p-2 min-h-[2.5em]">
+                    {conditions.find((c: any) => c.id == product.condition_id)?.grade_rubric || <span className="text-sand-400">Select a grade to see rubric</span>}
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-1">Notes</label>
+                  <textarea
+                    name="condition_notes"
+                    value={product.condition_notes || ''}
+                    onChange={handleChange}
+                    className="w-full border rounded p-2"
+                    rows={2}
+                  />
+                </div>
+              </div>
             </div>
             <div>
               <label className="block font-bold mb-1">Origin</label>
@@ -297,18 +316,6 @@ export default function AdminProductEdit() {
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /></svg>
             </button>
           </div>
-          {/* Image removal warning modal */}
-          {showImageWarning && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-              <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
-                <h2 className="text-xl font-bold mb-4 text-espresso">No Images Attached</h2>
-                <p className="mb-4 text-sand-700">Saving now will remove all images from this product. This is not allowed. Please add at least one image before saving.</p>
-                <div className="flex gap-4 mt-6">
-                  <button type="button" onClick={() => setShowImageWarning(false)} className="bg-sand text-espresso rounded px-6 py-2 border-2 border-sand shadow hover:bg-espresso hover:text-ivory transition">OK</button>
-                </div>
-              </div>
-            </div>
-          )}
         </>
       )}
       {activeTab === 'Images' && (
