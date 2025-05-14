@@ -157,6 +157,19 @@ export default function AdminProductEdit() {
 
   return (
     <main className="max-w-2xl mx-auto py-12 px-4">
+      {/* Link to live product page */}
+      {product?.slug && (
+        <div className="flex justify-end mb-2">
+          <a
+            href={`/showroom/${product.slug}`}
+            className="text-xs text-brass hover:underline border border-brass rounded px-3 py-1 transition font-semibold"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Live Page
+          </a>
+        </div>
+      )}
       <h1 className="font-heading text-2xl md:text-3xl font-bold uppercase text-espresso mb-6">Edit Product</h1>
       {/* Show the product slug for visual confirmation */}
       {product?.slug && (
@@ -240,19 +253,19 @@ export default function AdminProductEdit() {
               <textarea name="description" value={product.description || ""} onChange={handleChange} className="w-full border rounded p-2" rows={3} />
             </div>
             <div>
-              <label className="block font-bold mb-1">Dimensions (Wide)</label>
+              <label className="block font-bold mb-1">Dimensions (Wide): cm</label>
               <input name="dimension_wide" type="number" step="any" value={product.dimension_wide || ""} onChange={handleChange} className="w-full border rounded p-2 mb-2" />
             </div>
             <div>
-              <label className="block font-bold mb-1">Dimensions (Deep)</label>
+              <label className="block font-bold mb-1">Dimensions (Deep): cm</label>
               <input name="dimension_deep" type="number" step="any" value={product.dimension_deep || ""} onChange={handleChange} className="w-full border rounded p-2 mb-2" />
             </div>
             <div>
-              <label className="block font-bold mb-1">Dimensions (High)</label>
+              <label className="block font-bold mb-1">Dimensions (High): cm</label>
               <input name="dimension_high" type="number" step="any" value={product.dimension_high || ""} onChange={handleChange} className="w-full border rounded p-2" />
             </div>
             <div>
-              <label className="block font-bold mb-1">Weight</label>
+              <label className="block font-bold mb-1">Weight: kg</label>
               <input name="weight" type="number" step="any" value={product.weight || ""} onChange={handleChange} className="w-full border rounded p-2 mb-2" />
             </div>
             <div>

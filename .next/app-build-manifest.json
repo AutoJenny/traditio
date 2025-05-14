@@ -6,40 +6,50 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/admin/db/page": [
+    "/admin/products/[slug]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/admin/db/page.js"
+      "static/chunks/app/admin/products/[slug]/page.js"
     ],
     "/api/messages/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/messages/route.js"
     ],
-    "/api/db/route": [
+    "/api/categories/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/db/route.js"
+      "static/chunks/app/api/categories/route.js"
     ],
-    "/admin/page": [
+    "/api/products/[slug]/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/admin/page.js"
+      "static/chunks/app/api/products/[slug]/route.js"
     ],
-    "/admin/products/page": [
+    "/showroom/[slug]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/admin/products/page.js"
+      "static/chunks/app/showroom/[slug]/page.js"
+    ],
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
     ],
     "/api/products/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/products/route.js"
     ],
-    "/api/categories/route": [
+    "/showroom/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/categories/route.js"
+      "static/chunks/app/showroom/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

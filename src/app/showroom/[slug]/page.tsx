@@ -5,8 +5,56 @@ import { TransformWrapper, TransformComponent, useControls } from 'react-zoom-pa
 import ProductGrid from "../../../components/ProductGrid";
 import ProductEnquiryForm from '../../../components/ProductEnquiryForm';
 
+// Utility functions for unit conversion and formatting
+function formatDimensionMetric(cm: number) {
+  if (cm >= 100) {
+    return (cm / 100).toFixed(2) + ' m';
+  } else {
+    return Math.round(cm) + ' cm';
+  }
+}
+function formatWeightMetric(kg: number) {
+  if (kg >= 1) {
+    return kg.toFixed(2) + ' kg';
+  } else {
+    return Math.round(kg * 1000) + ' g';
+  }
+}
+function cmToInches(cm: number) {
+  return cm / 2.54;
+}
+function formatDimensionImperial(cm: number) {
+  const totalInches = cmToInches(cm);
+  if (totalInches >= 12) {
+    const feet = Math.floor(totalInches / 12);
+    const inches = totalInches % 12;
+    return `${feet}' ${inches.toFixed(1)}"`;
+  } else {
+    return totalInches.toFixed(1) + '"';
+  }
+}
+function kgToLbs(kg: number) {
+  return kg * 2.20462;
+}
+function formatWeightImperial(kg: number) {
+  const totalOunces = kg * 35.274;
+  if (totalOunces >= 224) { // 1 stone = 14 lbs = 224 oz
+    const stones = Math.floor(totalOunces / 224);
+    const lbs = Math.floor((totalOunces % 224) / 16);
+    const oz = Math.round(totalOunces % 16);
+    return `${stones} st ${lbs} lb${oz ? ' ' + oz + ' oz' : ''}`;
+  } else if (totalOunces >= 16) {
+    const lbs = Math.floor(totalOunces / 16);
+    const oz = Math.round(totalOunces % 16);
+    return `${lbs} lb${oz ? ' ' + oz + ' oz' : ''}`;
+  } else {
+    return Math.round(totalOunces) + ' oz';
+  }
+}
+
 export default function ProductDetail() {
   const { slug } = useParams();
+  console.log('Showroom page slug param:', slug);
   const [product, setProduct] = useState<any>(null);
   const [related, setRelated] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -14,14 +62,22 @@ export default function ProductDetail() {
   const [modalOpen, setModalOpen] = useState(false);
   const [showEnquiryForm, setShowEnquiryForm] = useState(false);
   const enquiryFormRef = useRef<HTMLDivElement>(null);
+  const [unitSystem, setUnitSystem] = useState<'Metric' | 'Imperial'>('Metric');
+  const [detailsOpen, setDetailsOpen] = useState(false);
 
   useEffect(() => {
     async function fetchProduct() {
-      const res = await fetch(`/api/products/${slug}`);
-      const data = await res.json();
-      setProduct(data.product);
-      setRelated(data.related || []);
-      setLoading(false);
+      try {
+        const res = await fetch(`/api/products/${slug}`);
+        if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+        const data = await res.json();
+        setProduct(data.product);
+        setRelated(data.related || []);
+      } catch (err) {
+        console.error('Error fetching product:', err);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchProduct();
   }, [slug]);
@@ -38,6 +94,15 @@ export default function ProductDetail() {
 
   return (
     <main className="max-w-5xl mx-auto py-12 px-4 md:px-0">
+      {/* Edit link at top right */}
+      <div className="flex justify-end">
+        <a
+          href={`/admin/products/${product.slug}`}
+          className="text-xs text-brass hover:underline border border-brass rounded px-3 py-1 mt-2 font-semibold"
+        >
+          Edit {product.title}
+        </a>
+      </div>
       {/* Image Gallery */}
       <section className="flex flex-col md:flex-row gap-10 mb-10">
         <div className="flex-1 flex flex-col items-center">
@@ -67,25 +132,39 @@ export default function ProductDetail() {
           <p className="font-body text-2xl text-brass font-bold mb-4">£{formatPrice(product.price)}</p>
           <div className="mb-6">
             <p className="font-body text-base text-sand mb-2 whitespace-pre-line">{product.description}</p>
-            <ul className="text-sm text-sand space-y-1">
-              {(product.dimension_wide || product.dimension_deep || product.dimension_high) && (
-                <li>
-                  <b>Dimensions:</b>
-                  {product.dimension_wide && <span> W: {product.dimension_wide}</span>}
-                  {product.dimension_deep && <span> × D: {product.dimension_deep}</span>}
-                  {product.dimension_high && <span> × H: {product.dimension_high}</span>}
-                </li>
-              )}
-              {product.condition && <li><b>Condition:</b> {product.condition}</li>}
-              {product.origin && <li><b>Origin:</b> {product.origin}</li>}
-              {product.period && <li><b>Period:</b> {product.period}</li>}
-              {product.weight && <li><b>Weight:</b> {product.weight}</li>}
-            </ul>
           </div>
-          {/* Delivery Info */}
-          <details className="mb-4 bg-ivory/60 rounded p-3">
-            <summary className="cursor-pointer font-bold text-espresso">Delivery Information</summary>
-            <div className="mt-2 text-sand text-sm">Delivery details and options will be shown here.</div>
+          {/* Details Accordion */}
+          <details className="mb-4 bg-ivory/60 rounded p-3" open={detailsOpen} onToggle={e => setDetailsOpen((e.target as HTMLDetailsElement).open)}>
+            <summary className="cursor-pointer font-bold text-espresso flex items-center justify-between">
+              <span>Details</span>
+              {detailsOpen && (
+                <span className="ml-auto">
+                  <select
+                    value={unitSystem}
+                    onChange={e => setUnitSystem(e.target.value as 'Metric' | 'Imperial')}
+                    className="bg-transparent border-0 border-b border-sand text-sand font-body text-sm px-2 py-1 focus:outline-none focus:border-brass focus:text-brass transition-colors duration-150 appearance-none min-w-[120px] hover:text-brass"
+                    aria-label="Unit system"
+                  >
+                    <option value="Metric">Metric</option>
+                    <option value="Imperial">Imperial</option>
+                  </select>
+                </span>
+              )}
+            </summary>
+            <div className="mt-2 text-sand text-sm space-y-2">
+              {(product.dimension_wide || product.dimension_deep || product.dimension_high) && (
+                <div>
+                  <b>Dimensions:</b>
+                  {product.dimension_wide && <span> W: {unitSystem === 'Metric' ? formatDimensionMetric(parseFloat(product.dimension_wide)) : formatDimensionImperial(parseFloat(product.dimension_wide))}</span>}
+                  {product.dimension_deep && <span> × D: {unitSystem === 'Metric' ? formatDimensionMetric(parseFloat(product.dimension_deep)) : formatDimensionImperial(parseFloat(product.dimension_deep))}</span>}
+                  {product.dimension_high && <span> × H: {unitSystem === 'Metric' ? formatDimensionMetric(parseFloat(product.dimension_high)) : formatDimensionImperial(parseFloat(product.dimension_high))}</span>}
+                </div>
+              )}
+              {product.weight && <div><b>Weight:</b> {unitSystem === 'Metric' ? formatWeightMetric(parseFloat(product.weight)) : formatWeightImperial(parseFloat(product.weight))}</div>}
+              {product.condition && <div><b>Condition:</b> {product.condition}</div>}
+              {product.origin && <div><b>Origin:</b> {product.origin}</div>}
+              {product.period && <div><b>Period:</b> {product.period}</div>}
+            </div>
           </details>
           {/* Social Share */}
           <div className="flex gap-4 mb-6">

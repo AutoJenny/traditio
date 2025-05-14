@@ -47,7 +47,7 @@ export default function RootLayout({
             <li><Link href="/contact" className="hover:text-brass transition-colors duration-200">Contact</Link></li>
           </ul>
           <div className="flex items-center gap-6">
-            <Link href="/admin" className="bg-brass text-espresso font-bold rounded px-4 py-2 border-2 border-brass uppercase shadow hover:bg-espresso hover:text-ivory transition">Edit</Link>
+            <Link href="/admin" className="bg-brass text-espresso font-bold rounded px-4 py-2 border-2 border-brass uppercase shadow hover:bg-espresso hover:text-ivory transition">Admin</Link>
             <AdminUnreadMailIcon />
             {/* <Link href="/account" className="hover:text-brass transition-colors duration-200">Sign In</Link> */}
             {/* <Link href="/cart" className="relative hover:text-brass transition-colors duration-200">

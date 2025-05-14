@@ -51,3 +51,19 @@
 [2024-05-13] Improved admin product image upload: after uploading an image, the page now auto-saves the image order/state to the backend, making the flow foolproof and preventing accidental image loss or state mismatch. 
 
 [2024-05-13] Added admin Database page: a fourth link on the admin dashboard now leads to a page that lists all tables and fields in the database, using a new /api/db endpoint. 
+
+[YYYY-MM-DD] Added a 'View Live Page' link at the top of the admin product edit page (/admin/products/[slug]) linking to the public showroom page for that product.
+
+[YYYY-MM-DD] On the live product page (/showroom/[slug]), added a small 'Edit <title>' link at the top right linking to the admin edit page for that product.
+
+[YYYY-MM-DD] Changed the 'Edit' button in the main site header to read 'Admin' instead.
+
+[YYYY-MM-DD] Updated admin product edit page: field labels for dimensions now read 'Dimensions (Wide/Deep/High): cm' and weight now reads 'Weight: kg'.
+
+[YYYY-MM-DD] Admin product edit page: moved all fields except title, price, and description into a 'Details' accordion (renamed from 'Delivery Information').
+
+[YYYY-MM-DD] Showroom product page: moved all product details (status, categories, dimensions, weight, condition, origin, period) into a 'Details' accordion, and removed the redundant Delivery Information accordion. Only title, price, and description are shown outside the accordion.
+
+[YYYY-MM-DD] Reversed previous error: restored the admin product edit page to its original structure, with all fields in the main form and no accordion for details.
+
+[YYYY-MM-DD] Showroom product page: removed Status and Categories from the Details accordion display.

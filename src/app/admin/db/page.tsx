@@ -58,8 +58,8 @@ export default function AdminDatabasePage() {
                   <table className="w-full border-collapse mb-4 table-fixed">
                     <thead>
                       <tr className="bg-sand text-espresso">
-                        <th className="p-2 text-left w-[20%]">Field</th>
-                        <th className="p-2 text-left w-[40%]">Type</th>
+                        <th className="p-2 text-left w-[30%]">Field</th>
+                        <th className="p-2 text-left w-[30%]">Type</th>
                         <th className="p-2 text-left w-[40%]">
                           <div className="flex items-center gap-2">
                             <span className="font-bold">Row:</span>
@@ -88,8 +88,8 @@ export default function AdminDatabasePage() {
                     <tbody>
                       {table.columns.map((col: any) => (
                         <tr key={col.name} className="border-b border-sand">
-                          <td className="p-2 font-mono w-[20%] truncate">{col.name}</td>
-                          <td className="p-2 font-mono text-sand-700 w-[40%] truncate">{col.type}</td>
+                          <td className="p-2 font-mono w-[30%] truncate">{col.name}</td>
+                          <td className="p-2 font-mono text-sand-700 w-[30%] truncate">{col.type}</td>
                           <td className="p-2 font-mono text-espresso w-[40%] truncate">
                             {table.rows && table.rows.length > 0
                               ? (table.rows[rowIndexes[table.name] || 0]?.[col.name] ?? '')
