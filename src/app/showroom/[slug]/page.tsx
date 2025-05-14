@@ -164,6 +164,21 @@ export default function ProductDetail() {
               {product.condition && <div><b>Condition:</b> {product.condition}</div>}
               {product.origin && <div><b>Origin:</b> {product.origin}</div>}
               {product.period && <div><b>Period:</b> {product.period}</div>}
+              {/* Condition details */}
+              {(product.condition_grade || product.condition_rubric || product.condition_notes) && (
+                <div className="mt-4">
+                  <div className="font-bold text-espresso mb-1">Condition</div>
+                  {product.condition_grade && (
+                    <div className="text-sand-900 font-semibold">{product.condition_grade}</div>
+                  )}
+                  {product.condition_rubric && (
+                    <div className="text-xs text-sand-600 mb-1">{product.condition_rubric}</div>
+                  )}
+                  {product.condition_notes && product.condition_notes.trim() && (
+                    <div className="mt-1 text-sand-700"><b>Notes:</b> {product.condition_notes}</div>
+                  )}
+                </div>
+              )}
             </div>
           </details>
           {/* Social Share */}
