@@ -73,3 +73,5 @@
 [YYYY-MM-DD] Admin product edit: decoupled image management from product save. Product details can now be saved without affecting images. Removed image warning modal and related logic.
 
 [YYYY-MM-DD] API fix: Updated product PUT handler to use condition_id and condition_notes instead of the old condition field, matching the new schema and frontend.
+
+[YYYY-MM-DD] API update: GET /api/products/[slug] now joins Condition table and returns grade and rubric for the product's condition_id.

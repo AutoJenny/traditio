@@ -31,12 +31,21 @@ export async function GET(req: Request, context: any) {
       JOIN "Category" c ON pc."categoryId" = c.id
       WHERE pc."productId" = $1
     `, [product.id]);
+    let condition = null;
+    if (product.condition_id) {
+      const condRes = await pool.query('SELECT grade, grade_rubric FROM "Condition" WHERE id = $1', [product.condition_id]);
+      if (condRes.rows.length > 0) {
+        condition = condRes.rows[0];
+      }
+    }
     const normalizedProduct = {
       ...rest,
       created: product.created || created,
       updated: product.updated || updated,
       images,
-      categories
+      categories,
+      condition_grade: condition?.grade || null,
+      condition_rubric: condition?.grade_rubric || null
     };
     return withCors(NextResponse.json({ product: normalizedProduct }));
   } catch (error) {
