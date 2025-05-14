@@ -93,7 +93,13 @@ export default function AdminMessagesPage() {
             {filteredMessages.map((msg: any) => (
               <tr key={msg.id} className="border-b border-sand hover:bg-sand-100 cursor-pointer transition" onClick={() => window.location.href = `/admin/messages/${msg.id}`} tabIndex={0} role="button" aria-label={`View message from ${msg.customer_name || msg.customer_email}`}>
                 <td className="p-2 whitespace-nowrap">{msg.created ? timeAgo(msg.created) : ""}</td>
-                <td className="p-2">{msg.customer_name || msg.customerName || ""}</td>
+                <td className="p-2">
+                  {msg.message_name ? (
+                    <span>{msg.message_name}{msg.message_phone ? ` (${msg.message_phone})` : ''}</span>
+                  ) : (
+                    msg.customer_name || msg.customerName || msg.customer_email || msg.customerEmail || ""
+                  )}
+                </td>
                 <td className="p-2">{msg.customer_email || msg.customerEmail || ""}</td>
                 <td className="p-2 max-w-[320px] truncate">{msg.content.length > 100 ? msg.content.slice(0, 100) + '…' : msg.content}</td>
                 <td className="p-2">

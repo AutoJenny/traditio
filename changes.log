@@ -96,3 +96,15 @@
 [2024-05-15  showroom] Add: Product details page now features a category navigation bar with Previous/Next icons, showing the selected category (or All Products) and allowing navigation to previous/next product in the current category. Subtle styling, placed below the header and above the product title. Product order matches showroom sort logic.
 
 [2024-05-15  showroom] Fix: Product details page now remembers and displays the active category as you click Previous/Next, using localStorage to persist the user's last selected category. Showroom page now saves category selection to localStorage. Navigation and label always match user's last intent.
+
+[2024-05-15  showroom] Update: Related Products section replaced with 'More in this Category' at the foot of the product details page, showing up to six of the most recent products from the same category (excluding the current product), using the same panels as the showroom. Section is hidden if no other products are available.
+
+[2024-05-15  newsletter] Fix: The static newsletter form in the footer is now replaced with the NewsletterSignupForm component, enabling correct submission, confirmation, and DB updates.
+
+[2024-05-15  admin] Update: Admin customers page now shows a Messages column (count of messages per customer) and displays only the date (YYYY-MM-DD) for Joined and Updated columns.
+
+[2024-05-15  contact] Update: Added name and phone columns to the Message table. Contact API now stores name and phone in Message as well as Customer, and only updates Customer fields if new values are non-empty. Preserves both historical and latest contact info.
+
+[2024-05-15  admin] Update: Admin messages page now displays the name and phone recorded with each message (not just the current customer name), and shows the phone number if present. API updated to return these fields.
+
+[2024-05-15  customer] Fix: Customer name and phone are now only set on first contact/newsletter form submission. Once set, they are never overwritten by subsequent forms. Ensures original contact info is preserved in Customer table.

@@ -143,6 +143,11 @@ export default function ProductDetail() {
     return num.toLocaleString('en-GB');
   }
 
+  // Compute more products in the same category (excluding current product)
+  const moreInCategory = (selectedCategory !== 'all' && selectedCategory && sortedProducts.length > 0)
+    ? sortedProducts.filter((p: any) => p.slug !== slug).slice(0, 6)
+    : [];
+
   if (loading) return <div className="text-center py-16">Loading...</div>;
   if (!product) return <div className="text-center py-16">Product not found.</div>;
 
@@ -304,11 +309,13 @@ export default function ProductDetail() {
           <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 bg-espresso text-ivory rounded-full w-10 h-10 flex items-center justify-center text-2xl font-bold shadow-lg hover:bg-brass hover:text-espresso transition">&times;</button>
         </div>
       )}
-      {/* Related Products */}
-      <section className="mt-16">
-        <h2 className="font-heading text-2xl mb-6 text-espresso">Related Products</h2>
-        <ProductGrid products={related} gridClassName="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" />
-      </section>
+      {/* More in this Category (replaces Related Products) */}
+      {moreInCategory.length > 0 && (
+        <section className="mt-16">
+          <h2 className="font-heading text-2xl mb-6 text-espresso">More in this Category</h2>
+          <ProductGrid products={moreInCategory} gridClassName="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" />
+        </section>
+      )}
       <div ref={enquiryFormRef} className="mt-12">
         {showEnquiryForm && <ProductEnquiryForm productSlug={product.slug} />}
       </div>

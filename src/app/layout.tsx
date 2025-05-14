@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import AdminUnreadMailIcon from "../components/AdminUnreadMailIcon";
+import NewsletterSignupForm from "../components/NewsletterSignupForm";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,11 +71,7 @@ export default function RootLayout({
             </div>
             <div>
               <h3 className="font-heading text-lg mb-2 uppercase tracking-wider">Newsletter</h3>
-              <form className="flex flex-col gap-2">
-                <input type="email" placeholder="Your email" className="border border-sand rounded px-3 py-2" aria-label="Email address" />
-                <button type="submit" className="bg-sand text-espresso font-bold rounded px-4 py-2 border-2 border-brass transition-colors duration-200 hover:bg-espresso hover:text-ivory">Subscribe</button>
-                <span className="text-xs text-sand mt-1">We respect your privacy.</span>
-              </form>
+              <NewsletterSignupForm />
             </div>
             <div>
               <h3 className="font-heading text-lg mb-2 uppercase tracking-wider">Legal</h3>
