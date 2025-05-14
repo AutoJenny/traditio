@@ -1,10 +1,8 @@
 {
-  "/api/categories/route": "app/api/categories/route.js",
-  "/api/conditions/route": "app/api/conditions/route.js",
   "/api/products/[slug]/route": "app/api/products/[slug]/route.js",
   "/admin/products/[slug]/page": "app/admin/products/[slug]/page.js",
   "/admin/page": "app/admin/page.js",
-  "/admin/products/[slug]/images/page": "app/admin/products/[slug]/images/page.js",
   "/admin/products/page": "app/admin/products/page.js",
+  "/admin/products/[slug]/images/page": "app/admin/products/[slug]/images/page.js",
   "/showroom/[slug]/page": "app/showroom/[slug]/page.js"
 }

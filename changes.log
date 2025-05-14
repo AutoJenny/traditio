@@ -71,3 +71,5 @@
 [YYYY-MM-DD] Product condition refactor: Added Condition table (grade, rubric), removed old condition field from Product, added condition_id (FK) and condition_notes. Updated admin product edit page to use a grouped section for grade, rubric, and notes. Added /api/conditions endpoint.
 
 [YYYY-MM-DD] Admin product edit: decoupled image management from product save. Product details can now be saved without affecting images. Removed image warning modal and related logic.
+
+[YYYY-MM-DD] API fix: Updated product PUT handler to use condition_id and condition_notes instead of the old condition field, matching the new schema and frontend.
